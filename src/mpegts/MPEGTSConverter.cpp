@@ -1,0 +1,272 @@
+#include "MPEGTSConverter.h"
+#include "DVBProcessor.h"
+#include "../alerting/AlertManager.h"
+#include "spdlog/spdlog.h"
+
+// Utilisation de TSDuck pour manipuler les paquets MPEG-TS
+// Note: Cette implémentation suppose que les bibliothèques TSDuck sont disponibles
+#include <tsduck/tsduck.h>
+
+MPEGTSConverter::MPEGTSConverter()
+    : running_(false) {
+    
+    // Le processeur DVB sera initialisé dans la méthode start()
+}
+
+void MPEGTSConverter::start() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    
+    if (running_) {
+        spdlog::warn("Le convertisseur MPEG-TS est déjà en cours d'exécution");
+        return;
+    }
+    
+    spdlog::info("Démarrage du convertisseur MPEG-TS");
+    
+    try {
+        // Initialiser le processeur DVB
+        dvbProcessor_ = std::make_unique<DVBProcessor>();
+        dvbProcessor_->initialize();
+        
+        running_ = true;
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::INFO,
+            "MPEGTSConverter",
+            "Convertisseur MPEG-TS démarré",
+            false
+        );
+    }
+    catch (const std::exception& e) {
+        spdlog::error("Erreur lors du démarrage du convertisseur MPEG-TS: {}", e.what());
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
+            "MPEGTSConverter",
+            std::string("Erreur lors du démarrage du convertisseur MPEG-TS: ") + e.what(),
+            true
+        );
+        
+        throw;
+    }
+}
+
+void MPEGTSConverter::stop() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    
+    if (!running_) {
+        spdlog::warn("Le convertisseur MPEG-TS n'est pas en cours d'exécution");
+        return;
+    }
+    
+    spdlog::info("Arrêt du convertisseur MPEG-TS");
+    
+    // Libérer les ressources
+    if (dvbProcessor_) {
+        dvbProcessor_->cleanup();
+        dvbProcessor_.reset();
+    }
+    
+    running_ = false;
+    
+    AlertManager::getInstance().addAlert(
+        AlertLevel::INFO,
+        "MPEGTSConverter",
+        "Convertisseur MPEG-TS arrêté",
+        false
+    );
+}
+
+std::optional<MPEGTSSegment> MPEGTSConverter::convert(const HLSSegment& hlsSegment) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    
+    if (!running_ || !dvbProcessor_) {
+        spdlog::error("Le convertisseur MPEG-TS n'est pas démarré");
+        return std::nullopt;
+    }
+    
+    try {
+        spdlog::debug("Conversion du segment HLS {} en MPEG-TS (discontinuité: {})",
+                    hlsSegment.sequenceNumber, hlsSegment.discontinuity ? "oui" : "non");
+        
+        // Si le segment HLS est déjà en MPEG-TS (ce qui est généralement le cas),
+        // nous devons traiter le flux MPEG-TS pour assurer sa conformité DVB
+        
+        // Créer un flux d'entrée à partir des données HLS
+        ts::ByteBlock inputData(hlsSegment.data.data(), hlsSegment.data.size());
+        ts::TSPacketVector packets;
+        
+        // Extraction des paquets MPEG-TS
+        if (!ts::TSPacket::FromBytes(packets, inputData)) {
+            spdlog::error("Erreur lors de l'extraction des paquets MPEG-TS du segment HLS {}", 
+                        hlsSegment.sequenceNumber);
+            
+            AlertManager::getInstance().addAlert(
+                AlertLevel::ERROR,
+                "MPEGTSConverter",
+                "Erreur lors de l'extraction des paquets MPEG-TS du segment HLS " + 
+                std::to_string(hlsSegment.sequenceNumber),
+                true
+            );
+            
+            return std::nullopt;
+        }
+        
+        // Vérifier si les paquets sont valides
+        if (packets.empty()) {
+            spdlog::error("Aucun paquet MPEG-TS valide trouvé dans le segment HLS {}", 
+                        hlsSegment.sequenceNumber);
+            
+            AlertManager::getInstance().addAlert(
+                AlertLevel::ERROR,
+                "MPEGTSConverter",
+                "Aucun paquet MPEG-TS valide trouvé dans le segment HLS " + 
+                std::to_string(hlsSegment.sequenceNumber),
+                true
+            );
+            
+            return std::nullopt;
+        }
+        
+        // Convertir les paquets en vecteur d'octets pour le traitement
+        std::vector<uint8_t> tsData;
+        tsData.reserve(packets.size() * ts::PKT_SIZE);
+        
+        for (const auto& packet : packets) {
+            const uint8_t* packetData = packet.b;
+            tsData.insert(tsData.end(), packetData, packetData + ts::PKT_SIZE);
+        }
+        
+        // Traiter les discontinuités si nécessaire
+        std::vector<uint8_t> discontinuityProcessed;
+        if (hlsSegment.discontinuity) {
+            discontinuityProcessed = processDiscontinuity(tsData, true);
+        } else {
+            discontinuityProcessed = tsData;
+        }
+        
+        // Mettre à jour les tables PSI/SI
+        std::vector<uint8_t> finalData = updatePSITables(discontinuityProcessed);
+        
+        // Créer le segment MPEG-TS de sortie
+        MPEGTSSegment mpegtsSegment;
+        mpegtsSegment.data = finalData;
+        mpegtsSegment.discontinuity = hlsSegment.discontinuity;
+        mpegtsSegment.sequenceNumber = hlsSegment.sequenceNumber;
+        mpegtsSegment.duration = hlsSegment.duration;
+        mpegtsSegment.timestamp = hlsSegment.timestamp;
+        
+        // Journaliser le succès
+        spdlog::debug("Segment MPEG-TS {} généré avec succès, taille: {} octets",
+                    mpegtsSegment.sequenceNumber, mpegtsSegment.data.size());
+        
+        return mpegtsSegment;
+    }
+    catch (const ts::Exception& e) {
+        spdlog::error("Exception TSDuck lors de la conversion MPEG-TS: {}", e.what());
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
+            "MPEGTSConverter",
+            std::string("Exception TSDuck lors de la conversion MPEG-TS: ") + e.what(),
+            true
+        );
+        
+        return std::nullopt;
+    }
+    catch (const std::exception& e) {
+        spdlog::error("Exception lors de la conversion MPEG-TS: {}", e.what());
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
+            "MPEGTSConverter",
+            std::string("Exception lors de la conversion MPEG-TS: ") + e.what(),
+            true
+        );
+        
+        return std::nullopt;
+    }
+}
+
+std::vector<uint8_t> MPEGTSConverter::processDiscontinuity(const std::vector<uint8_t>& data, bool discontinuity) {
+    if (!discontinuity || data.empty()) {
+        return data;
+    }
+    
+    spdlog::info("Traitement d'une discontinuité dans le flux MPEG-TS");
+    
+    AlertManager::getInstance().addAlert(
+        AlertLevel::INFO,
+        "MPEGTSConverter",
+        "Traitement d'une discontinuité dans le flux MPEG-TS",
+        false
+    );
+    
+    try {
+        // Convertir le vecteur d'octets en paquets MPEG-TS
+        ts::TSPacketVector packets;
+        size_t packetCount = data.size() / ts::PKT_SIZE;
+        
+        for (size_t i = 0; i < packetCount; ++i) {
+            ts::TSPacket packet;
+            std::memcpy(packet.b, &data[i * ts::PKT_SIZE], ts::PKT_SIZE);
+            packets.push_back(packet);
+        }
+        
+        // Pour chaque paquet, marquer le flag de discontinuité si c'est un paquet avec PCR
+        for (auto& packet : packets) {
+            if (packet.hasPCR()) {
+                packet.setDiscontinuityIndicator(true);
+                
+                // Debug: journaliser le PCR
+                uint64_t pcr = packet.getPCR();
+                spdlog::debug("Marqueur de discontinuité défini sur le paquet avec PCR: {}", pcr);
+            }
+        }
+        
+        // Convertir les paquets en vecteur d'octets
+        std::vector<uint8_t> result;
+        result.reserve(packets.size() * ts::PKT_SIZE);
+        
+        for (const auto& packet : packets) {
+            const uint8_t* packetData = packet.b;
+            result.insert(result.end(), packetData, packetData + ts::PKT_SIZE);
+        }
+        
+        return result;
+    }
+    catch (const std::exception& e) {
+        spdlog::error("Erreur lors du traitement de la discontinuité: {}", e.what());
+        
+        // En cas d'erreur, retourner les données d'origine
+        return data;
+    }
+}
+
+std::vector<uint8_t> MPEGTSConverter::updatePSITables(const std::vector<uint8_t>& data) {
+    if (data.empty() || !dvbProcessor_) {
+        return data;
+    }
+    
+    try {
+        // Utiliser le processeur DVB pour mettre à jour les tables PSI/SI
+        return dvbProcessor_->updatePSITables(data);
+    }
+    catch (const std::exception& e) {
+        spdlog::error("Erreur lors de la mise à jour des tables PSI/SI: {}", e.what());
+        
+        // En cas d'erreur, retourner les données d'origine
+        return data;
+    }
+}
+
+bool MPEGTSConverter::isRunning() const {
+    return running_;
+}
+
+MPEGTSConverter::~MPEGTSConverter() {
+    if (running_) {
+        stop();
+    }
+}
+
