@@ -22,10 +22,10 @@ void StreamManager::start() {
     running_ = true;
     
     // Démarrer tous les flux configurés
-    auto streams = config_->getStreams();
+    auto streams = config_->getStreamConfigs();
     for (const auto& streamConfig : streams) {
         // Vérifier si le flux a une configuration valide
-        if (!streamConfig.hlsInput.empty() && !streamConfig.multicastOutput.empty() && streamConfig.multicastPort > 0) {
+        if (!streamConfig.hlsInput.empty() && !streamConfig.mcastOutput.empty() && streamConfig.mcastPort > 0) {
             try {
                 startStream(streamConfig.id);
             }
@@ -72,7 +72,7 @@ void StreamManager::stop() {
 
 bool StreamManager::startStream(const std::string& streamId) {
     // Vérifier si la configuration existe
-    const StreamConfig* config = config_->getStream(streamId);
+    const StreamConfig* config = config_->getStreamConfig(streamId);
     if (!config) {
         spdlog::error("Configuration du flux non trouvée: {}", streamId);
         return false;
@@ -102,8 +102,8 @@ bool StreamManager::startStream(const std::string& streamId) {
             stream.hlsClient = std::make_shared<HLSClient>(config->hlsInput);
             stream.mpegtsConverter = std::make_shared<MPEGTSConverter>();
             stream.multicastSender = std::make_shared<MulticastSender>(
-                config->multicastOutput, 
-                config->multicastPort
+                config->mcastOutput, 
+                config->mcastPort
             );
             
             // Démarrer le client HLS pour vérifier si le flux est valide
@@ -290,7 +290,7 @@ bool StreamManager::setStreamBufferSize(const std::string& streamId, size_t buff
     // Mettre à jour la configuration pour la persistance
     StreamConfig updatedConfig = stream.config;
     updatedConfig.bufferSize = bufferSize;
-    config_->setStream(updatedConfig);
+    config_->updateStreamConfig(updatedConfig);
     
     spdlog::info("Taille du buffer ajustée pour le flux {}: {}", streamId, bufferSize);
     

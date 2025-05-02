@@ -126,8 +126,272 @@ hls-to-dvb: cmake_check_build_system
 
 # fast build rule for target.
 hls-to-dvb/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/build
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/build
 .PHONY : hls-to-dvb/fast
+
+src/alerting/AlertManager.o: src/alerting/AlertManager.cpp.o
+.PHONY : src/alerting/AlertManager.o
+
+# target to build an object file
+src/alerting/AlertManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/alerting/AlertManager.cpp.o
+.PHONY : src/alerting/AlertManager.cpp.o
+
+src/alerting/AlertManager.i: src/alerting/AlertManager.cpp.i
+.PHONY : src/alerting/AlertManager.i
+
+# target to preprocess a source file
+src/alerting/AlertManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/alerting/AlertManager.cpp.i
+.PHONY : src/alerting/AlertManager.cpp.i
+
+src/alerting/AlertManager.s: src/alerting/AlertManager.cpp.s
+.PHONY : src/alerting/AlertManager.s
+
+# target to generate assembly for a file
+src/alerting/AlertManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/alerting/AlertManager.cpp.s
+.PHONY : src/alerting/AlertManager.cpp.s
+
+src/core/Application.o: src/core/Application.cpp.o
+.PHONY : src/core/Application.o
+
+# target to build an object file
+src/core/Application.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/Application.cpp.o
+.PHONY : src/core/Application.cpp.o
+
+src/core/Application.i: src/core/Application.cpp.i
+.PHONY : src/core/Application.i
+
+# target to preprocess a source file
+src/core/Application.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/Application.cpp.i
+.PHONY : src/core/Application.cpp.i
+
+src/core/Application.s: src/core/Application.cpp.s
+.PHONY : src/core/Application.s
+
+# target to generate assembly for a file
+src/core/Application.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/Application.cpp.s
+.PHONY : src/core/Application.cpp.s
+
+src/core/SegmentBuffer.o: src/core/SegmentBuffer.cpp.o
+.PHONY : src/core/SegmentBuffer.o
+
+# target to build an object file
+src/core/SegmentBuffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/SegmentBuffer.cpp.o
+.PHONY : src/core/SegmentBuffer.cpp.o
+
+src/core/SegmentBuffer.i: src/core/SegmentBuffer.cpp.i
+.PHONY : src/core/SegmentBuffer.i
+
+# target to preprocess a source file
+src/core/SegmentBuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/SegmentBuffer.cpp.i
+.PHONY : src/core/SegmentBuffer.cpp.i
+
+src/core/SegmentBuffer.s: src/core/SegmentBuffer.cpp.s
+.PHONY : src/core/SegmentBuffer.s
+
+# target to generate assembly for a file
+src/core/SegmentBuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/SegmentBuffer.cpp.s
+.PHONY : src/core/SegmentBuffer.cpp.s
+
+src/core/StreamManager.o: src/core/StreamManager.cpp.o
+.PHONY : src/core/StreamManager.o
+
+# target to build an object file
+src/core/StreamManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/StreamManager.cpp.o
+.PHONY : src/core/StreamManager.cpp.o
+
+src/core/StreamManager.i: src/core/StreamManager.cpp.i
+.PHONY : src/core/StreamManager.i
+
+# target to preprocess a source file
+src/core/StreamManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/StreamManager.cpp.i
+.PHONY : src/core/StreamManager.cpp.i
+
+src/core/StreamManager.s: src/core/StreamManager.cpp.s
+.PHONY : src/core/StreamManager.s
+
+# target to generate assembly for a file
+src/core/StreamManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/StreamManager.cpp.s
+.PHONY : src/core/StreamManager.cpp.s
+
+src/core/config.o: src/core/config.cpp.o
+.PHONY : src/core/config.o
+
+# target to build an object file
+src/core/config.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/config.cpp.o
+.PHONY : src/core/config.cpp.o
+
+src/core/config.i: src/core/config.cpp.i
+.PHONY : src/core/config.i
+
+# target to preprocess a source file
+src/core/config.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/config.cpp.i
+.PHONY : src/core/config.cpp.i
+
+src/core/config.s: src/core/config.cpp.s
+.PHONY : src/core/config.s
+
+# target to generate assembly for a file
+src/core/config.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/core/config.cpp.s
+.PHONY : src/core/config.cpp.s
+
+src/hls/HLSClient.o: src/hls/HLSClient.cpp.o
+.PHONY : src/hls/HLSClient.o
+
+# target to build an object file
+src/hls/HLSClient.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/hls/HLSClient.cpp.o
+.PHONY : src/hls/HLSClient.cpp.o
+
+src/hls/HLSClient.i: src/hls/HLSClient.cpp.i
+.PHONY : src/hls/HLSClient.i
+
+# target to preprocess a source file
+src/hls/HLSClient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/hls/HLSClient.cpp.i
+.PHONY : src/hls/HLSClient.cpp.i
+
+src/hls/HLSClient.s: src/hls/HLSClient.cpp.s
+.PHONY : src/hls/HLSClient.s
+
+# target to generate assembly for a file
+src/hls/HLSClient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/hls/HLSClient.cpp.s
+.PHONY : src/hls/HLSClient.cpp.s
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
+src/mpegts/DVBProcessor.o: src/mpegts/DVBProcessor.cpp.o
+.PHONY : src/mpegts/DVBProcessor.o
+
+# target to build an object file
+src/mpegts/DVBProcessor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.o
+.PHONY : src/mpegts/DVBProcessor.cpp.o
+
+src/mpegts/DVBProcessor.i: src/mpegts/DVBProcessor.cpp.i
+.PHONY : src/mpegts/DVBProcessor.i
+
+# target to preprocess a source file
+src/mpegts/DVBProcessor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.i
+.PHONY : src/mpegts/DVBProcessor.cpp.i
+
+src/mpegts/DVBProcessor.s: src/mpegts/DVBProcessor.cpp.s
+.PHONY : src/mpegts/DVBProcessor.s
+
+# target to generate assembly for a file
+src/mpegts/DVBProcessor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.s
+.PHONY : src/mpegts/DVBProcessor.cpp.s
+
+src/mpegts/MPEGTSConverter.o: src/mpegts/MPEGTSConverter.cpp.o
+.PHONY : src/mpegts/MPEGTSConverter.o
+
+# target to build an object file
+src/mpegts/MPEGTSConverter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.o
+.PHONY : src/mpegts/MPEGTSConverter.cpp.o
+
+src/mpegts/MPEGTSConverter.i: src/mpegts/MPEGTSConverter.cpp.i
+.PHONY : src/mpegts/MPEGTSConverter.i
+
+# target to preprocess a source file
+src/mpegts/MPEGTSConverter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.i
+.PHONY : src/mpegts/MPEGTSConverter.cpp.i
+
+src/mpegts/MPEGTSConverter.s: src/mpegts/MPEGTSConverter.cpp.s
+.PHONY : src/mpegts/MPEGTSConverter.s
+
+# target to generate assembly for a file
+src/mpegts/MPEGTSConverter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.s
+.PHONY : src/mpegts/MPEGTSConverter.cpp.s
+
+src/multicast/MulticastSender.o: src/multicast/MulticastSender.cpp.o
+.PHONY : src/multicast/MulticastSender.o
+
+# target to build an object file
+src/multicast/MulticastSender.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o
+.PHONY : src/multicast/MulticastSender.cpp.o
+
+src/multicast/MulticastSender.i: src/multicast/MulticastSender.cpp.i
+.PHONY : src/multicast/MulticastSender.i
+
+# target to preprocess a source file
+src/multicast/MulticastSender.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.i
+.PHONY : src/multicast/MulticastSender.cpp.i
+
+src/multicast/MulticastSender.s: src/multicast/MulticastSender.cpp.s
+.PHONY : src/multicast/MulticastSender.s
+
+# target to generate assembly for a file
+src/multicast/MulticastSender.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.s
+.PHONY : src/multicast/MulticastSender.cpp.s
+
+src/web/WebServer.o: src/web/WebServer.cpp.o
+.PHONY : src/web/WebServer.o
+
+# target to build an object file
+src/web/WebServer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o
+.PHONY : src/web/WebServer.cpp.o
+
+src/web/WebServer.i: src/web/WebServer.cpp.i
+.PHONY : src/web/WebServer.i
+
+# target to preprocess a source file
+src/web/WebServer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.i
+.PHONY : src/web/WebServer.cpp.i
+
+src/web/WebServer.s: src/web/WebServer.cpp.s
+.PHONY : src/web/WebServer.s
+
+# target to generate assembly for a file
+src/web/WebServer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.s
+.PHONY : src/web/WebServer.cpp.s
 
 # Help Target
 help:
@@ -138,6 +402,39 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... hls-to-dvb"
+	@echo "... src/alerting/AlertManager.o"
+	@echo "... src/alerting/AlertManager.i"
+	@echo "... src/alerting/AlertManager.s"
+	@echo "... src/core/Application.o"
+	@echo "... src/core/Application.i"
+	@echo "... src/core/Application.s"
+	@echo "... src/core/SegmentBuffer.o"
+	@echo "... src/core/SegmentBuffer.i"
+	@echo "... src/core/SegmentBuffer.s"
+	@echo "... src/core/StreamManager.o"
+	@echo "... src/core/StreamManager.i"
+	@echo "... src/core/StreamManager.s"
+	@echo "... src/core/config.o"
+	@echo "... src/core/config.i"
+	@echo "... src/core/config.s"
+	@echo "... src/hls/HLSClient.o"
+	@echo "... src/hls/HLSClient.i"
+	@echo "... src/hls/HLSClient.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/mpegts/DVBProcessor.o"
+	@echo "... src/mpegts/DVBProcessor.i"
+	@echo "... src/mpegts/DVBProcessor.s"
+	@echo "... src/mpegts/MPEGTSConverter.o"
+	@echo "... src/mpegts/MPEGTSConverter.i"
+	@echo "... src/mpegts/MPEGTSConverter.s"
+	@echo "... src/multicast/MulticastSender.o"
+	@echo "... src/multicast/MulticastSender.i"
+	@echo "... src/multicast/MulticastSender.s"
+	@echo "... src/web/WebServer.o"
+	@echo "... src/web/WebServer.i"
+	@echo "... src/web/WebServer.s"
 .PHONY : help
 
 

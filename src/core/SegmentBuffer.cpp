@@ -1,4 +1,4 @@
-#include "SegmentBuffer.h"
+#include "core/SegmentBuffer.h"
 #include "spdlog/spdlog.h"
 
 SegmentBuffer::SegmentBuffer(size_t bufferSize)

@@ -1,5 +1,5 @@
-#include "HLSClient.h"
-#include "../alerting/AlertManager.h"
+#include "hls/HLSClient.h"
+#include "alerting/AlertManager.h"
 #include "spdlog/spdlog.h"
 
 #include <fstream>
@@ -7,6 +7,8 @@
 #include <regex>
 #include <chrono>
 #include <algorithm>
+
+using namespace hls_to_dvb;
 
 // Initialisation globale de FFmpeg (une seule fois)
 static struct FFmpegInit {

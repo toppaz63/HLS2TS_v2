@@ -1,7 +1,7 @@
 set(SOURCES
     main.cpp
     core/Application.cpp
-    core/Config.cpp
+    core/config.cpp
     core/StreamManager.cpp
     core/SegmentBuffer.cpp
     alerting/AlertManager.cpp
@@ -14,14 +14,82 @@ set(SOURCES
 
 add_executable(hls-to-dvb ${SOURCES})
 
+# Vérification supplémentaire pour TSDuck
+if(NOT TSDUCK_FOUND)
+    # Essayer de trouver TSDuck via pkg-config d'abord
+    find_package(PkgConfig QUIET)
+    if(PkgConfig_FOUND)
+        pkg_check_modules(TSDUCK tsduck)
+    endif()
+    
+    # Si TSDuck n'est toujours pas trouvé, rechercher manuellement
+    if(NOT TSDUCK_FOUND)
+        find_path(TSDUCK_INCLUDE_DIRS tsduck/tsduck.h
+            PATHS
+                /usr/include
+                /usr/local/include
+                /opt/homebrew/include
+                /opt/homebrew/Cellar/tsduck/*/include
+        )
+        
+        find_library(TSDUCK_LIBRARIES
+            NAMES tsduck
+            PATHS
+                /usr/lib
+                /usr/local/lib
+                /opt/homebrew/lib
+                /opt/homebrew/Cellar/tsduck/*/lib
+        )
+        
+        if(TSDUCK_INCLUDE_DIRS AND TSDUCK_LIBRARIES)
+            set(TSDUCK_FOUND TRUE)
+            message(STATUS "TSDuck found manually: ${TSDUCK_LIBRARIES}")
+            include_directories(${TSDUCK_INCLUDE_DIRS})
+        else()
+            message(FATAL_ERROR "TSDuck library not found. Please install TSDuck.")
+        endif()
+    endif()
+endif()
+
+# Afficher des informations sur TSDuck pour le débogage
+message(STATUS "TSDUCK_FOUND: ${TSDUCK_FOUND}")
+message(STATUS "TSDUCK_INCLUDE_DIRS: ${TSDUCK_INCLUDE_DIRS}")
+message(STATUS "TSDUCK_LIBRARIES: ${TSDUCK_LIBRARIES}")
+
+# Définir manuellement le chemin des bibliothèques si nécessaire
+if(APPLE)
+    # Sur macOS, ajouter explicitement les chemins de recherche pour Homebrew
+    link_directories(/opt/homebrew/lib /usr/local/lib)
+endif()
+
 target_link_libraries(hls-to-dvb
     ${TSDUCK_LIBRARIES}
     ${FFMPEG_LIBRARIES}
     OpenSSL::SSL
     OpenSSL::Crypto
     Threads::Threads
-    -ldl
 )
+
+# Ajout explicite de tsduck pour s'assurer qu'elle est liée
+target_link_libraries(hls-to-dvb tsduck)
+
+# Ajouter -ldl sur les plateformes qui le supportent
+if(UNIX AND NOT APPLE)
+    target_link_libraries(hls-to-dvb -ldl)
+endif()
+
+# Ajouter les liens vers les bibliothèques si elles ont été trouvées en tant que packages
+if(spdlog_FOUND)
+    target_link_libraries(hls-to-dvb spdlog::spdlog)
+endif()
+
+if(fmt_FOUND)
+    target_link_libraries(hls-to-dvb fmt::fmt)
+endif()
+
+if(nlohmann_json_FOUND)
+    target_link_libraries(hls-to-dvb nlohmann_json::nlohmann_json)
+endif()
 
 # Flags de compilation
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")

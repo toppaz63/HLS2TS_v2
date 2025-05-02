@@ -1,107 +1,96 @@
-#include "WebServer.h"
-#include "../alerting/AlertManager.h"
-#include "../core/Config.h"
-#include "../core/StreamManager.h"
-#include "spdlog/spdlog.h"
-#include "nlohmann/json.hpp"
-
-#include <fstream>
-#include <sstream>
+#include "web/WebServer.h"
+#include <spdlog/spdlog.h>
+#include <nlohmann/json.hpp>
 #include <thread>
 #include <chrono>
-#include <filesystem>
-#include <ctime>
+#include <fstream>  // Ajout pour std::ifstream
+#include <algorithm> // Pour std::transform, std::replace, etc.
+#include "alerting/AlertManager.h" // Ajout de l'include pour AlertManager
+#include <cerrno> // Pour strerror
 
-// Définir CPPHTTPLIB_OPENSSL_SUPPORT avant d'inclure httplib.h si vous utilisez SSL
+// Inclure httplib avec l'implémentation
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <httplib.h>
 
-// Définir l'espace de noms pour JSON
-using json = nlohmann::json;
-
 namespace hls_to_dvb {
 
-WebServer::WebServer(Config* config, StreamManager* streamManager)
-    : config_(config), streamManager_(streamManager), running_(false) {
-    
-    // Vérifier les paramètres
-    if (!config || !streamManager) {
-        throw std::invalid_argument("Config et StreamManager ne peuvent pas être null");
-    }
+WebServer::WebServer(Config& config, StreamManager& streamManager, const std::string& webRoot)
+    : config_(config), streamManager_(streamManager), webRoot_(webRoot), running_(false) {
+    server_ = std::make_unique<httplib::Server>();
 }
 
+WebServer::~WebServer() {
+    stop();
+}
 
-void WebServer::start() {
-    if (running_) {
+bool WebServer::start() {
+    if (isRunning()) {
         spdlog::warn("Le serveur web est déjà en cours d'exécution");
-        return;
+        return true;
     }
     
-    try {
-        // Récupérer le port du serveur web
-        int port = config_->getWebServerPort();
-        
-        spdlog::info("Démarrage du serveur web sur le port {}", port);
-        
-        // Initialiser le serveur HTTP
-        server_ = std::make_unique<httplib::Server>();
-        
-        // Configuration des routes
-        configureRoutes();
-        
-        // Démarrer le serveur dans un thread séparé
-        serverThread_ = std::thread([this, port]() {
-            // Journaliser le début du serveur
-            spdlog::info("Serveur web en écoute sur le port {}", port);
+    // Configurer les routes
+    setupRoutes();
+    
+    // Obtenir la configuration du serveur
+    const auto& serverConfig = config_.getServerConfig();
+    
+    // Afficher plus d'informations de débogage
+    spdlog::info("Tentative de démarrage du serveur web sur {}:{}", serverConfig.address, serverConfig.port);
+    spdlog::info("Répertoire web racine: {}", webRoot_);
+    
+    // Démarrer le serveur dans un thread séparé
+    running_ = true;
+    serverThread_ = std::thread([this, serverConfig]() {
+        try {
+            spdlog::info("Thread du serveur démarré");
             
-            // Démarrer le serveur
-            if (!server_->listen("0.0.0.0", port)) {
-                spdlog::error("Erreur lors du démarrage du serveur web sur le port {}", port);
-                
-                AlertManager::getInstance().addAlert(
-                    AlertLevel::ERROR,
-                    "WebServer",
-                    "Erreur lors du démarrage du serveur web sur le port " + std::to_string(port),
-                    true
-                );
+            // Configurer le répertoire statique
+            server_->set_mount_point("/", webRoot_);
+            spdlog::info("Point de montage configuré: / -> {}", webRoot_);
+            
+            // Ajouter une route de base pour tester
+            server_->Get("/test", [](const httplib::Request&, httplib::Response& res) {
+                res.set_content("Test server is running", "text/plain");
+            });
+            spdlog::info("Route de test ajoutée: /test");
+            
+            // Démarrer le serveur (bloquant)
+            spdlog::info("Démarrage de l'écoute sur {}:{}", serverConfig.address, serverConfig.port);
+            if (!server_->listen(serverConfig.address.c_str(), serverConfig.port)) {
+                spdlog::error("Erreur lors du démarrage du serveur web: {}", strerror(errno));
+                running_ = false;
             }
-        });
-        
-        running_ = true;
-        
-        AlertManager::getInstance().addAlert(
-            AlertLevel::INFO,
-            "WebServer",
-            "Serveur web démarré sur le port " + std::to_string(port),
-            false
-        );
+        } catch (const std::exception& e) {
+            spdlog::error("Exception dans le thread du serveur: {}", e.what());
+            running_ = false;
+        } catch (...) {
+            spdlog::error("Exception inconnue dans le thread du serveur");
+            running_ = false;
+        }
+    });
+    
+    // Attendre un peu plus longtemps pour vérifier si le serveur a démarré correctement
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    
+    if (running_) {
+        spdlog::info("Serveur web démarré avec succès");
+    } else {
+        spdlog::error("Échec du démarrage du serveur web");
     }
-    catch (const std::exception& e) {
-        spdlog::error("Erreur lors du démarrage du serveur web: {}", e.what());
-        
-        AlertManager::getInstance().addAlert(
-            AlertLevel::ERROR,
-            "WebServer",
-            std::string("Erreur lors du démarrage du serveur web: ") + e.what(),
-            true
-        );
-        
-        throw;
-    }
+    
+    return running_;
 }
 
 void WebServer::stop() {
-    if (!running_) {
-        spdlog::warn("Le serveur web n'est pas en cours d'exécution");
+    if (!isRunning()) {
         return;
     }
     
     spdlog::info("Arrêt du serveur web");
     
     // Arrêter le serveur
-    if (server_) {
-        server_->stop();
-    }
+    server_->stop();
     
     // Attendre la fin du thread
     if (serverThread_.joinable()) {
@@ -109,579 +98,529 @@ void WebServer::stop() {
     }
     
     running_ = false;
-    
-    AlertManager::getInstance().addAlert(
-        AlertLevel::INFO,
-        "WebServer",
-        "Serveur web arrêté",
-        false
-    );
 }
 
-void WebServer::configureRoutes() {
-    // Servir les fichiers statiques
-    server_->set_mount_point("/", "./web");
-    
-    // Route principale - redirection vers l'index.html
-    server_->Get("/", [](const httplib::Request& req, httplib::Response& res) {
-        res.set_redirect("/index.html");
+bool WebServer::isRunning() const {
+    return running_;
+}
+
+void WebServer::setupRoutes() {
+    // Gérer les routes API
+    server_->Get("/api/status", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleGetStatus(req, res);
     });
     
-    // API pour récupérer la configuration
-    server_->Get("/api/config", [this](const httplib::Request& req, httplib::Response& res) {
-        handleGetConfig(req, res);
-    });
-    
-    // API pour mettre à jour la configuration
-    server_->Post("/api/config", [this](const httplib::Request& req, httplib::Response& res) {
-        handlePostConfig(req, res);
-    });
-    
-    // API pour récupérer la liste des flux
     server_->Get("/api/streams", [this](const httplib::Request& req, httplib::Response& res) {
-        handleGetStreams(req, res);
+        this->handleGetStreams(req, res);
     });
     
-    // API pour récupérer un flux spécifique
-    server_->Get(R"(/api/streams/(\w+))", [this](const httplib::Request& req, httplib::Response& res) {
-        auto streamId = req.matches[1];
-        handleGetStream(streamId, req, res);
-    });
-    
-    // API pour créer ou mettre à jour un flux
     server_->Post("/api/streams", [this](const httplib::Request& req, httplib::Response& res) {
-        handlePostStream(req, res);
+        this->handleCreateStream(req, res);
     });
     
-    // API pour supprimer un flux
-    server_->Delete(R"(/api/streams/(\w+))", [this](const httplib::Request& req, httplib::Response& res) {
-        auto streamId = req.matches[1];
-        handleDeleteStream(streamId, req, res);
+    server_->Get(R"(/api/streams/([^/]+))", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleGetStream(req, res);
     });
     
-    // API pour démarrer un flux
-    server_->Post(R"(/api/streams/(\w+)/start)", [this](const httplib::Request& req, httplib::Response& res) {
-        auto streamId = req.matches[1];
-        handleStartStream(streamId, req, res);
+    server_->Put(R"(/api/streams/([^/]+))", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleUpdateStream(req, res);
     });
     
-    // API pour arrêter un flux
-    server_->Post(R"(/api/streams/(\w+)/stop)", [this](const httplib::Request& req, httplib::Response& res) {
-        auto streamId = req.matches[1];
-        handleStopStream(streamId, req, res);
+    server_->Delete(R"(/api/streams/([^/]+))", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleDeleteStream(req, res);
     });
     
-    // API pour récupérer les statistiques d'un flux
-    server_->Get(R"(/api/streams/(\w+)/stats)", [this](const httplib::Request& req, httplib::Response& res) {
-        auto streamId = req.matches[1];
-        handleGetStreamStats(streamId, req, res);
+    server_->Post(R"(/api/streams/([^/]+)/start)", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleStartStream(req, res);
     });
     
-    // API pour récupérer les alertes
+    server_->Post(R"(/api/streams/([^/]+)/stop)", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleStopStream(req, res);
+    });
+    
+    server_->Get("/api/stats", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleGetStats(req, res);
+    });
+    
     server_->Get("/api/alerts", [this](const httplib::Request& req, httplib::Response& res) {
-        handleGetAlerts(req, res);
+        this->handleGetAlerts(req, res);
     });
     
-    // API pour supprimer une alerte
-    server_->Delete(R"(/api/alerts/(\d+))", [this](const httplib::Request& req, httplib::Response& res) {
-        auto alertId = std::stoi(req.matches[1]);
-        handleDeleteAlert(alertId, req, res);
+    server_->Post(R"(/api/alerts/([^/]+)/resolve)", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleResolveAlert(req, res);
     });
     
-    // API pour récupérer l'état du système
-    server_->Get("/api/system", [this](const httplib::Request& req, httplib::Response& res) {
-        handleGetSystemStatus(req, res);
+    server_->Get("/api/alerts/export", [this](const httplib::Request& req, httplib::Response& res) {
+        this->handleExportAlerts(req, res);
+    });
+    
+    // Route par défaut pour le SPA
+    server_->Get(".*", [this]([[maybe_unused]] const httplib::Request& req, httplib::Response& res) {
+        // Définir le type de contenu avec set_header au lieu de set_content_type
+        res.set_header("Content-Type", "text/html");
+        
+        // Rediriger toutes les routes inconnues vers index.html pour le SPA
+        auto indexPath = webRoot_ + "/index.html";
+        
+        // Lecture du fichier complète et mise dans la réponse
+        std::ifstream file(indexPath, std::ios::binary);
+        if (!file) {
+            res.status = 404;
+            res.set_content("<html><body><h1>404 Not Found</h1></body></html>", "text/html");
+            return;
+        }
+        
+        // Lire tout le fichier en une fois
+        std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        res.set_content(content, "text/html");
     });
 }
 
-void WebServer::handleGetConfig(const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Récupérer les paramètres de configuration
-        int webServerPort = config_->getWebServerPort();
-        std::string logLevel = config_->getLogLevel();
-        
-        // Construire la réponse JSON
-        json response = {
-            {"webServerPort", webServerPort},
-            {"logLevel", logLevel}
-        };
-        
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la récupération de la configuration: " + std::string(e.what()));
-    }
+// Implémentation des gestionnaires de route
+
+void WebServer::handleGetStatus([[maybe_unused]] const httplib::Request& req, httplib::Response& res) {
+    nlohmann::json response = {
+        {"status", "ok"},
+        {"uptime", 0},  // À implémenter
+        {"version", "1.0.0"}
+    };
+    
+    res.set_content(response.dump(), "application/json");
 }
 
-void WebServer::handlePostConfig(const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Analyser le corps de la requête
-        json requestBody = json::parse(req.body);
+void WebServer::handleGetStreams([[maybe_unused]] const httplib::Request& req, httplib::Response& res) {
+    nlohmann::json streamsJson = nlohmann::json::array();
+    
+    for (const auto& streamConfig : config_.getStreamConfigs()) {
+        bool isRunning = streamManager_.isStreamRunning(streamConfig.id);
         
-        // Mettre à jour les paramètres (à implémenter dans la classe Config)
-        // Pour l'instant, nous utilisons une approche directe
+        nlohmann::json streamJson = {
+            {"id", streamConfig.id},
+            {"name", streamConfig.name},
+            {"hlsInput", streamConfig.hlsInput},
+            {"multicastOutput", streamConfig.mcastOutput},
+            {"multicastPort", streamConfig.mcastPort},
+            {"bufferSize", streamConfig.bufferSize},
+            {"enabled", streamConfig.enabled},
+            {"running", isRunning}
+        };
         
-        if (requestBody.contains("logLevel")) {
-            std::string logLevel = requestBody["logLevel"];
-            
-            // Mettre à jour le niveau de log
-            if (logLevel == "debug") {
-                spdlog::set_level(spdlog::level::debug);
+        // Ajouter les statistiques si le flux est en cours d'exécution
+        if (isRunning) {
+            auto stats = streamManager_.getStreamStats(streamConfig.id);
+            if (stats) {
+                streamJson["stats"] = {
+                    {"segmentsProcessed", stats->segmentsProcessed},
+                    {"discontinuitiesDetected", stats->discontinuitiesDetected},
+                    {"bufferSize", stats->bufferSize},
+                    {"bufferCapacity", stats->bufferCapacity},
+                    {"packetsTransmitted", stats->packetsTransmitted},
+                    {"currentBitrate", stats->currentBitrate},
+                    {"width", stats->width},
+                    {"height", stats->height},
+                    {"bandwidth", stats->bandwidth},
+                    {"codecs", stats->codecs}
+                };
             }
-            else if (logLevel == "info") {
-                spdlog::set_level(spdlog::level::info);
-            }
-            else if (logLevel == "warning") {
-                spdlog::set_level(spdlog::level::warn);
-            }
-            else if (logLevel == "error") {
-                spdlog::set_level(spdlog::level::err);
-            }
         }
         
-        // Sauvegarder la configuration
-        config_->save();
-        
-        // Construire la réponse
-        json response = {
-            {"success", true},
-            {"message", "Configuration mise à jour avec succès"}
-        };
-        
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
+        streamsJson.push_back(streamJson);
     }
-    catch (const json::exception& e) {
-        handleError(res, 400, "JSON invalide: " + std::string(e.what()));
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la mise à jour de la configuration: " + std::string(e.what()));
-    }
+    
+    res.set_content(streamsJson.dump(), "application/json");
 }
 
-void WebServer::handleGetStreams(const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Récupérer la liste des flux
-        auto streams = config_->getStreams();
-        
-        // Construire la réponse JSON
-        json response = json::array();
-        
-        for (const auto& stream : streams) {
-            response.push_back({
-                {"id", stream.id},
-                {"name", stream.name},
-                {"hlsInput", stream.hlsInput},
-                {"multicastOutput", stream.multicastOutput},
-                {"multicastPort", stream.multicastPort},
-                {"bufferSize", stream.bufferSize},
-                {"running", streamManager_->isStreamRunning(stream.id)}
-            });
-        }
-        
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la récupération des flux: " + std::string(e.what()));
-    }
-}
+// Implémentation des autres méthodes de gestionnaire
 
-void WebServer::handleGetStream(const std::string& streamId, const httplib::Request& req, httplib::Response& res) {
+void WebServer::handleCreateStream(const httplib::Request& req, httplib::Response& res) {
     try {
-        // Récupérer le flux spécifié
-        const StreamConfig* stream = config_->getStream(streamId);
+        auto json = nlohmann::json::parse(req.body);
         
-        if (!stream) {
-            handleError(res, 404, "Flux non trouvé: " + streamId);
-            return;
-        }
+        StreamConfig config;
+        config.name = json.value("name", "");
+        config.hlsInput = json.value("hlsInput", "");
+        config.mcastOutput = json.value("multicastOutput", "");
+        config.mcastPort = json.value("multicastPort", 1234);
+        config.bufferSize = json.value("bufferSize", 3);
+        config.enabled = json.value("enabled", true);
         
-        // Construire la réponse JSON
-        json response = {
-            {"id", stream->id},
-            {"name", stream->name},
-            {"hlsInput", stream->hlsInput},
-            {"multicastOutput", stream->multicastOutput},
-            {"multicastPort", stream->multicastPort},
-            {"bufferSize", stream->bufferSize},
-            {"running", streamManager_->isStreamRunning(stream->id)}
-        };
+        // Générer un ID si non fourni
+        config.id = json.value("id", generateStreamId(config.name));
         
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la récupération du flux: " + std::string(e.what()));
-    }
-}
-
-void WebServer::handlePostStream(const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Analyser le corps de la requête
-        json requestBody = json::parse(req.body);
-        
-        // Créer une nouvelle configuration de flux
-        StreamConfig stream;
-        
-        // ID du flux (si fourni, sinon sera généré)
-        if (requestBody.contains("id") && !requestBody["id"].is_null()) {
-            stream.id = requestBody["id"];
-        }
-        
-        // Nom du flux
-        if (requestBody.contains("name")) {
-            stream.name = requestBody["name"];
-        }
-        
-        // URL du flux HLS d'entrée
-        if (requestBody.contains("hlsInput")) {
-            stream.hlsInput = requestBody["hlsInput"];
-        }
-        
-        // Adresse IP multicast de sortie
-        if (requestBody.contains("multicastOutput")) {
-            stream.multicastOutput = requestBody["multicastOutput"];
-        }
-        
-        // Port multicast de sortie
-        if (requestBody.contains("multicastPort")) {
-            stream.multicastPort = requestBody["multicastPort"];
-        }
-        
-        // Taille du buffer
-        if (requestBody.contains("bufferSize")) {
-            stream.bufferSize = requestBody["bufferSize"];
-        }
-        
-        // Ajouter ou mettre à jour le flux
-        bool success = config_->setStream(stream);
-        
-        if (!success) {
-            handleError(res, 500, "Erreur lors de l'enregistrement du flux");
-            return;
-        }
-        
-        // Démarrer le flux si demandé
-        bool startStream = false;
-        if (requestBody.contains("autoStart") && requestBody["autoStart"].is_boolean()) {
-            startStream = requestBody["autoStart"];
-        }
-        
-        if (startStream) {
-            streamManager_->startStream(stream.id);
-        }
-        
-        // Construire la réponse
-        json response = {
-            {"success", true},
-            {"message", "Flux enregistré avec succès"},
-            {"id", stream.id}
-        };
-        
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
-    }
-    catch (const json::exception& e) {
-        handleError(res, 400, "JSON invalide: " + std::string(e.what()));
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de l'enregistrement du flux: " + std::string(e.what()));
-    }
-}
-
-void WebServer::handleDeleteStream(const std::string& streamId, const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Vérifier si le flux existe
-        const StreamConfig* stream = config_->getStream(streamId);
-        if (!stream) {
-            handleError(res, 404, "Flux non trouvé: " + streamId);
-            return;
-        }
-        
-        // Arrêter le flux s'il est en cours d'exécution
-        if (streamManager_->isStreamRunning(streamId)) {
-            streamManager_->stopStream(streamId);
-        }
-        
-        // Supprimer le flux
-        bool success = config_->removeStream(streamId);
-        
-        if (!success) {
-            handleError(res, 500, "Erreur lors de la suppression du flux");
-            return;
-        }
-        
-        // Construire la réponse
-        json response = {
-            {"success", true},
-            {"message", "Flux supprimé avec succès"}
-        };
-        
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la suppression du flux: " + std::string(e.what()));
-    }
-}
-
-void WebServer::handleStartStream(const std::string& streamId, const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Vérifier si le flux existe
-        const StreamConfig* stream = config_->getStream(streamId);
-        if (!stream) {
-            handleError(res, 404, "Flux non trouvé: " + streamId);
-            return;
-        }
-        
-        // Vérifier si le flux est déjà en cours d'exécution
-        if (streamManager_->isStreamRunning(streamId)) {
-            // Succès même si déjà démarré
-            json response = {
-                {"success", true},
-                {"message", "Le flux est déjà en cours d'exécution"}
+        // Vérifier si l'ID existe déjà
+        if (config_.getStreamConfig(config.id) != nullptr) {
+            res.status = 409; // Conflict
+            nlohmann::json response = {
+                {"error", "Un flux avec cet ID existe déjà"}
             };
             res.set_content(response.dump(), "application/json");
             return;
         }
         
-        // Démarrer le flux
-        bool success = streamManager_->startStream(streamId);
-        
-        if (!success) {
-            handleError(res, 500, "Erreur lors du démarrage du flux");
+        // Mettre à jour la configuration
+        if (!config_.updateStreamConfig(config)) {
+            res.status = 500;
+            nlohmann::json response = {
+                {"error", "Erreur lors de la création du flux"}
+            };
+            res.set_content(response.dump(), "application/json");
             return;
         }
         
-        // Construire la réponse
-        json response = {
-            {"success", true},
-            {"message", "Flux démarré avec succès"}
+        // Retourner la configuration créée
+        nlohmann::json response = {
+            {"id", config.id},
+            {"name", config.name},
+            {"hlsInput", config.hlsInput},
+            {"multicastOutput", config.mcastOutput},
+            {"multicastPort", config.mcastPort},
+            {"bufferSize", config.bufferSize},
+            {"enabled", config.enabled},
+            {"running", false}
         };
         
-        // Envoyer la réponse
+        res.status = 201; // Created
         res.set_content(response.dump(), "application/json");
-    }
+    } 
     catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors du démarrage du flux: " + std::string(e.what()));
+        res.status = 400;
+        nlohmann::json response = {
+            {"error", std::string("Erreur lors du parsing de la requête: ") + e.what()}
+        };
+        res.set_content(response.dump(), "application/json");
     }
 }
 
-void WebServer::handleStopStream(const std::string& streamId, const httplib::Request& req, httplib::Response& res) {
+void WebServer::handleGetStream(const httplib::Request& req, httplib::Response& res) {
+    // Extraire l'ID du flux depuis les captures regex
+    std::string streamId = req.matches[1];
+    
+    // Rechercher le flux dans la configuration
+    const auto* streamConfig = config_.getStreamConfig(streamId);
+    if (!streamConfig) {
+        res.status = 404;
+        nlohmann::json response = {
+            {"error", "Flux non trouvé"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Vérifier si le flux est en cours d'exécution
+    bool isRunning = streamManager_.isStreamRunning(streamId);
+    
+    // Construire la réponse JSON
+    nlohmann::json response = {
+        {"id", streamConfig->id},
+        {"name", streamConfig->name},
+        {"hlsInput", streamConfig->hlsInput},
+        {"multicastOutput", streamConfig->mcastOutput},
+        {"multicastPort", streamConfig->mcastPort},
+        {"bufferSize", streamConfig->bufferSize},
+        {"enabled", streamConfig->enabled},
+        {"running", isRunning}
+    };
+    
+    // Ajouter les statistiques si le flux est en cours d'exécution
+    if (isRunning) {
+        auto stats = streamManager_.getStreamStats(streamId);
+        if (stats) {
+            response["stats"] = {
+                {"segmentsProcessed", stats->segmentsProcessed},
+                {"discontinuitiesDetected", stats->discontinuitiesDetected},
+                {"bufferSize", stats->bufferSize},
+                {"bufferCapacity", stats->bufferCapacity},
+                {"packetsTransmitted", stats->packetsTransmitted},
+                {"currentBitrate", stats->currentBitrate},
+                {"width", stats->width},
+                {"height", stats->height},
+                {"bandwidth", stats->bandwidth},
+                {"codecs", stats->codecs}
+            };
+        }
+    }
+    
+    res.set_content(response.dump(), "application/json");
+}
+
+void WebServer::handleUpdateStream(const httplib::Request& req, httplib::Response& res) {
+    // Extraire l'ID du flux depuis les captures regex
+    std::string streamId = req.matches[1];
+    
+    // Vérifier si le flux existe
+    const auto* existingConfig = config_.getStreamConfig(streamId);
+    if (!existingConfig) {
+        res.status = 404;
+        nlohmann::json response = {
+            {"error", "Flux non trouvé"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
     try {
-        // Vérifier si le flux existe
-        const StreamConfig* stream = config_->getStream(streamId);
-        if (!stream) {
-            handleError(res, 404, "Flux non trouvé: " + streamId);
+        auto json = nlohmann::json::parse(req.body);
+        
+        // Partir de la configuration existante
+        StreamConfig config = *existingConfig;
+        
+        // Mettre à jour les champs fournis
+        if (json.contains("name")) config.name = json["name"];
+        if (json.contains("hlsInput")) config.hlsInput = json["hlsInput"];
+        if (json.contains("multicastOutput")) config.mcastOutput = json["multicastOutput"];
+        if (json.contains("multicastPort")) config.mcastPort = json["multicastPort"];
+        if (json.contains("bufferSize")) config.bufferSize = json["bufferSize"];
+        if (json.contains("enabled")) config.enabled = json["enabled"];
+        
+        // Mettre à jour la configuration
+        if (!config_.updateStreamConfig(config)) {
+            res.status = 500;
+            nlohmann::json response = {
+                {"error", "Erreur lors de la mise à jour du flux"}
+            };
+            res.set_content(response.dump(), "application/json");
             return;
         }
         
         // Vérifier si le flux est en cours d'exécution
-        if (!streamManager_->isStreamRunning(streamId)) {
-            // Succès même si déjà arrêté
-            json response = {
-                {"success", true},
-                {"message", "Le flux n'est pas en cours d'exécution"}
-            };
-            res.set_content(response.dump(), "application/json");
-            return;
-        }
-        
-        // Arrêter le flux
-        bool success = streamManager_->stopStream(streamId);
-        
-        if (!success) {
-            handleError(res, 500, "Erreur lors de l'arrêt du flux");
-            return;
-        }
-        
-        // Construire la réponse
-        json response = {
-            {"success", true},
-            {"message", "Flux arrêté avec succès"}
-        };
-        
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de l'arrêt du flux: " + std::string(e.what()));
-    }
-}
-
-void WebServer::handleGetStreamStats(const std::string& streamId, const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Vérifier si le flux existe
-        const StreamConfig* stream = config_->getStream(streamId);
-        if (!stream) {
-            handleError(res, 404, "Flux non trouvé: " + streamId);
-            return;
-        }
-        
-        // Récupérer les statistiques du flux
-        auto stats = streamManager_->getStreamStats(streamId);
-        
-        if (!stats) {
-            handleError(res, 404, "Statistiques non disponibles pour ce flux");
-            return;
-        }
+        bool isRunning = streamManager_.isStreamRunning(streamId);
         
         // Construire la réponse JSON
-        json response = {
-            {"segmentsProcessed", stats->segmentsProcessed},
-            {"discontinuitiesDetected", stats->discontinuitiesDetected},
-            {"bufferSize", stats->bufferSize},
-            {"bufferCapacity", stats->bufferCapacity},
-            {"packetsTransmitted", stats->packetsTransmitted},
-            {"currentBitrate", stats->currentBitrate},
-            {"width", stats->width},
-            {"height", stats->height},
-            {"bandwidth", stats->bandwidth},
-            {"codecs", stats->codecs},
-            {"running", streamManager_->isStreamRunning(streamId)}
+        nlohmann::json response = {
+            {"id", config.id},
+            {"name", config.name},
+            {"hlsInput", config.hlsInput},
+            {"multicastOutput", config.mcastOutput},
+            {"multicastPort", config.mcastPort},
+            {"bufferSize", config.bufferSize},
+            {"enabled", config.enabled},
+            {"running", isRunning}
         };
         
-        // Envoyer la réponse
         res.set_content(response.dump(), "application/json");
-    }
+    } 
     catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la récupération des statistiques: " + std::string(e.what()));
-    }
-}
-
-void WebServer::handleGetAlerts(const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Récupérer les alertes
-        auto alerts = AlertManager::getInstance().getAllAlerts();
-        
-        // Construire la réponse JSON
-        json response = json::array();
-        
-        for (const auto& alert : alerts) {
-            // Convertir le niveau d'alerte en chaîne
-            std::string levelStr;
-            switch (alert.level) {
-                case AlertLevel::INFO:
-                    levelStr = "INFO";
-                    break;
-                case AlertLevel::WARNING:
-                    levelStr = "WARNING";
-                    break;
-                case AlertLevel::ERROR:
-                    levelStr = "ERROR";
-                    break;
-                default:
-                    levelStr = "UNKNOWN";
-            }
-            
-            // Format de l'horodatage : convertir timestamp en chaîne lisible
-            auto timestamp = std::chrono::system_clock::time_point(
-                std::chrono::milliseconds(alert.timestamp)
-            );
-            auto timeT = std::chrono::system_clock::to_time_t(timestamp);
-            char timeStr[100];
-            std::strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", std::localtime(&timeT));
-            
-            response.push_back({
-                {"level", levelStr},
-                {"source", alert.source},
-                {"message", alert.message},
-                {"persistent", alert.persistent},
-                {"timestamp", std::string(timeStr)}
-            });
-        }
-        
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la récupération des alertes: " + std::string(e.what()));
-    }
-}
-
-void WebServer::handleDeleteAlert(int alertId, const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Supprimer l'alerte
-        bool success = AlertManager::getInstance().removeAlert(alertId);
-        
-        if (!success) {
-            handleError(res, 404, "Alerte non trouvée");
-            return;
-        }
-        
-        // Construire la réponse
-        json response = {
-            {"success", true},
-            {"message", "Alerte supprimée avec succès"}
+        res.status = 400;
+        nlohmann::json response = {
+            {"error", std::string("Erreur lors du parsing de la requête: ") + e.what()}
         };
-        
-        // Envoyer la réponse
         res.set_content(response.dump(), "application/json");
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la suppression de l'alerte: " + std::string(e.what()));
     }
 }
 
-void WebServer::handleGetSystemStatus(const httplib::Request& req, httplib::Response& res) {
-    try {
-        // Récupérer les informations système
-        auto streams = config_->getStreams();
-        size_t totalStreams = streams.size();
-        size_t runningStreams = 0;
-        
-        for (const auto& stream : streams) {
-            if (streamManager_->isStreamRunning(stream.id)) {
-                runningStreams++;
-            }
-        }
-        
-        // Obtenir l'utilisation CPU et mémoire (exemple simplifié)
-        double cpuUsage = 0.0;  // À implémenter en fonction du système
-        double memoryUsage = 0.0;  // À implémenter en fonction du système
-        
-        // Obtenir l'uptime du système (exemple simplifié)
-        std::string uptime = "0d 0h 0m";  // À implémenter en fonction du système
-        
-        // Construire la réponse JSON
-        json response = {
-            {"totalStreams", totalStreams},
-            {"runningStreams", runningStreams},
-            {"cpuUsage", cpuUsage},
-            {"memoryUsage", memoryUsage},
-            {"uptime", uptime},
-            {"version", "1.0.0"}  // Version de l'application
-        };
-        
-        // Envoyer la réponse
-        res.set_content(response.dump(), "application/json");
-    }
-    catch (const std::exception& e) {
-        handleError(res, 500, "Erreur lors de la récupération des informations système: " + std::string(e.what()));
-    }
-}
-
-void WebServer::handleError(httplib::Response& res, int statusCode, const std::string& message) {
-    // Journaliser l'erreur
-    spdlog::error("Erreur API ({}) : {}", statusCode, message);
+void WebServer::handleDeleteStream(const httplib::Request& req, httplib::Response& res) {
+    // Extraire l'ID du flux depuis les captures regex
+    std::string streamId = req.matches[1];
     
-    // Construire la réponse d'erreur
-    json response = {
-        {"success", false},
-        {"error", message}
+    // Vérifier si le flux existe
+    if (config_.getStreamConfig(streamId) == nullptr) {
+        res.status = 404;
+        nlohmann::json response = {
+            {"error", "Flux non trouvé"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Arrêter le flux s'il est en cours d'exécution
+    if (streamManager_.isStreamRunning(streamId)) {
+        streamManager_.stopStream(streamId);
+    }
+    
+    // Supprimer le flux de la configuration
+    if (!config_.removeStreamConfig(streamId)) {
+        res.status = 500;
+        nlohmann::json response = {
+            {"error", "Erreur lors de la suppression du flux"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Réponse 204 No Content
+    res.status = 204;
+}
+
+void WebServer::handleStartStream(const httplib::Request& req, httplib::Response& res) {
+    // Extraire l'ID du flux depuis les captures regex
+    std::string streamId = req.matches[1];
+    
+    // Vérifier si le flux existe
+    const auto* streamConfig = config_.getStreamConfig(streamId);
+    if (!streamConfig) {
+        res.status = 404;
+        nlohmann::json response = {
+            {"error", "Flux non trouvé"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Vérifier si le flux est déjà en cours d'exécution
+    if (streamManager_.isStreamRunning(streamId)) {
+        res.status = 409; // Conflict
+        nlohmann::json response = {
+            {"error", "Le flux est déjà en cours d'exécution"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Démarrer le flux (passer l'ID, pas le StreamConfig)
+    if (!streamManager_.startStream(streamId)) {
+        res.status = 500;
+        nlohmann::json response = {
+            {"error", "Erreur lors du démarrage du flux"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Réponse 204 No Content
+    res.status = 204;
+}
+
+void WebServer::handleStopStream(const httplib::Request& req, httplib::Response& res) {
+    // Extraire l'ID du flux depuis les captures regex
+    std::string streamId = req.matches[1];
+    
+    // Vérifier si le flux existe
+    if (config_.getStreamConfig(streamId) == nullptr) {
+        res.status = 404;
+        nlohmann::json response = {
+            {"error", "Flux non trouvé"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Vérifier si le flux est en cours d'exécution
+    if (!streamManager_.isStreamRunning(streamId)) {
+        res.status = 409; // Conflict
+        nlohmann::json response = {
+            {"error", "Le flux n'est pas en cours d'exécution"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Arrêter le flux
+    if (!streamManager_.stopStream(streamId)) {
+        res.status = 500;
+        nlohmann::json response = {
+            {"error", "Erreur lors de l'arrêt du flux"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Réponse 204 No Content
+    res.status = 204;
+}
+
+void WebServer::handleGetStats([[maybe_unused]] const httplib::Request& req, httplib::Response& res) {
+    // Compter les flux en cours d'exécution
+    int runningStreams = 0;
+    for (const auto& config : config_.getStreamConfigs()) {
+        if (streamManager_.isStreamRunning(config.id)) {
+            runningStreams++;
+        }
+    }
+
+    nlohmann::json stats = {
+        {"streams", {
+            {"total", config_.getStreamConfigs().size()},
+            {"running", runningStreams}
+        }},
+        {"system", {
+            {"cpuUsage", 0.0},  // À implémenter
+            {"memoryUsage", 0.0}  // À implémenter
+        }}
     };
     
-    // Définir le code d'état HTTP
-    res.status = statusCode;
-    
-    // Envoyer la réponse
-    res.set_content(response.dump(), "application/json");
+    res.set_content(stats.dump(), "application/json");
 }
 
-WebServer::~WebServer() {
-    if (running_) {
-        stop();
+void WebServer::handleGetAlerts([[maybe_unused]] const httplib::Request& req, httplib::Response& res) {
+    nlohmann::json alertsJson = nlohmann::json::array();
+    
+    // Récupérer les alertes depuis AlertManager
+    auto alerts = hls_to_dvb::AlertManager::getInstance().getActiveAlerts();
+    
+    for (const auto& alert : alerts) {
+        nlohmann::json alertJson = {
+            {"id", alert.id},
+            {"level", static_cast<int>(alert.level)},
+            {"message", alert.message},
+            {"component", alert.component},
+            {"timestamp", std::chrono::system_clock::to_time_t(alert.timestamp)},
+            {"persistent", alert.persistent}
+        };
+        
+        alertsJson.push_back(alertJson);
     }
+    
+    res.set_content(alertsJson.dump(), "application/json");
 }
+
+void WebServer::handleResolveAlert(const httplib::Request& req, httplib::Response& res) {
+    // Extraire l'ID de l'alerte depuis les captures regex
+    std::string alertId = req.matches[1];
+    
+    // Résoudre l'alerte
+    if (!hls_to_dvb::AlertManager::getInstance().resolveAlert(alertId)) {
+        res.status = 404;
+        nlohmann::json response = {
+            {"error", "Alerte non trouvée"}
+        };
+        res.set_content(response.dump(), "application/json");
+        return;
+    }
+    
+    // Réponse 204 No Content
+    res.status = 204;
+}
+
+void WebServer::handleExportAlerts([[maybe_unused]] const httplib::Request& req, httplib::Response& res) {
+    nlohmann::json alertsJson = nlohmann::json::array();
+    
+    // Récupérer les alertes depuis AlertManager
+    auto alerts = hls_to_dvb::AlertManager::getInstance().getActiveAlerts();
+    
+    for (const auto& alert : alerts) {
+        nlohmann::json alertJson = {
+            {"id", alert.id},
+            {"level", static_cast<int>(alert.level)},
+            {"message", alert.message},
+            {"component", alert.component},
+            {"timestamp", std::chrono::system_clock::to_time_t(alert.timestamp)},
+            {"persistent", alert.persistent}
+        };
+        
+        alertsJson.push_back(alertJson);
+    }
+    
+    // Configurer l'en-tête pour le téléchargement
+    res.set_header("Content-Disposition", "attachment; filename=alerts.json");
+    res.set_content(alertsJson.dump(4), "application/json");
+}
+
+std::string WebServer::generateStreamId(const std::string& name) {
+    // Générer un ID à partir du nom (slugify)
+    std::string id = name;
+    
+    // Remplacer les espaces par des tirets
+    std::replace(id.begin(), id.end(), ' ', '-');
+    
+    // Supprimer les caractères non alphanumériques
+    id.erase(std::remove_if(id.begin(), id.end(), [](char c) {
+        return !std::isalnum(c) && c != '-' && c != '_';
+    }), id.end());
+    
+    // Convertir en minuscules
+    std::transform(id.begin(), id.end(), id.begin(), ::tolower);
+    
+    return id;
+}
+
+} // namespace hls_to_dvb

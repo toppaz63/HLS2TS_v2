@@ -11,10 +11,18 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/4.0.1/CMakeCCompiler.cmake"
   "CMakeFiles/4.0.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.0.1/CMakeSystem.cmake"
-  "/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/CMakeLists.txt"
+  "/opt/homebrew/lib/cmake/fmt/fmt-config-version.cmake"
+  "/opt/homebrew/lib/cmake/fmt/fmt-config.cmake"
+  "/opt/homebrew/lib/cmake/fmt/fmt-targets-release.cmake"
+  "/opt/homebrew/lib/cmake/fmt/fmt-targets.cmake"
+  "/opt/homebrew/lib/cmake/spdlog/spdlogConfig.cmake"
+  "/opt/homebrew/lib/cmake/spdlog/spdlogConfigTargets-release.cmake"
+  "/opt/homebrew/lib/cmake/spdlog/spdlogConfigTargets.cmake"
+  "/opt/homebrew/lib/cmake/spdlog/spdlogConfigVersion.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeCInformation.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
+  "/opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeGenericSystem.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeInitializeConfigs.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeLanguageInformation.cmake"
@@ -51,6 +59,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/share/cmake/Modules/Platform/Linker/Apple-AppleClang-CXX.cmake"
   "/opt/homebrew/share/cmake/Modules/Platform/Linker/Apple-AppleClang.cmake"
   "/opt/homebrew/share/cmake/Modules/Platform/UnixPaths.cmake"
+  "/opt/homebrew/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake"
+  "/opt/homebrew/share/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake"
+  "/opt/homebrew/share/cmake/nlohmann_json/nlohmann_jsonTargets.cmake"
   )
 
 # The corresponding makefile is:
@@ -62,10 +73,9 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "src/CMakeFiles/hls-to-dvb.dir/DependInfo.cmake"
+  "CMakeFiles/hls-to-dvb.dir/DependInfo.cmake"
   )

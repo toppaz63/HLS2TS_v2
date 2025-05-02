@@ -63,71 +63,52 @@ CMAKE_BINARY_DIR = /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/buil
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: src/all
+all: CMakeFiles/hls-to-dvb.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: src/codegen
+codegen: CMakeFiles/hls-to-dvb.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
-preinstall: src/preinstall
+preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: src/clean
+clean: CMakeFiles/hls-to-dvb.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory src
-
-# Recursive "all" directory target.
-src/all: src/CMakeFiles/hls-to-dvb.dir/all
-.PHONY : src/all
-
-# Recursive "codegen" directory target.
-src/codegen: src/CMakeFiles/hls-to-dvb.dir/codegen
-.PHONY : src/codegen
-
-# Recursive "preinstall" directory target.
-src/preinstall:
-.PHONY : src/preinstall
-
-# Recursive "clean" directory target.
-src/clean: src/CMakeFiles/hls-to-dvb.dir/clean
-.PHONY : src/clean
-
-#=============================================================================
-# Target rules for target src/CMakeFiles/hls-to-dvb.dir
+# Target rules for target CMakeFiles/hls-to-dvb.dir
 
 # All Build rule for target.
-src/CMakeFiles/hls-to-dvb.dir/all:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/depend
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/build
+CMakeFiles/hls-to-dvb.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target hls-to-dvb"
-.PHONY : src/CMakeFiles/hls-to-dvb.dir/all
+.PHONY : CMakeFiles/hls-to-dvb.dir/all
 
 # Build rule for subdir invocation for target.
-src/CMakeFiles/hls-to-dvb.dir/rule: cmake_check_build_system
+CMakeFiles/hls-to-dvb.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles 12
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/hls-to-dvb.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/hls-to-dvb.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles 0
-.PHONY : src/CMakeFiles/hls-to-dvb.dir/rule
+.PHONY : CMakeFiles/hls-to-dvb.dir/rule
 
 # Convenience name for target.
-hls-to-dvb: src/CMakeFiles/hls-to-dvb.dir/rule
+hls-to-dvb: CMakeFiles/hls-to-dvb.dir/rule
 .PHONY : hls-to-dvb
 
 # codegen rule for target.
-src/CMakeFiles/hls-to-dvb.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/codegen
+CMakeFiles/hls-to-dvb.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/codegen
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Finished codegen for target hls-to-dvb"
-.PHONY : src/CMakeFiles/hls-to-dvb.dir/codegen
+.PHONY : CMakeFiles/hls-to-dvb.dir/codegen
 
 # clean rule for target.
-src/CMakeFiles/hls-to-dvb.dir/clean:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/clean
-.PHONY : src/CMakeFiles/hls-to-dvb.dir/clean
+CMakeFiles/hls-to-dvb.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/clean
+.PHONY : CMakeFiles/hls-to-dvb.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

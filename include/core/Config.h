@@ -59,7 +59,7 @@ struct LoggingConfig {
  * @brief Configuration du système d'alertes
  */
 struct AlertsConfig {
-    struct {
+    struct Retention {
         int info;                     ///< Durée de conservation des alertes INFO en secondes
         int warning;                  ///< Durée de conservation des alertes WARNING en secondes
         int error;                    ///< Durée de conservation des alertes ERROR en secondes
@@ -104,6 +104,18 @@ struct AlertsConfig {
  */
 class Config {
 public:
+    /**
+     * @brief Constructeur
+     * @param configPath Chemin vers le fichier de configuration
+     */
+    explicit Config(const std::string& configPath);
+    
+    /**
+     * @brief Charge la configuration depuis un fichier JSON
+     * @return true si la configuration a été chargée avec succès, false sinon
+     */
+    bool load();
+    
     /**
      * @brief Charge la configuration depuis un fichier JSON
      * @param configPath Chemin vers le fichier de configuration
@@ -171,6 +183,12 @@ public:
     const AlertsConfig& getAlertsConfig() const;
     
     /**
+     * @brief Récupère la configuration de rétention des alertes
+     * @return Configuration de rétention des alertes
+     */
+    const AlertsConfig::Retention& getAlertRetention() const;
+    
+    /**
      * @brief Met à jour la configuration du serveur
      * @param config Nouvelle configuration du serveur
      */
@@ -194,7 +212,14 @@ public:
      */
     nlohmann::json toJson() const;
     
+    /**
+     * @brief Récupère le chemin du fichier de configuration
+     * @return Chemin du fichier de configuration
+     */
+    std::string getConfigPath() const;
+    
 private:
+    std::string configPath_;
     std::vector<StreamConfig> streams_;
     ServerConfig server_;
     LoggingConfig logging_;

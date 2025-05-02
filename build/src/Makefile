@@ -178,30 +178,6 @@ core/Application.cpp.s:
 	cd /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/core/Application.cpp.s
 .PHONY : core/Application.cpp.s
 
-core/Config.o: core/Config.cpp.o
-.PHONY : core/Config.o
-
-# target to build an object file
-core/Config.cpp.o:
-	cd /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/core/Config.cpp.o
-.PHONY : core/Config.cpp.o
-
-core/Config.i: core/Config.cpp.i
-.PHONY : core/Config.i
-
-# target to preprocess a source file
-core/Config.cpp.i:
-	cd /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/core/Config.cpp.i
-.PHONY : core/Config.cpp.i
-
-core/Config.s: core/Config.cpp.s
-.PHONY : core/Config.s
-
-# target to generate assembly for a file
-core/Config.cpp.s:
-	cd /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/core/Config.cpp.s
-.PHONY : core/Config.cpp.s
-
 core/SegmentBuffer.o: core/SegmentBuffer.cpp.o
 .PHONY : core/SegmentBuffer.o
 
@@ -249,6 +225,30 @@ core/StreamManager.s: core/StreamManager.cpp.s
 core/StreamManager.cpp.s:
 	cd /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/core/StreamManager.cpp.s
 .PHONY : core/StreamManager.cpp.s
+
+core/config.o: core/config.cpp.o
+.PHONY : core/config.o
+
+# target to build an object file
+core/config.cpp.o:
+	cd /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/core/config.cpp.o
+.PHONY : core/config.cpp.o
+
+core/config.i: core/config.cpp.i
+.PHONY : core/config.i
+
+# target to preprocess a source file
+core/config.cpp.i:
+	cd /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/core/config.cpp.i
+.PHONY : core/config.cpp.i
+
+core/config.s: core/config.cpp.s
+.PHONY : core/config.s
+
+# target to generate assembly for a file
+core/config.cpp.s:
+	cd /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hls-to-dvb.dir/build.make src/CMakeFiles/hls-to-dvb.dir/core/config.cpp.s
+.PHONY : core/config.cpp.s
 
 hls/HLSClient.o: hls/HLSClient.cpp.o
 .PHONY : hls/HLSClient.o
@@ -409,15 +409,15 @@ help:
 	@echo "... core/Application.o"
 	@echo "... core/Application.i"
 	@echo "... core/Application.s"
-	@echo "... core/Config.o"
-	@echo "... core/Config.i"
-	@echo "... core/Config.s"
 	@echo "... core/SegmentBuffer.o"
 	@echo "... core/SegmentBuffer.i"
 	@echo "... core/SegmentBuffer.s"
 	@echo "... core/StreamManager.o"
 	@echo "... core/StreamManager.i"
 	@echo "... core/StreamManager.s"
+	@echo "... core/config.o"
+	@echo "... core/config.i"
+	@echo "... core/config.s"
 	@echo "... hls/HLSClient.o"
 	@echo "... hls/HLSClient.i"
 	@echo "... hls/HLSClient.s"

@@ -1,8 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/cmake_install.cmake",
-		"/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/src/cmake_install.cmake"
+		"/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

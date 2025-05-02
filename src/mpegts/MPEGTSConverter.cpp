@@ -1,11 +1,14 @@
-#include "MPEGTSConverter.h"
-#include "DVBProcessor.h"
-#include "../alerting/AlertManager.h"
+#include "mpegts/MPEGTSConverter.h"
+#include "mpegts/DVBProcessor.h"
+#include "alerting/AlertManager.h"
 #include "spdlog/spdlog.h"
+
 
 // Utilisation de TSDuck pour manipuler les paquets MPEG-TS
 // Note: Cette implémentation suppose que les bibliothèques TSDuck sont disponibles
 #include <tsduck/tsduck.h>
+
+using namespace hls_to_dvb;
 
 MPEGTSConverter::MPEGTSConverter()
     : running_(false) {
@@ -30,8 +33,8 @@ void MPEGTSConverter::start() {
         
         running_ = true;
         
-        AlertManager::getInstance().addAlert(
-            AlertLevel::INFO,
+        hls_to_dvb::AlertManager::getInstance().addAlert(
+            hls_to_dvb::AlertLevel::INFO,
             "MPEGTSConverter",
             "Convertisseur MPEG-TS démarré",
             false
@@ -40,8 +43,8 @@ void MPEGTSConverter::start() {
     catch (const std::exception& e) {
         spdlog::error("Erreur lors du démarrage du convertisseur MPEG-TS: {}", e.what());
         
-        AlertManager::getInstance().addAlert(
-            AlertLevel::ERROR,
+        hls_to_dvb::AlertManager::getInstance().addAlert(
+            hls_to_dvb::AlertLevel::ERROR,
             "MPEGTSConverter",
             std::string("Erreur lors du démarrage du convertisseur MPEG-TS: ") + e.what(),
             true
@@ -69,8 +72,8 @@ void MPEGTSConverter::stop() {
     
     running_ = false;
     
-    AlertManager::getInstance().addAlert(
-        AlertLevel::INFO,
+    hls_to_dvb::AlertManager::getInstance().addAlert(
+        hls_to_dvb::AlertLevel::INFO,
         "MPEGTSConverter",
         "Convertisseur MPEG-TS arrêté",
         false
@@ -92,24 +95,31 @@ std::optional<MPEGTSSegment> MPEGTSConverter::convert(const HLSSegment& hlsSegme
         // Si le segment HLS est déjà en MPEG-TS (ce qui est généralement le cas),
         // nous devons traiter le flux MPEG-TS pour assurer sa conformité DVB
         
-        // Créer un flux d'entrée à partir des données HLS
-        ts::ByteBlock inputData(hlsSegment.data.data(), hlsSegment.data.size());
+        // Extraction des paquets MPEG-TS
         ts::TSPacketVector packets;
         
-        // Extraction des paquets MPEG-TS
-        if (!ts::TSPacket::FromBytes(packets, inputData)) {
-            spdlog::error("Erreur lors de l'extraction des paquets MPEG-TS du segment HLS {}", 
-                        hlsSegment.sequenceNumber);
+        // Utilisation d'une méthode alternative compatible avec TSDuck 3.40
+        // Au lieu d'utiliser FromBytes qui n'existe pas, nous allons construire manuellement les paquets
+        if (hlsSegment.data.size() % ts::PKT_SIZE != 0) {
+            spdlog::error("Taille de données non multiple de la taille d'un paquet TS: {}", hlsSegment.data.size());
             
-            AlertManager::getInstance().addAlert(
-                AlertLevel::ERROR,
+            hls_to_dvb::AlertManager::getInstance().addAlert(
+                hls_to_dvb::AlertLevel::ERROR,
                 "MPEGTSConverter",
-                "Erreur lors de l'extraction des paquets MPEG-TS du segment HLS " + 
-                std::to_string(hlsSegment.sequenceNumber),
+                "Taille de données non multiple de la taille d'un paquet TS: " + 
+                std::to_string(hlsSegment.data.size()),
                 true
             );
             
             return std::nullopt;
+        }
+        
+        size_t packetCount = hlsSegment.data.size() / ts::PKT_SIZE;
+        for (size_t i = 0; i < packetCount; ++i) {
+            ts::TSPacket packet;
+            const uint8_t* packetData = hlsSegment.data.data() + (i * ts::PKT_SIZE);
+            std::memcpy(packet.b, packetData, ts::PKT_SIZE);
+            packets.push_back(packet);
         }
         
         // Vérifier si les paquets sont valides
@@ -117,8 +127,8 @@ std::optional<MPEGTSSegment> MPEGTSConverter::convert(const HLSSegment& hlsSegme
             spdlog::error("Aucun paquet MPEG-TS valide trouvé dans le segment HLS {}", 
                         hlsSegment.sequenceNumber);
             
-            AlertManager::getInstance().addAlert(
-                AlertLevel::ERROR,
+            hls_to_dvb::AlertManager::getInstance().addAlert(
+                hls_to_dvb::AlertLevel::ERROR,
                 "MPEGTSConverter",
                 "Aucun paquet MPEG-TS valide trouvé dans le segment HLS " + 
                 std::to_string(hlsSegment.sequenceNumber),
@@ -165,8 +175,8 @@ std::optional<MPEGTSSegment> MPEGTSConverter::convert(const HLSSegment& hlsSegme
     catch (const ts::Exception& e) {
         spdlog::error("Exception TSDuck lors de la conversion MPEG-TS: {}", e.what());
         
-        AlertManager::getInstance().addAlert(
-            AlertLevel::ERROR,
+        hls_to_dvb::AlertManager::getInstance().addAlert(
+            hls_to_dvb::AlertLevel::ERROR,
             "MPEGTSConverter",
             std::string("Exception TSDuck lors de la conversion MPEG-TS: ") + e.what(),
             true
@@ -177,8 +187,8 @@ std::optional<MPEGTSSegment> MPEGTSConverter::convert(const HLSSegment& hlsSegme
     catch (const std::exception& e) {
         spdlog::error("Exception lors de la conversion MPEG-TS: {}", e.what());
         
-        AlertManager::getInstance().addAlert(
-            AlertLevel::ERROR,
+        hls_to_dvb::AlertManager::getInstance().addAlert(
+            hls_to_dvb::AlertLevel::ERROR,
             "MPEGTSConverter",
             std::string("Exception lors de la conversion MPEG-TS: ") + e.what(),
             true
@@ -195,8 +205,8 @@ std::vector<uint8_t> MPEGTSConverter::processDiscontinuity(const std::vector<uin
     
     spdlog::info("Traitement d'une discontinuité dans le flux MPEG-TS");
     
-    AlertManager::getInstance().addAlert(
-        AlertLevel::INFO,
+    hls_to_dvb::AlertManager::getInstance().addAlert(
+        hls_to_dvb::AlertLevel::INFO,
         "MPEGTSConverter",
         "Traitement d'une discontinuité dans le flux MPEG-TS",
         false
@@ -269,4 +279,3 @@ MPEGTSConverter::~MPEGTSConverter() {
         stop();
     }
 }
-

@@ -1,78 +1,58 @@
 #pragma once
 
-#include <queue>
+#include "../mpegts/MPEGTSConverter.h"
+
+#include <deque>
 #include <mutex>
 #include <condition_variable>
-#include <vector>
-#include <chrono>
 #include <atomic>
-#include <string>
-
-namespace hls_to_dvb {
+#include <chrono>
 
 /**
- * @brief Structure représentant un segment MPEG-TS traité
- */
-struct MPEGTSSegment {
-    std::vector<uint8_t> data;           ///< Données du segment MPEG-TS
-    bool hasDiscontinuity;               ///< Indique si le segment contient une discontinuité
-    uint64_t sequenceNumber;             ///< Numéro de séquence du segment
-    std::chrono::milliseconds duration;  ///< Durée du segment
-    
-    MPEGTSSegment() : hasDiscontinuity(false), sequenceNumber(0), duration(0) {}
-    
-    MPEGTSSegment(const std::vector<uint8_t>& _data, bool _hasDiscontinuity, 
-                  uint64_t _sequenceNumber, std::chrono::milliseconds _duration) 
-        : data(_data), hasDiscontinuity(_hasDiscontinuity), 
-          sequenceNumber(_sequenceNumber), duration(_duration) {}
-};
-
-/**
- * @brief Classe gérant un buffer de segments pour retarder le flux de sortie
+ * @class SegmentBuffer
+ * @brief Buffer circulaire pour les segments MPEG-TS
  * 
- * Cette classe permet de mettre en buffer un nombre configurable de segments avant
- * de les envoyer vers la sortie, ce qui permet de gérer les interruptions réseau
- * ou du flux HLS source.
+ * Gère un tampon de segments MPEG-TS avec synchronisation pour l'accès concurrent.
+ * Permet de compenser les variations de latence du réseau et d'assurer une lecture fluide.
  */
 class SegmentBuffer {
 public:
     /**
      * @brief Constructeur
-     * @param bufferSize Taille du buffer en nombre de segments
-     * @param name Nom du buffer pour l'identification dans les logs
+     * @param bufferSize Taille maximale du buffer (nombre de segments)
      */
-    SegmentBuffer(size_t bufferSize, const std::string& name = "default");
+    explicit SegmentBuffer(size_t bufferSize = 3);
     
     /**
      * @brief Ajoute un segment au buffer
      * @param segment Segment à ajouter
-     * @return true si le segment a été ajouté, false si le buffer est plein
+     * @return true si le segment a été ajouté avec succès
      */
     bool pushSegment(const MPEGTSSegment& segment);
     
     /**
-     * @brief Récupère le prochain segment disponible
-     * @param segment Référence vers où stocker le segment récupéré
-     * @param waitTimeoutMs Temps d'attente maximum en millisecondes (0 = non bloquant)
-     * @return true si un segment a été récupéré, false si timeout ou buffer vide
+     * @brief Récupère le segment suivant du buffer
+     * @param segment Référence pour stocker le segment récupéré
+     * @param timeout Durée maximale d'attente en millisecondes (0 = pas d'attente)
+     * @return true si un segment a été récupéré
      */
-    bool getSegment(MPEGTSSegment& segment, uint32_t waitTimeoutMs = 0);
+    bool getSegment(MPEGTSSegment& segment, int timeout = 0);
     
     /**
-     * @brief Récupère la taille configurée du buffer
-     * @return Taille du buffer en nombre de segments
+     * @brief Définit la taille maximale du buffer
+     * @param bufferSize Nouvelle taille du buffer
+     */
+    void setBufferSize(size_t bufferSize);
+    
+    /**
+     * @brief Récupère la taille maximale du buffer
+     * @return Taille maximale du buffer
      */
     size_t getBufferSize() const;
     
     /**
-     * @brief Modifie la taille du buffer
-     * @param newSize Nouvelle taille du buffer en nombre de segments
-     */
-    void setBufferSize(size_t newSize);
-    
-    /**
      * @brief Récupère le nombre actuel de segments dans le buffer
-     * @return Nombre de segments actuellement dans le buffer
+     * @return Nombre de segments dans le buffer
      */
     size_t getCurrentSize() const;
     
@@ -81,29 +61,9 @@ public:
      */
     void clear();
     
-    /**
-     * @brief Indique si le buffer est actuellement en sous-charge
-     * @param thresholdPercent Pourcentage de remplissage minimal souhaité (0-100)
-     * @return true si le buffer est en sous-charge, false sinon
-     */
-    bool isUnderflow(float thresholdPercent = 30.0f) const;
-    
-    /**
-     * @brief Récupère le nom du buffer
-     * @return Nom du buffer
-     */
-    std::string getName() const;
-    
 private:
-    mutable std::mutex mutex_;
-    std::condition_variable condition_;
-    std::queue<MPEGTSSegment> segments_;
-    std::atomic<size_t> bufferSize_;
-    std::string name_;
-    
-    // Statistiques
-    std::chrono::steady_clock::time_point lastGetTime_;
-    std::chrono::steady_clock::time_point lastPushTime_;
+    std::deque<MPEGTSSegment> buffer_;         ///< Buffer de segments
+    std::atomic<size_t> bufferSize_;            ///< Taille maximale du buffer
+    mutable std::mutex mutex_;                   ///< Mutex pour l'accès concurrent
+    std::condition_variable conditionVar_;      ///< Variable de condition pour l'attente
 };
-
-} // namespace hls_to_dvb

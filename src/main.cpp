@@ -3,16 +3,16 @@
 #include <signal.h>
 #include <thread>
 #include <chrono>
+#include <filesystem>
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/rotating_file_sink.h>
 
-#include "core/Config.h"
+#include "core/config.h"
 #include "core/StreamManager.h"
 #include "alerting/AlertManager.h"
 #include "web/WebServer.h"
-#include "core/Config.h"
 
 using namespace hls_to_dvb;
 
@@ -39,6 +39,9 @@ int main(int argc, char* argv[]) {
     signal(SIGTERM, signalHandler);
     
     try {
+        // S'assurer que le répertoire logs existe
+        std::filesystem::create_directories("logs");
+        
         // Initialiser le logger
         auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
         console_sink->set_level(spdlog::level::info);
@@ -71,7 +74,6 @@ int main(int argc, char* argv[]) {
             return 1;
         }
         
-
         // Mettre à jour la configuration de journalisation
         const auto& loggingConfig = config.getLoggingConfig();
         if (loggingConfig.level == "debug") {
@@ -83,11 +85,10 @@ int main(int argc, char* argv[]) {
         } else if (loggingConfig.level == "error") {
             spdlog::set_level(spdlog::level::err);
         }
-
-
+        
         // Initialiser le gestionnaire d'alertes
         const auto& alertsConfig = config.getAlertRetention();
-
+        
         AlertManager::getInstance().setRetention(
             AlertLevel::INFO,
             alertsConfig.info
@@ -114,15 +115,26 @@ int main(int argc, char* argv[]) {
         streamManager.start();
         
         // Démarrer les flux configurés
-        //if (!streamManager.startAll()) {
-        //    spdlog::warn("Certains flux n'ont pas pu être démarrés");
-        //}
+        for (const auto& streamConfig : config.getStreamConfigs()) {
+            if (streamConfig.enabled) {
+                if (!streamManager.startStream(streamConfig.id)) {
+                    spdlog::warn("Impossible de démarrer le flux: {}", streamConfig.id);
+                }
+            }
+        }
         
         // Créer et démarrer le serveur web
+        spdlog::info("Initialisation du serveur web avec le répertoire: web");
         WebServer webServer(config, streamManager, "web");
-        if (!webServer.start()) {
+
+        spdlog::info("Tentative de démarrage du serveur web...");
+        bool webServerStarted = webServer.start();
+        spdlog::info("Résultat du démarrage du serveur web: {}", webServerStarted ? "Succès" : "Échec");
+
+        if (!webServerStarted) {
             spdlog::error("Erreur lors du démarrage du serveur web");
-            return 1;
+            // Ne pas quitter l'application, mais continuer sans serveur web
+            // return 1;
         }
         
         // Boucle principale
