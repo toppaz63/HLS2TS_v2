@@ -66,15 +66,15 @@ int main(int argc, char* argv[]) {
         
         // Afficher le message de démarrage
         spdlog::info("Démarrage du convertisseur HLS vers MPEG-TS DVB");
-        
+        spdlog::info("configFile: {}", configFile);
         // Charger la configuration
         Config config(configFile);
         if (!config.load()) {
             spdlog::error("Erreur lors du chargement de la configuration: {}", configFile);
             return 1;
         }
-        
-        // Mettre à jour la configuration de journalisation
+        spdlog::info("Post config call");
+
         const auto& loggingConfig = config.getLoggingConfig();
         if (loggingConfig.level == "debug") {
             spdlog::set_level(spdlog::level::debug);
@@ -86,6 +86,8 @@ int main(int argc, char* argv[]) {
             spdlog::set_level(spdlog::level::err);
         }
         
+        spdlog::info("config loaded");
+
         // Initialiser le gestionnaire d'alertes
         const auto& alertsConfig = config.getAlertRetention();
         
@@ -110,6 +112,7 @@ int main(int argc, char* argv[]) {
             false
         );
         
+        spdlog::info("AlertManager loaded");
         // Créer le gestionnaire de flux
         StreamManager streamManager(&config);
         streamManager.start();
@@ -122,6 +125,7 @@ int main(int argc, char* argv[]) {
                 }
             }
         }
+        spdlog::info("streamManager loaded");
         
         // Créer et démarrer le serveur web
         spdlog::info("Initialisation du serveur web avec le répertoire: web");

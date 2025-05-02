@@ -24,6 +24,7 @@ WebServer::~WebServer() {
 }
 
 bool WebServer::start() {
+    spdlog::critical("************ WebServer::start() CALLED! ************");
     if (isRunning()) {
         spdlog::warn("Le serveur web est déjà en cours d'exécution");
         return true;

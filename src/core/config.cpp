@@ -9,6 +9,7 @@ namespace hls_to_dvb {
 Config::Config(const std::string& configPath)
     : configPath_(configPath) {
     // Initialiser avec des valeurs par défaut
+    spdlog::info("Config constructor called");
 }
 
 bool Config::load() {
@@ -39,7 +40,8 @@ bool Config::loadFromFile(const std::string& configPath) {
                 server_.workerThreads = serverJson["workerThreads"].get<int>();
             }
         }
-        
+        spdlog::info("Server config loaded");
+
         // Charger la configuration de journalisation
         if (json.contains("logging")) {
             const auto& loggingJson = json["logging"];
@@ -65,7 +67,8 @@ bool Config::loadFromFile(const std::string& configPath) {
                 }
             }
         }
-        
+        spdlog::info("Logging config loaded");
+
         // Charger la configuration des alertes
         if (json.contains("alerts")) {
             const auto& alertsJson = json["alerts"];
@@ -84,7 +87,8 @@ bool Config::loadFromFile(const std::string& configPath) {
             
             // Vous pouvez également charger la configuration des notifications ici
         }
-        
+
+        spdlog::info("Alerts config loaded");
         // Charger les configurations de flux
         if (json.contains("streams") && json["streams"].is_array()) {
             streams_.clear();
@@ -128,6 +132,7 @@ bool Config::loadFromFile(const std::string& configPath) {
                 streams_.push_back(streamConfig);
             }
         }
+        spdlog::info("Streams config loaded");
         
         return true;
     } catch (const std::exception& e) {
