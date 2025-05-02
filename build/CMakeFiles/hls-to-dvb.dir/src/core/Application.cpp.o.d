@@ -960,7 +960,7 @@ CMakeFiles/hls-to-dvb.dir/src/core/Application.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__charconv/from_chars_integral.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__charconv/from_chars_result.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__charconv/to_chars.h \
-  /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/core/Config.h \
+  /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/core/config.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
   /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/json.hpp \
@@ -1141,7 +1141,6 @@ CMakeFiles/hls-to-dvb.dir/src/core/Application.cpp.o: \
   /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/core/../core/SegmentBuffer.h \
   /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/core/../core/../mpegts/MPEGTSConverter.h \
   /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/web/WebServer.h \
-  /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/core/config.h \
   /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/alerting/AlertManager.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/spdlog.h \

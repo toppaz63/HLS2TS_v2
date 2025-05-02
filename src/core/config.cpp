@@ -173,10 +173,13 @@ bool Config::saveToFile(const std::string& configPath) const {
 }
 
 const StreamConfig* Config::getStreamConfig(const std::string& streamId) const {
+    spdlog::info("getStreamConfig called with streamId: {}", streamId);
     auto it = streamIndexMap_.find(streamId);
     if (it != streamIndexMap_.end() && it->second < streams_.size()) {
+        spdlog::info("getStreamConfig found streamId: {}", streamId);
         return &streams_[it->second];
     }
+    spdlog::info("getStreamConfig not found streamId: {}", streamId);
     return nullptr;
 }
 

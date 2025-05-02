@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Config.h"
+#include "config.h"
 #include "../hls/HLSClient.h"
 #include "../mpegts/MPEGTSConverter.h"
 #include "../multicast/MulticastSender.h"

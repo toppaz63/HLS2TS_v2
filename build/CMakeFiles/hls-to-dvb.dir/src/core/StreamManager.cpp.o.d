@@ -1,7 +1,7 @@
 CMakeFiles/hls-to-dvb.dir/src/core/StreamManager.cpp.o: \
   /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/core/StreamManager.cpp \
   /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/core/StreamManager.h \
-  /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/core/Config.h \
+  /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/core/config.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/max.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/comp.h \

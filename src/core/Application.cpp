@@ -1,7 +1,5 @@
-#pragma once
-
 #include "core/Application.h"
-#include "core/Config.h"
+#include "core/config.h"
 #include "core/StreamManager.h"
 #include "web/WebServer.h"
 #include "alerting/AlertManager.h"
