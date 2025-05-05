@@ -67,13 +67,14 @@ int main(int argc, char* argv[]) {
         // Afficher le message de démarrage
         spdlog::info("Démarrage du convertisseur HLS vers MPEG-TS DVB");
         spdlog::info("configFile: {}", configFile);
+        
         // Charger la configuration
         Config config(configFile);
         if (!config.load()) {
             spdlog::error("Erreur lors du chargement de la configuration: {}", configFile);
             return 1;
         }
-        spdlog::info("Post config call");
+        spdlog::info("Configuration chargée avec succès");
 
         const auto& loggingConfig = config.getLoggingConfig();
         if (loggingConfig.level == "debug") {
@@ -85,8 +86,6 @@ int main(int argc, char* argv[]) {
         } else if (loggingConfig.level == "error") {
             spdlog::set_level(spdlog::level::err);
         }
-        
-        spdlog::info("config loaded");
 
         // Initialiser le gestionnaire d'alertes
         const auto& alertsConfig = config.getAlertRetention();
@@ -104,7 +103,6 @@ int main(int argc, char* argv[]) {
             alertsConfig.error
         );
         
-        // Ajouter une alerte de démarrage
         AlertManager::getInstance().addAlert(
             AlertLevel::INFO,
             "System",
@@ -112,25 +110,18 @@ int main(int argc, char* argv[]) {
             false
         );
         
-        spdlog::info("AlertManager loaded");
-        // Créer le gestionnaire de flux
-        StreamManager streamManager(&config);
-        streamManager.start();
+        spdlog::info("Gestionnaire d'alertes initialisé");
         
-        // Démarrer les flux configurés
-        for (const auto& streamConfig : config.getStreamConfigs()) {
-              spdlog::info("Configuration trouvée - ID: {}, URL: {}, Enabled: {}", 
-                streamConfig.id, streamConfig.hlsInput, streamConfig.enabled);
- 
-            spdlog::info("Before call - Starting stream: {}", streamConfig.id);
-            if (streamConfig.enabled) {
-                if (!streamManager.startStream(streamConfig.id)) {
-                    spdlog::warn("Impossible de démarrer le flux: {}", streamConfig.id);
-                }
-                spdlog::info("Stream {} started", streamConfig.id);
-            }
-        }
-        spdlog::info("streamManager loaded");
+        // Créer le gestionnaire de flux qui va gérer la conversion HLS -> MPEG-TS et la diffusion multicast
+        spdlog::info("Initialisation du gestionnaire de flux");
+        StreamManager streamManager(&config);
+        
+        // Démarrer le gestionnaire de flux
+        // Cette méthode va initialiser et démarrer tous les flux configurés
+        // y compris la création des instances de MPEGTSConverter et MulticastSender
+        spdlog::info("Démarrage du gestionnaire de flux");
+        streamManager.start();
+        spdlog::info("Gestionnaire de flux démarré avec succès");
         
         // Créer et démarrer le serveur web
         spdlog::info("Initialisation du serveur web avec le répertoire: web");
@@ -143,7 +134,6 @@ int main(int argc, char* argv[]) {
         if (!webServerStarted) {
             spdlog::error("Erreur lors du démarrage du serveur web");
             // Ne pas quitter l'application, mais continuer sans serveur web
-            // return 1;
         }
         
         // Boucle principale
@@ -160,6 +150,7 @@ int main(int argc, char* argv[]) {
         webServer.stop();
         
         // Arrêter tous les flux
+        // Cette méthode va correctement arrêter tous les MPEGTSConverter et MulticastSender
         streamManager.stop();
         
         // Ajouter une alerte de fin

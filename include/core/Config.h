@@ -16,6 +16,7 @@ struct StreamConfig {
     std::string hlsInput;         ///< URL d'entrée du flux HLS
     std::string mcastOutput;      ///< Adresse IP multicast de sortie
     int mcastPort;                ///< Port multicast de sortie
+    std::string mcastInterface;   ///< Interface réseau pour la sortie multicast
     size_t bufferSize;            ///< Taille du buffer en nombre de segments
     bool enabled;                 ///< Si le flux est activé
     
@@ -217,6 +218,11 @@ public:
      * @return Chemin du fichier de configuration
      */
     std::string getConfigPath() const;
+
+    /**
+    * @brief Journalise la configuration complète pour vérification
+    */
+    void logConfiguration() const;
     
 private:
     std::string configPath_;

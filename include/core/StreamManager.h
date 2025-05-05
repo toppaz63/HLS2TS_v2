@@ -145,6 +145,8 @@ private:
      * @param streamId ID du flux à traiter
      */
     void processStream(const std::string& streamId);
+
+    bool isValidMulticastAddress(const std::string& address);
 };
 
 } // namespace hls_to_dvb

@@ -50,7 +50,7 @@ public:
      * @param ttl TTL des paquets multicast
      */
     MulticastSender(const std::string& groupAddress, int port, 
-                   const std::string& interface = "", int ttl = 4);
+                   const std::string& interface, int ttl);
     
     /**
      * @brief Destructeur
@@ -132,6 +132,12 @@ private:
     void senderLoop();
     bool createSocket();
     void closeSocket();
+
+    /**
+    * @brief Vérifie les permissions réseau, particulièrement utile sur macOS 15.4+
+    * @return true si les permissions semblent correctes, false sinon
+    */
+    bool checkNetworkPermissions();
 };
 
 } // namespace hls_to_dvb

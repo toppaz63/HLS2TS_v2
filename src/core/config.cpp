@@ -16,6 +16,51 @@ bool Config::load() {
     return loadFromFile(configPath_);
 }
 
+void Config::logConfiguration() const {
+    // Log de la configuration du serveur
+    spdlog::info("=== Configuration chargée ===");
+    
+    // Configuration du serveur
+    spdlog::info("Serveur web:");
+    spdlog::info("  - Adresse: {}", server_.address);
+    spdlog::info("  - Port: {}", server_.port);
+    spdlog::info("  - Threads: {}", server_.workerThreads);
+    
+    // Configuration de la journalisation
+    spdlog::info("Journalisation:");
+    spdlog::info("  - Niveau: {}", logging_.level);
+    spdlog::info("  - Console: {}", logging_.console ? "Activée" : "Désactivée");
+    spdlog::info("  - Fichier: {}", logging_.file.enabled ? "Activé" : "Désactivé");
+    if (logging_.file.enabled) {
+        spdlog::info("    - Chemin: {}", logging_.file.path);
+        spdlog::info("    - Taille rotation: {} octets", logging_.file.rotationSize);
+        spdlog::info("    - Nombre fichiers: {}", logging_.file.maxFiles);
+    }
+    
+    // Configuration des alertes
+    spdlog::info("Alertes:");
+    spdlog::info("  - Rétention:");
+    spdlog::info("    - Info: {} secondes", alerts_.retention.info);
+    spdlog::info("    - Warning: {} secondes", alerts_.retention.warning);
+    spdlog::info("    - Error: {} secondes", alerts_.retention.error);
+    
+    // Configuration des flux
+    spdlog::info("Flux configurés: {}", streams_.size());
+    for (size_t i = 0; i < streams_.size(); ++i) {
+        const auto& stream = streams_[i];
+        spdlog::info("  Flux #{} - {}:", i+1, stream.id);
+        spdlog::info("    - Nom: {}", stream.name);
+        spdlog::info("    - HLS Input: {}", stream.hlsInput);
+        spdlog::info("    - Multicast Output: {}", stream.mcastOutput);
+        spdlog::info("    - Multicast Port: {}", stream.mcastPort);
+        spdlog::info("    - Multicast Interface: {}", stream.mcastInterface);
+        spdlog::info("    - Buffer Size: {}", stream.bufferSize);
+        spdlog::info("    - Enabled: {}", stream.enabled ? "Oui" : "Non");
+    }
+    
+    spdlog::info("=== Fin de la configuration ===");
+}
+
 bool Config::loadFromFile(const std::string& configPath) {
     try {
         std::ifstream configFile(configPath);
@@ -95,6 +140,8 @@ bool Config::loadFromFile(const std::string& configPath) {
             streamIndexMap_.clear();
             
             for (const auto& streamJson : json["streams"]) {
+                spdlog::debug("Champs détectés dans le JSON: {}", streamJson.dump());
+                
                 StreamConfig streamConfig;
                 
                 if (streamJson.contains("id")) {
@@ -112,12 +159,16 @@ bool Config::loadFromFile(const std::string& configPath) {
                     streamConfig.hlsInput = streamJson["hlsInput"].get<std::string>();
                 }
                 
-                if (streamJson.contains("multicastOutput")) {
-                    streamConfig.mcastOutput = streamJson["multicastOutput"].get<std::string>();
+                if (streamJson.contains("mcastOutput")) {
+                    streamConfig.mcastOutput = streamJson["mcastOutput"].get<std::string>();
                 }
-                
-                if (streamJson.contains("multicastPort")) {
-                    streamConfig.mcastPort = streamJson["multicastPort"].get<int>();
+
+                if (streamJson.contains("mcastPort")) {
+                    streamConfig.mcastPort = streamJson["mcastPort"].get<int>();
+                }
+
+                if (streamJson.contains("mcastInterface")) {
+                    streamConfig.mcastInterface = streamJson["mcastInterface"].get<std::string>();
                 }
                 
                 if (streamJson.contains("bufferSize")) {
@@ -133,6 +184,8 @@ bool Config::loadFromFile(const std::string& configPath) {
             }
         }
         spdlog::info("Streams config loaded");
+
+        logConfiguration();
         
         return true;
     } catch (const std::exception& e) {
