@@ -119,6 +119,9 @@ int main(int argc, char* argv[]) {
         
         // Démarrer les flux configurés
         for (const auto& streamConfig : config.getStreamConfigs()) {
+              spdlog::info("Configuration trouvée - ID: {}, URL: {}, Enabled: {}", 
+                streamConfig.id, streamConfig.hlsInput, streamConfig.enabled);
+ 
             spdlog::info("Before call - Starting stream: {}", streamConfig.id);
             if (streamConfig.enabled) {
                 if (!streamManager.startStream(streamConfig.id)) {

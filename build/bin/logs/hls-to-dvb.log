@@ -1,0 +1,616 @@
+[2025-05-02 16:50:18.864] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-02 16:50:18.865] [main] [info] configFile: ../../config/config.json
+[2025-05-02 16:50:18.865] [main] [info] Config constructor called
+[2025-05-02 16:50:18.865] [main] [error] Erreur lors du chargement de la configuration: [json.exception.parse_error.101] parse error at line 36, column 21: syntax error while parsing object - unexpected string literal; expected '}'
+[2025-05-02 16:50:18.865] [main] [error] Erreur lors du chargement de la configuration: ../../config/config.json
+[2025-05-02 16:53:51.247] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-02 16:53:51.247] [main] [info] configFile: ../../config/config.json
+[2025-05-02 16:53:51.247] [main] [info] Config constructor called
+[2025-05-02 16:53:51.248] [main] [error] Erreur lors du chargement de la configuration: [json.exception.parse_error.101] parse error at line 28, column 5: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal
+[2025-05-02 16:53:51.248] [main] [error] Erreur lors du chargement de la configuration: ../../config/config.json
+[2025-05-02 16:54:35.871] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-02 16:54:35.871] [main] [info] configFile: ../../config/config.json
+[2025-05-02 16:54:35.871] [main] [info] Config constructor called
+[2025-05-02 16:54:35.871] [main] [info] Server config loaded
+[2025-05-02 16:54:35.871] [main] [info] Logging config loaded
+[2025-05-02 16:54:35.871] [main] [info] Alerts config loaded
+[2025-05-02 16:54:35.871] [main] [info] Streams config loaded
+[2025-05-02 16:54:35.871] [main] [info] Post config call
+[2025-05-02 16:54:35.871] [main] [info] config loaded
+[2025-05-02 16:54:35.872] [main] [info] [System] INFO: Application started
+[2025-05-02 16:54:35.872] [main] [info] AlertManager loaded
+[2025-05-02 16:54:35.872] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-02 16:54:35.872] [main] [info] Configuration trouvée - ID: example1, URL: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index.m3u8, Enabled: true
+[2025-05-02 16:54:35.872] [main] [info] Before call - Starting stream: example1
+[2025-05-02 16:54:35.872] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-02 16:54:35.872] [main] [info] getStreamConfig found streamId: example1
+[2025-05-02 16:54:35.872] [main] [info] Démarrage du flux: example1
+[2025-05-02 16:54:35.872] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-02 16:54:35.873] [main] [info] Démarrage du client HLS pour l'URL: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index.m3u8
+[2025-05-02 16:54:45.021] [main] [error] Le flux HLS ne contient pas de segments MPEG-TS
+[2025-05-02 16:54:45.034] [main] [error] Erreur lors du démarrage du client HLS: Aucun flux valide trouvé dans la playlist HLS
+[2025-05-02 16:54:45.034] [main] [error] [HLSClient] ERROR: Erreur lors du démarrage du client HLS: Aucun flux valide trouvé dans la playlist HLS
+[2025-05-02 16:54:45.034] [main] [error] Erreur lors de la création du flux example1: Aucun flux valide trouvé dans la playlist HLS
+[2025-05-02 16:54:45.034] [main] [error] [StreamManager] ERROR: Erreur lors de la création du flux example1: Aucun flux valide trouvé dans la playlist HLS
+[2025-05-02 16:54:45.034] [main] [warning] Impossible de démarrer le flux: example1
+[2025-05-02 16:54:45.034] [main] [info] Stream example1 started
+[2025-05-02 16:54:45.034] [main] [info] streamManager loaded
+[2025-05-02 16:54:45.034] [main] [info] Initialisation du serveur web avec le répertoire: web
+[2025-05-02 16:54:45.036] [main] [info] Tentative de démarrage du serveur web...
+[2025-05-02 16:54:45.036] [main] [critical] ************ WebServer::start() CALLED! ************
+[2025-05-02 16:54:45.037] [main] [info] Tentative de démarrage du serveur web sur 0.0.0.0:8080
+[2025-05-02 16:54:45.037] [main] [info] Répertoire web racine: web
+[2025-05-02 16:54:45.037] [main] [error] Le répertoire web n'existe pas: web
+[2025-05-02 16:54:45.037] [main] [info] Répertoire web créé: web
+[2025-05-02 16:54:45.037] [main] [info] Test d'écriture dans le répertoire web réussi
+[2025-05-02 16:54:45.037] [main] [info] Thread du serveur démarré
+[2025-05-02 16:54:45.038] [main] [info] Point de montage configuré: / -> web
+[2025-05-02 16:54:45.038] [main] [info] Route de test ajoutée: /test
+[2025-05-02 16:54:45.038] [main] [info] Démarrage de l'écoute sur 0.0.0.0:8080
+[2025-05-02 16:54:47.039] [main] [info] Serveur web démarré avec succès
+[2025-05-02 16:54:47.039] [main] [info] Résultat du démarrage du serveur web: Succès
+[2025-05-02 16:54:47.039] [main] [info] Application démarrée et en cours d'exécution
+[2025-05-02 18:05:58.215] [main] [info] Signal reçu: 2
+[2025-05-02 18:05:59.155] [main] [info] Arrêt de l'application...
+[2025-05-02 18:05:59.155] [main] [info] Arrêt du serveur web
+[2025-05-02 18:05:59.156] [main] [info] Arrêt du gestionnaire de flux
+[2025-05-02 18:05:59.156] [main] [info] Tous les flux ont été arrêtés
+[2025-05-02 18:05:59.156] [main] [info] [System] INFO: Application stopped
+[2025-05-02 18:05:59.156] [main] [info] Application arrêtée
+[2025-05-02 18:06:02.026] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-02 18:06:02.026] [main] [info] configFile: ../../config/config.json
+[2025-05-02 18:06:02.026] [main] [info] Config constructor called
+[2025-05-02 18:06:02.026] [main] [info] Server config loaded
+[2025-05-02 18:06:02.026] [main] [info] Logging config loaded
+[2025-05-02 18:06:02.026] [main] [info] Alerts config loaded
+[2025-05-02 18:06:02.027] [main] [info] Streams config loaded
+[2025-05-02 18:06:02.027] [main] [info] Post config call
+[2025-05-02 18:06:02.027] [main] [info] config loaded
+[2025-05-02 18:06:02.027] [main] [info] [System] INFO: Application started
+[2025-05-02 18:06:02.027] [main] [info] AlertManager loaded
+[2025-05-02 18:06:02.027] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-02 18:06:02.027] [main] [info] Configuration trouvée - ID: example1, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8, Enabled: true
+[2025-05-02 18:06:02.027] [main] [info] Before call - Starting stream: example1
+[2025-05-02 18:06:02.027] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-02 18:06:02.027] [main] [info] getStreamConfig found streamId: example1
+[2025-05-02 18:06:02.027] [main] [info] Démarrage du flux: example1
+[2025-05-02 18:06:02.027] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-02 18:06:02.027] [main] [info] Démarrage du client HLS pour l'URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-02 18:06:14.487] [main] [error] Le flux HLS ne contient pas de segments MPEG-TS
+[2025-05-02 18:06:14.498] [main] [error] Erreur lors du démarrage du client HLS: Aucun flux valide trouvé dans la playlist HLS
+[2025-05-02 18:06:14.498] [main] [error] [HLSClient] ERROR: Erreur lors du démarrage du client HLS: Aucun flux valide trouvé dans la playlist HLS
+[2025-05-02 18:06:14.498] [main] [error] Erreur lors de la création du flux example1: Aucun flux valide trouvé dans la playlist HLS
+[2025-05-02 18:06:14.498] [main] [error] [StreamManager] ERROR: Erreur lors de la création du flux example1: Aucun flux valide trouvé dans la playlist HLS
+[2025-05-02 18:06:14.498] [main] [warning] Impossible de démarrer le flux: example1
+[2025-05-02 18:06:14.498] [main] [info] Stream example1 started
+[2025-05-02 18:06:14.498] [main] [info] streamManager loaded
+[2025-05-02 18:06:14.498] [main] [info] Initialisation du serveur web avec le répertoire: web
+[2025-05-02 18:06:14.498] [main] [info] Tentative de démarrage du serveur web...
+[2025-05-02 18:06:14.498] [main] [critical] ************ WebServer::start() CALLED! ************
+[2025-05-02 18:06:14.499] [main] [info] Tentative de démarrage du serveur web sur 0.0.0.0:8080
+[2025-05-02 18:06:14.499] [main] [info] Répertoire web racine: web
+[2025-05-02 18:06:14.499] [main] [info] Test d'écriture dans le répertoire web réussi
+[2025-05-02 18:06:14.499] [main] [info] Thread du serveur démarré
+[2025-05-02 18:06:14.499] [main] [info] Point de montage configuré: / -> web
+[2025-05-02 18:06:14.499] [main] [info] Route de test ajoutée: /test
+[2025-05-02 18:06:14.499] [main] [info] Démarrage de l'écoute sur 0.0.0.0:8080
+[2025-05-02 18:06:16.505] [main] [info] Serveur web démarré avec succès
+[2025-05-02 18:06:16.505] [main] [info] Résultat du démarrage du serveur web: Succès
+[2025-05-02 18:06:16.505] [main] [info] Application démarrée et en cours d'exécution
+[2025-05-03 17:48:57.491] [main] [info] Signal reçu: 2
+[2025-05-03 17:48:57.528] [main] [info] Arrêt de l'application...
+[2025-05-03 17:48:57.528] [main] [info] Arrêt du serveur web
+[2025-05-03 17:48:57.529] [main] [info] Arrêt du gestionnaire de flux
+[2025-05-03 17:48:57.529] [main] [info] Tous les flux ont été arrêtés
+[2025-05-03 17:48:57.529] [main] [info] [System] INFO: Application stopped
+[2025-05-03 17:48:57.529] [main] [info] Application arrêtée
+[2025-05-03 18:24:15.041] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-03 18:24:15.041] [main] [info] configFile: ../../config/config.json
+[2025-05-03 18:24:15.041] [main] [info] Config constructor called
+[2025-05-03 18:24:15.041] [main] [info] Server config loaded
+[2025-05-03 18:24:15.041] [main] [info] Logging config loaded
+[2025-05-03 18:24:15.041] [main] [info] Alerts config loaded
+[2025-05-03 18:24:15.041] [main] [info] Streams config loaded
+[2025-05-03 18:24:15.041] [main] [info] Post config call
+[2025-05-03 18:24:15.041] [main] [info] config loaded
+[2025-05-03 18:24:15.041] [main] [info] [System] INFO: Application started
+[2025-05-03 18:24:15.041] [main] [info] AlertManager loaded
+[2025-05-03 18:24:15.041] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-03 18:24:15.041] [main] [info] Configuration trouvée - ID: example1, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8, Enabled: true
+[2025-05-03 18:24:15.041] [main] [info] Before call - Starting stream: example1
+[2025-05-03 18:24:15.041] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-03 18:24:15.041] [main] [info] getStreamConfig found streamId: example1
+[2025-05-03 18:24:15.041] [main] [info] Démarrage du flux: example1
+[2025-05-03 18:24:15.041] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-03 18:24:15.041] [main] [info] Démarrage du client HLS pour l'URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 18:24:15.041] [main] [info] Analyse détaillée de la playlist: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 18:24:21.077] [main] [info] Format: hls
+[2025-05-03 18:24:21.077] [main] [info] Contenu de la playlist:
+[2025-05-03 18:24:21.077] [main] [info] Ligne 1: #EXTM3U
+[2025-05-03 18:24:21.077] [main] [info] Ligne 2: #EXT-X-VERSION:3
+[2025-05-03 18:24:21.077] [main] [info] Ligne 3: #EXT-X-INDEPENDENT-SEGMENTS
+[2025-05-03 18:24:21.077] [main] [info] Ligne 4: 
+[2025-05-03 18:24:21.077] [main] [info] Ligne 5: #EXT-X-STREAM-INF:BANDWIDTH=7124480,AVERAGE-BANDWIDTH=6705600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1920x1080,FRAME-RATE=25.000
+[2025-05-03 18:24:21.077] [main] [info] Ligne 6: f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=43de6521-c6c6-4da5-8d52-e0f5c0798f3e
+[2025-05-03 18:24:21.077] [main] [info] Ligne 7: 
+[2025-05-03 18:24:21.077] [main] [info] Ligne 8: #EXT-X-STREAM-INF:BANDWIDTH=3604480,AVERAGE-BANDWIDTH=3405600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1280x720,FRAME-RATE=25.000
+[2025-05-03 18:24:21.077] [main] [info] Ligne 9: 6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=43de6521-c6c6-4da5-8d52-e0f5c0798f3e
+[2025-05-03 18:24:21.077] [main] [info] Ligne 10: 
+[2025-05-03 18:24:21.077] [main] [info] Ligne 11: #EXT-X-STREAM-INF:BANDWIDTH=2431145,AVERAGE-BANDWIDTH=2305600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=960x540,FRAME-RATE=25.000
+[2025-05-03 18:24:21.077] [main] [info] Ligne 12: f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=43de6521-c6c6-4da5-8d52-e0f5c0798f3e
+[2025-05-03 18:24:21.077] [main] [info] Ligne 13: 
+[2025-05-03 18:24:21.077] [main] [info] Ligne 14: #EXT-X-STREAM-INF:BANDWIDTH=517198,AVERAGE-BANDWIDTH=507091,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=640x360,FRAME-RATE=25.000
+[2025-05-03 18:24:21.077] [main] [info] Ligne 15: 19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=43de6521-c6c6-4da5-8d52-e0f5c0798f3e
+[2025-05-03 18:24:21.077] [main] [info] Ligne 16: 
+[2025-05-03 18:24:21.077] [main] [info] Métadonnées:
+[2025-05-03 18:24:21.636] [main] [info] Nombre de flux: 12
+[2025-05-03 18:24:21.636] [main] [info]   Flux 0: Type vidéo, Codec h264
+[2025-05-03 18:24:21.636] [main] [info]   Flux 1: Type audio, Codec aac
+[2025-05-03 18:24:21.636] [main] [info]   Flux 2: Type données, Codec inconnu
+[2025-05-03 18:24:21.636] [main] [info]   Flux 3: Type vidéo, Codec h264
+[2025-05-03 18:24:21.636] [main] [info]   Flux 4: Type audio, Codec aac
+[2025-05-03 18:24:21.636] [main] [info]   Flux 5: Type données, Codec inconnu
+[2025-05-03 18:24:21.636] [main] [in[2025-05-03 18:37:46.912] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-03 18:37:46.912] [main] [info] configFile: ../../config/config.json
+[2025-05-03 18:37:46.912] [main] [info] Config constructor called
+[2025-05-03 18:37:46.912] [main] [info] Server config loaded
+[2025-05-03 18:37:46.912] [main] [info] Logging config loaded
+[2025-05-03 18:37:46.912] [main] [info] Alerts config loaded
+[2025-05-03 18:37:46.912] [main] [info] Streams config loaded
+[2025-05-03 18:37:46.912] [main] [info] Post config call
+[2025-05-03 18:37:46.912] [main] [info] config loaded
+[2025-05-03 18:37:46.913] [main] [info] [System] INFO: Application started
+[2025-05-03 18:37:46.913] [main] [info] AlertManager loaded
+[2025-05-03 18:37:46.913] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-03 18:37:46.913] [main] [info] Configuration trouvée - ID: example1, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8, Enabled: true
+[2025-05-03 18:37:46.913] [main] [info] Before call - Starting stream: example1
+[2025-05-03 18:37:46.913] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-03 18:37:46.913] [main] [info] getStreamConfig found streamId: example1
+[2025-05-03 18:37:46.913] [main] [info] Démarrage du flux: example1
+[2025-05-03 18:37:46.913] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-03 18:37:46.913] [main] [info] Démarrage du client HLS pour l'URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 18:37:46.913] [main] [info] Analyse détaillée de la playlist: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 18:37:51.105] [main] [info] Format: hls
+[2025-05-03 18:37:51.105] [main] [info] Contenu de la playlist:
+[2025-05-03 18:37:51.105] [main] [info] Ligne 1: #EXTM3U
+[2025-05-03 18:37:51.105] [main] [info] Ligne 2: #EXT-X-VERSION:3
+[2025-05-03 18:37:51.105] [main] [info] Ligne 3: #EXT-X-INDEPENDENT-SEGMENTS
+[2025-05-03 18:37:51.105] [main] [info] Ligne 4: 
+[2025-05-03 18:37:51.105] [main] [info] Ligne 5: #EXT-X-STREAM-INF:BANDWIDTH=7124480,AVERAGE-BANDWIDTH=6705600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1920x1080,FRAME-RATE=25.000
+[2025-05-03 18:37:51.105] [main] [info] Ligne 6: f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=6d77a26c-a900-4044-ae61-bef1db921f0d
+[2025-05-03 18:37:51.105] [main] [info] Ligne 7: 
+[2025-05-03 18:37:51.105] [main] [info] Ligne 8: #EXT-X-STREAM-INF:BANDWIDTH=3604480,AVERAGE-BANDWIDTH=3405600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1280x720,FRAME-RATE=25.000
+[2025-05-03 18:37:51.105] [main] [info] Ligne 9: 6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=6d77a26c-a900-4044-ae61-bef1db921f0d
+[2025-05-03 18:37:51.105] [main] [info] Ligne 10: 
+[2025-05-03 18:37:51.105] [main] [info] Ligne 11: #EXT-X-STREAM-INF:BANDWIDTH=2431145,AVERAGE-BANDWIDTH=2305600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=960x540,FRAME-RATE=25.000
+[2025-05-03 18:37:51.105] [main] [info] Ligne 12: f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=6d77a26c-a900-4044-ae61-bef1db921f0d
+[2025-05-03 18:37:51.105] [main] [info] Ligne 13: 
+[2025-05-03 18:37:51.105] [main] [info] Ligne 14: #EXT-X-STREAM-INF:BANDWIDTH=517198,AVERAGE-BANDWIDTH=507091,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=640x360,FRAME-RATE=25.000
+[2025-05-03 18:37:51.105] [main] [info] Ligne 15: 19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=6d77a26c-a900-4044-ae61-bef1db921f0d
+[2025-05-03 18:37:51.105] [main] [info] Ligne 16: 
+[2025-05-03 18:37:51.105] [main] [info] Type de playlist détecté: Master Playlist
+[2025-05-03 18:37:51.106] [main] [error] Erreur lors du démarrage du client HLS: The expression contained mismatched ( and ).
+[2025-05-03 18:37:51.106] [main] [error] [HLSClient] ERROR: Erreur lors du démarrage du client HLS: The expression contained mismatched ( and ).
+[2025-05-03 18:37:51.106] [main] [error] Erreur lors de la création du flux example1: The expression contained mismatched ( and ).
+[2025-05-03 18:37:51.106] [main] [error] [StreamManager] ERROR: Erreur lors de la création du flux example1: The expression contained mismatched ( and ).
+[2025-05-03 18:37:51.108] [main] [warning] Impossible de démarrer le flux: example1
+[2025-05-03 18:37:51.108] [main] [info] Stream example1 started
+[2025-05-03 18:37:51.108] [main] [info] streamManager loaded
+[2025-05-03 18:37:51.108] [main] [info] Initialisation du serveur web avec le répertoire: web
+[2025-05-03 18:37:51.108] [main] [info] Tentative de démarrage du serveur web...
+[2025-05-03 18:37:51.108] [main] [critical] ************ WebServer::start() CALLED! ************
+[2025-05-03 18:37:51.108] [main] [info] Tentative de démarrage du serveur web sur 0.0.0.0:8080
+[2025-05-03 18:37:51.109] [main] [info] Répertoire web racine: web
+[2025-05-03 18:37:51.110] [main] [info] Test d'écriture dans le répertoire web réussi
+[2025-05-03 18:37:51.110] [main] [info] Thread du serveur démarré
+[2025-05-03 18:37:51.110] [main] [info] Point de montage configuré: / -> web
+[2025-05-03 18:37:51.110] [main] [info] Route de test ajoutée: /test
+[2025-05-03 18:37:51.110] [main] [info] Démarrage de l'écoute sur 0.0.0.0:8080
+[2025-05-03 18:37:53.112] [main] [info] Serveur web démarré avec succès
+[2025-05-03 18:37:53.112] [main] [info] Résultat du démarrage du serveur web: Succès
+[2025-05-03 18:37:53.112] [main] [info] Application démarrée et en cours d'exécution
+[2025-05-03 18:38:05.684] [main] [info] Signal reçu: 2
+[2025-05-03 18:38:06.159] [main] [info] Arrêt de l'application...
+[2025-05-03 18:38:06.159] [main] [info] Arrêt du serveur web
+[2025-05-03 18:38:06.160] [main] [info] Arrêt du gestionnaire de flux
+[2025-05-03 18:38:06.160] [main] [info] Tous les flux ont été arrêtés
+[2025-05-03 18:38:06.160] [main] [info] [System] INFO: Application stopped
+[2025-05-03 18:38:06.160] [main] [info] Application arrêtée
+[2025-05-03 18:40:39.426] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-03 18:40:39.426] [main] [info] configFile: ../../config/config.json
+[2025-05-03 18:40:39.426] [main] [info] Config constructor called
+[2025-05-03 18:40:39.426] [main] [info] Server config loaded
+[2025-05-03 18:40:39.426] [main] [info] Logging config loaded
+[2025-05-03 18:40:39.426] [main] [info] Alerts config loaded
+[2025-05-03 18:40:39.426] [main] [info] Streams config loaded
+[2025-05-03 18:40:39.426] [main] [info] Post config call
+[2025-05-03 18:40:39.426] [main] [info] config loaded
+[2025-05-03 18:40:39.426] [main] [info] [System] INFO: Application started
+[2025-05-03 18:40:39.426] [main] [info] AlertManager loaded
+[2025-05-03 18:40:39.426] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-03 18:40:39.426] [main] [info] Configuration trouvée - ID: example1, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8, Enabled: true
+[2025-05-03 18:40:39.426] [main] [info] Before call - Starting stream: example1
+[2025-05-03 18:40:39.426] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-03 18:40:39.426] [main] [info] getStreamConfig found streamId: example1
+[2025-05-03 18:40:39.426] [main] [info] Démarrage du flux: example1
+[2025-05-03 18:40:39.426] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-03 18:40:39.426] [main] [info] Démarrage du client HLS pour l'URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 18:40:39.426] [main] [info] Analyse détaillée de la playlist: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 18:40:44.431] [main] [info] Format: hls
+[2025-05-03 18:40:44.431] [main] [info] Contenu de la playlist:
+[2025-05-03 18:40:44.431] [main] [info] Ligne 1: #EXTM3U
+[2025-05-03 18:40:44.431] [main] [info] Ligne 2: #EXT-X-VERSION:3
+[2025-05-03 18:40:44.431] [main] [info] Ligne 3: #EXT-X-INDEPENDENT-SEGMENTS
+[2025-05-03 18:40:44.431] [main] [info] Ligne 4: 
+[2025-05-03 18:40:44.431] [main] [info] Ligne 5: #EXT-X-STREAM-INF:BANDWIDTH=7124480,AVERAGE-BANDWIDTH=6705600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1920x1080,FRAME-RATE=25.000
+[2025-05-03 18:40:44.431] [main] [info] Ligne 6: f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:44.431] [main] [info] Ligne 7: 
+[2025-05-03 18:40:44.431] [main] [info] Ligne 8: #EXT-X-STREAM-INF:BANDWIDTH=3604480,AVERAGE-BANDWIDTH=3405600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1280x720,FRAME-RATE=25.000
+[2025-05-03 18:40:44.432] [main] [info] Ligne 9: 6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:44.432] [main] [info] Ligne 10: 
+[2025-05-03 18:40:44.432] [main] [info] Ligne 11: #EXT-X-STREAM-INF:BANDWIDTH=2431145,AVERAGE-BANDWIDTH=2305600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=960x540,FRAME-RATE=25.000
+[2025-05-03 18:40:44.432] [main] [info] Ligne 12: f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:44.432] [main] [info] Ligne 13: 
+[2025-05-03 18:40:44.432] [main] [info] Ligne 14: #EXT-X-STREAM-INF:BANDWIDTH=517198,AVERAGE-BANDWIDTH=507091,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=640x360,FRAME-RATE=25.000
+[2025-05-03 18:40:44.432] [main] [info] Ligne 15: 19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:44.432] [main] [info] Ligne 16: 
+[2025-05-03 18:40:44.432] [main] [info] Type de playlist détecté: Master Playlist
+[2025-05-03 18:40:44.432] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:44.432] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:44.432] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:44.432] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:44.432] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:45.071] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 18:40:45.080] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:45.874] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_22_6413546.ts?m=1655215304
+[2025-05-03 18:40:45.885] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:46.485] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_23_6413546.ts?m=1655215304
+[2025-05-03 18:40:46.496] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=6ae4c0af-0aaa-4106-81d4-e598c2412dfb
+[2025-05-03 18:40:47.266] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_21_6413546.ts?m=1655215304
+[2025-05-03 18:40:47.276] [main] [info] Métadonnées:
+[2025-05-03 18:40:54.587] [main] [info] Master playlist HLS détectée, analyse des variantes
+[2025-05-03 18:40:54.587] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=db282906-45b3-45d2-8843-a91ff21f1302
+[2025-05-03 18:40:54.587] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=db282906-45b3-45d2-8843-a91ff21f1302
+[2025-05-03 18:40:54.587] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=db282906-45b3-45d2-8843-a91ff21f1302
+[2025-05-03 18:40:54.588] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=db282906-45b3-45d2-8843-a91ff21f1302
+[2025-05-03 18:40:55.323] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 18:40:56.619] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 18:41:04.212] [main] [info] Client HLS démarré avec succès. Flux sélectionné: 0x0, 0kbps, codecs: h264
+[2025-05-03 18:41:04.212] [main] [info] Thread de récupération des segments HLS démarré
+[2025-05-03 18:41:04.213] [main] [info] [HLSClient] INFO: Client HLS démarré. Flux sélectionné: 0x0, 0kbps, codecs: h264
+[2025-05-03 18:41:04.213] [main] [info] [StreamManager] INFO: Flux example1 (Stream d'exemple 1) démarré
+[2025-05-03 18:41:04.213] [main] [info] [StreamManager] INFO: Flux example1 : 0x0, 0kbps, codecs: h264
+[2025-05-03 18:41:04.213] [main] [info] Stream example1 started
+[2025-05-03 18:41:04.213] [main] [info] streamManager loaded
+[2025-05-03 18:41:04.213] [main] [info] Initialisation du serveur web avec le répertoire: web
+[2025-05-03 18:41:04.213] [mai[2025-05-03 18:55:23.920] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-03 18:55:23.920] [main] [info] configFile: ../../config/config.json
+[2025-05-03 18:55:23.920] [main] [info] Config constructor called
+[2025-05-03 18:55:23.920] [main] [info] Server config loaded
+[2025-05-03 18:55:23.921] [main] [info] Logging config loaded
+[2025-05-03 18:55:23.921] [main] [info] Alerts config loaded
+[2025-05-03 18:55:23.921] [main] [info] Streams config loaded
+[2025-05-03 18:55:23.921] [main] [info] Post config call
+[2025-05-03 18:55:23.921] [main] [info] config loaded
+[2025-05-03 18:55:23.921] [main] [info] [System] INFO: Application started
+[2025-05-03 18:55:23.921] [main] [info] AlertManager loaded
+[2025-05-03 18:55:23.921] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-03 18:55:23.921] [main] [info] Configuration trouvée - ID: example1, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8, Enabled: true
+[2025-05-03 18:55:23.921] [main] [info] Before call - Starting stream: example1
+[2025-05-03 18:55:23.921] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-03 18:55:23.921] [main] [info] getStreamConfig found streamId: example1
+[2025-05-03 18:55:23.921] [main] [info] Démarrage du flux: example1
+[2025-05-03 18:55:23.921] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-03 18:55:23.921] [main] [info] Démarrage du client HLS pour l'URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 18:55:23.921] [main] [info] Analyse détaillée de la playlist: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 18:55:28.011] [main] [info] Format: hls
+[2025-05-03 18:55:28.011] [main] [info] Contenu de la playlist:
+[2025-05-03 18:55:28.011] [main] [info] Ligne 1: #EXTM3U
+[2025-05-03 18:55:28.011] [main] [info] Ligne 2: #EXT-X-VERSION:3
+[2025-05-03 18:55:28.011] [main] [info] Ligne 3: #EXT-X-INDEPENDENT-SEGMENTS
+[2025-05-03 18:55:28.011] [main] [info] Ligne 4: 
+[2025-05-03 18:55:28.011] [main] [info] Ligne 5: #EXT-X-STREAM-INF:BANDWIDTH=7124480,AVERAGE-BANDWIDTH=6705600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1920x1080,FRAME-RATE=25.000
+[2025-05-03 18:55:28.011] [main] [info] Ligne 6: f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.011] [main] [info] Ligne 7: 
+[2025-05-03 18:55:28.011] [main] [info] Ligne 8: #EXT-X-STREAM-INF:BANDWIDTH=3604480,AVERAGE-BANDWIDTH=3405600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1280x720,FRAME-RATE=25.000
+[2025-05-03 18:55:28.011] [main] [info] Ligne 9: 6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.011] [main] [info] Ligne 10: 
+[2025-05-03 18:55:28.011] [main] [info] Ligne 11: #EXT-X-STREAM-INF:BANDWIDTH=2431145,AVERAGE-BANDWIDTH=2305600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=960x540,FRAME-RATE=25.000
+[2025-05-03 18:55:28.011] [main] [info] Ligne 12: f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.011] [main] [info] Ligne 13: 
+[2025-05-03 18:55:28.011] [main] [info] Ligne 14: #EXT-X-STREAM-INF:BANDWIDTH=517198,AVERAGE-BANDWIDTH=507091,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=640x360,FRAME-RATE=25.000
+[2025-05-03 18:55:28.011] [main] [info] Ligne 15: 19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.011] [main] [info] Ligne 16: 
+[2025-05-03 18:55:28.011] [main] [info] Type de playlist détecté: Master Playlist
+[2025-05-03 18:55:28.011] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.011] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.012] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.012] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.012] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:28.711] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 18:55:28.722] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:29.455] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_22_6413546.ts?m=1655215304
+[2025-05-03 18:55:29.464] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:30.116] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_23_6413546.ts?m=1655215304
+[2025-05-03 18:55:30.125] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=d5f55dbf-4b25-48d1-a99d-5a2bbbec7eb2
+[2025-05-03 18:55:30.805] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_21_6413546.ts?m=1655215304
+[2025-05-03 18:55:30.810] [main] [info] Métadonnées:
+[2025-05-03 18:55:39.001] [main] [info] Master playlist HLS détectée, analyse des variantes
+[2025-05-03 18:55:39.001] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=617be08b-d6c7-4dfc-a9f4-c30a1c935486
+[2025-05-03 18:55:39.001] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=617be08b-d6c7-4dfc-a9f4-c30a1c935486
+[2025-05-03 18:55:39.001] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=617be08b-d6c7-4dfc-a9f4-c30a1c935486
+[2025-05-03 18:55:39.001] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=617be08b-d6c7-4dfc-a9f4-c30a1c935486
+[2025-05-03 18:55:39.848] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 18:55:41.184] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 18:55:41.209] [main] [warning] Résolution non détectée, utilisation de valeurs par défaut (1280x720)
+[2025-05-03 18:55:49.240] [main] [info] Client HLS démarré avec succès. Flux sélectionné: 1280x720, 1000kbps, codecs: h264
+[2025-05-03 18:55:49.240] [main] [info] Thread de récupération des segments HLS démarré
+[2025-05-03 18:55:49.241] [main] [info] [HLSClient] INFO: Client HLS démarré. Flux sélectionné: 1280x720, 1000kbps, codecs: h264
+[2025-05-03 18:55:49.241] [main] [info] [StreamManager] INFO: Flux example1 (Stream d'exemple 1) démarré
+[2025-05-03 18:55:49.241] [main] [info] [StreamManager] INFO: Flux example1 : 1280x720, 1000kbps, codecs: h264
+[2025-05-03 18:55:49.241] [main] [info] Stream example1 started
+[2025-05-03 18:55:49.241] [main] [info] strea[2025-05-03 19:06:40.602] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-03 19:06:40.602] [main] [info] configFile: ../../config/config.json
+[2025-05-03 19:06:40.602] [main] [info] Config constructor called
+[2025-05-03 19:06:40.603] [main] [info] Server config loaded
+[2025-05-03 19:06:40.603] [main] [info] Logging config loaded
+[2025-05-03 19:06:40.603] [main] [info] Alerts config loaded
+[2025-05-03 19:06:40.603] [main] [info] Streams config loaded
+[2025-05-03 19:06:40.603] [main] [info] Post config call
+[2025-05-03 19:06:40.603] [main] [info] config loaded
+[2025-05-03 19:06:40.603] [main] [info] [System] INFO: Application started
+[2025-05-03 19:06:40.603] [main] [info] AlertManager loaded
+[2025-05-03 19:06:40.603] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-03 19:06:40.603] [main] [info] Configuration trouvée - ID: example1, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8, Enabled: true
+[2025-05-03 19:06:40.603] [main] [info] Before call - Starting stream: example1
+[2025-05-03 19:06:40.603] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-03 19:06:40.603] [main] [info] getStreamConfig found streamId: example1
+[2025-05-03 19:06:40.603] [main] [info] Démarrage du flux: example1
+[2025-05-03 19:06:40.603] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-03 19:06:40.603] [main] [info] Démarrage du client HLS pour l'URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 19:06:40.603] [main] [info] Analyse détaillée de la playlist: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 19:07:00.752] [main] [info] Format: hls
+[2025-05-03 19:07:00.752] [main] [info] Contenu de la playlist:
+[2025-05-03 19:07:00.752] [main] [info] Ligne 1: #EXTM3U
+[2025-05-03 19:07:00.752] [main] [info] Ligne 2: #EXT-X-VERSION:3
+[2025-05-03 19:07:00.752] [main] [info] Ligne 3: #EXT-X-INDEPENDENT-SEGMENTS
+[2025-05-03 19:07:00.752] [main] [info] Ligne 4: 
+[2025-05-03 19:07:00.752] [main] [info] Ligne 5: #EXT-X-STREAM-INF:BANDWIDTH=7124480,AVERAGE-BANDWIDTH=6705600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1920x1080,FRAME-RATE=25.000
+[2025-05-03 19:07:00.752] [main] [info] Ligne 6: f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:00.753] [main] [info] Ligne 7: 
+[2025-05-03 19:07:00.753] [main] [info] Ligne 8: #EXT-X-STREAM-INF:BANDWIDTH=3604480,AVERAGE-BANDWIDTH=3405600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1280x720,FRAME-RATE=25.000
+[2025-05-03 19:07:00.753] [main] [info] Ligne 9: 6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:00.753] [main] [info] Ligne 10: 
+[2025-05-03 19:07:00.753] [main] [info] Ligne 11: #EXT-X-STREAM-INF:BANDWIDTH=2431145,AVERAGE-BANDWIDTH=2305600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=960x540,FRAME-RATE=25.000
+[2025-05-03 19:07:00.753] [main] [info] Ligne 12: f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:00.753] [main] [info] Ligne 13: 
+[2025-05-03 19:07:00.753] [main] [info] Ligne 14: #EXT-X-STREAM-INF:BANDWIDTH=517198,AVERAGE-BANDWIDTH=507091,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=640x360,FRAME-RATE=25.000
+[2025-05-03 19:07:00.753] [main] [info] Ligne 15: 19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:00.753] [main] [info] Ligne 16: 
+[2025-05-03 19:07:00.753] [main] [info] Type de playlist détecté: Master Playlist
+[2025-05-03 19:07:00.753] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:00.753] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:00.753] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:00.754] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:00.754] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:03.455] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 19:07:03.468] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:05.855] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_22_6413546.ts?m=1655215304
+[2025-05-03 19:07:05.863] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:09.021] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_23_6413546.ts?m=1655215304
+[2025-05-03 19:07:09.029] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=34d4011e-b4db-43e9-9584-9743c99e7a0b
+[2025-05-03 19:07:13.910] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_21_6413546.ts?m=1655215304
+[2025-05-03 19:07:13.918] [main] [info] Métadonnées:
+[2025-05-03 19:07:31.863] [main] [info] Master playlist HLS détectée, analyse des variantes
+[2025-05-03 19:07:31.863] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=0658fe00-47e9-4447-bc12-dff3cc956440
+[2025-05-03 19:07:31.863] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=0658fe00-47e9-4447-bc12-dff3cc956440
+[2025-05-03 19:07:31.863] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=0658fe00-47e9-4447-bc12-dff3cc956440
+[2025-05-03 19:07:31.863] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=0658fe00-47e9-4447-bc12-dff3cc956440
+[2025-05-03 19:07:32.578] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 19:07:33.543] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:07:33.569] [main] [warning] Résolution non détectée, utilisation de valeurs par défaut (1280x720)
+[2025-05-03 19:07:41.424] [main] [info] Client HLS démarré avec succès. Flux sélectionné: 1280x720, 1000kbps, codecs: h264
+[2025-05-03 19:07:41.424] [main] [info] Thread de récupération des segments HLS démarré
+[2025-05-03 19:07:41.424] [main] [info] [HLSClient] INFO: Client HLS démarré. Flux sélectionné: 1280x720, 1000kbps, codecs: h264
+[2025-05-03 19:07:41.424] [main] [info] [StreamManager] INFO: Flux example1 (Stream d'exemple 1) démarré
+[2025-05-03 19:07:41.424] [main] [info] [StreamManager] INFO: Flux example1 : 1280x720, 1000kbps, codecs: h264
+[2025-05-03 19:07:41.424] [main] [info] Stream example1 started
+[2025-05-03 19:07:41.424] [main] [info] strea[2025-05-03 19:12:20.235] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-03 19:12:20.235] [main] [info] configFile: ../../config/config.json
+[2025-05-03 19:12:20.235] [main] [info] Config constructor called
+[2025-05-03 19:12:20.236] [main] [info] Server config loaded
+[2025-05-03 19:12:20.236] [main] [info] Logging config loaded
+[2025-05-03 19:12:20.236] [main] [info] Alerts config loaded
+[2025-05-03 19:12:20.236] [main] [info] Streams config loaded
+[2025-05-03 19:12:20.236] [main] [info] Post config call
+[2025-05-03 19:12:20.236] [main] [info] config loaded
+[2025-05-03 19:12:20.236] [main] [info] [System] INFO: Application started
+[2025-05-03 19:12:20.236] [main] [info] AlertManager loaded
+[2025-05-03 19:12:20.236] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-03 19:12:20.236] [main] [info] Configuration trouvée - ID: example1, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8, Enabled: true
+[2025-05-03 19:12:20.236] [main] [info] Before call - Starting stream: example1
+[2025-05-03 19:12:20.236] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-03 19:12:20.236] [main] [info] getStreamConfig found streamId: example1
+[2025-05-03 19:12:20.236] [main] [info] Démarrage du flux: example1
+[2025-05-03 19:12:20.236] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-03 19:12:20.236] [main] [info] Démarrage du client HLS pour l'URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 19:12:20.236] [main] [info] Analyse détaillée de la playlist: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 19:12:35.183] [main] [info] Format: hls
+[2025-05-03 19:12:35.183] [main] [info] Contenu de la playlist:
+[2025-05-03 19:12:35.183] [main] [info] Ligne 1: #EXTM3U
+[2025-05-03 19:12:35.183] [main] [info] Ligne 2: #EXT-X-VERSION:3
+[2025-05-03 19:12:35.183] [main] [info] Ligne 3: #EXT-X-INDEPENDENT-SEGMENTS
+[2025-05-03 19:12:35.183] [main] [info] Ligne 4: 
+[2025-05-03 19:12:35.183] [main] [info] Ligne 5: #EXT-X-STREAM-INF:BANDWIDTH=7124480,AVERAGE-BANDWIDTH=6705600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1920x1080,FRAME-RATE=25.000
+[2025-05-03 19:12:35.183] [main] [info] Ligne 6: f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.183] [main] [info] Ligne 7: 
+[2025-05-03 19:12:35.183] [main] [info] Ligne 8: #EXT-X-STREAM-INF:BANDWIDTH=3604480,AVERAGE-BANDWIDTH=3405600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1280x720,FRAME-RATE=25.000
+[2025-05-03 19:12:35.183] [main] [info] Ligne 9: 6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.183] [main] [info] Ligne 10: 
+[2025-05-03 19:12:35.183] [main] [info] Ligne 11: #EXT-X-STREAM-INF:BANDWIDTH=2431145,AVERAGE-BANDWIDTH=2305600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=960x540,FRAME-RATE=25.000
+[2025-05-03 19:12:35.183] [main] [info] Ligne 12: f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.183] [main] [info] Ligne 13: 
+[2025-05-03 19:12:35.183] [main] [info] Ligne 14: #EXT-X-STREAM-INF:BANDWIDTH=517198,AVERAGE-BANDWIDTH=507091,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=640x360,FRAME-RATE=25.000
+[2025-05-03 19:12:35.183] [main] [info] Ligne 15: 19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.184] [main] [info] Ligne 16: 
+[2025-05-03 19:12:35.184] [main] [info] Type de playlist détecté: Master Playlist
+[2025-05-03 19:12:35.184] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.184] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.184] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.185] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.185] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:35.960] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 19:12:35.972] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:36.791] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_22_6413546.ts?m=1655215304
+[2025-05-03 19:12:36.800] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:37.591] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_23_6413546.ts?m=1655215304
+[2025-05-03 19:12:37.600] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=b5485882-9950-42d6-9c3a-0a78fbae9249
+[2025-05-03 19:12:38.304] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_21_6413546.ts?m=1655215304
+[2025-05-03 19:12:38.313] [main] [info] Métadonnées:
+[2025-05-03 19:12:47.276] [main] [info] Type de playlist détecté: Master Playlist
+[2025-05-03 19:12:47.276] [main] [info] Bande passante détectée: 7124480 bps
+[2025-05-03 19:12:47.276] [main] [info] Codecs détectés: avc1.640029,mp4a.40.2
+[2025-05-03 19:12:47.276] [main] [info] Résolution détectée: 1920x1080
+[2025-05-03 19:12:47.276] [main] [info] URL de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:47.276] [main] [info] Bande passante détectée: 3604480 bps
+[2025-05-03 19:12:47.276] [main] [info] Codecs détectés: avc1.640029,mp4a.40.2
+[2025-05-03 19:12:47.276] [main] [info] Résolution détectée: 1280x720
+[2025-05-03 19:12:47.276] [main] [info] URL de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:47.277] [main] [info] Bande passante détectée: 2431145 bps
+[2025-05-03 19:12:47.277] [main] [info] Codecs détectés: avc1.640029,mp4a.40.2
+[2025-05-03 19:12:47.277] [main] [info] Résolution détectée: 960x540
+[2025-05-03 19:12:47.277] [main] [info] URL de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:47.277] [main] [info] Bande passante détectée: 517198 bps
+[2025-05-03 19:12:47.277] [main] [info] Codecs détectés: avc1.640029,mp4a.40.2
+[2025-05-03 19:12:47.277] [main] [info] Résolution détectée: 640x360
+[2025-05-03 19:12:47.277] [main] [info] URL de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:47.975] [main] [info] Segment MPEG-TS trouvé dans la playlist HLS: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 19:12:49.610] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:12:49.623] [main] [info] Variante avec segments MPEG-TS trouvée: 1920x1080, 7124kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:50.373] [main] [info] Segment MPEG-TS trouvé dans la playlist HLS: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_22_6413546.ts?m=1655215304
+[2025-05-03 19:12:51.542] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:12:51.554] [main] [info] Variante avec segments MPEG-TS trouvée: 1280x720, 3604kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:52.485] [main] [info] Segment MPEG-TS trouvé dans la playlist HLS: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_23_6413546.ts?m=1655215304
+[2025-05-03 19:12:53.428] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:12:53.440] [main] [info] Variante avec segments MPEG-TS trouvée: 960x540, 2431kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:54.301] [main] [info] Segment MPEG-TS trouvé dans la playlist HLS: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_21_6413546.ts?m=1655215304
+[2025-05-03 19:12:55.010] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:12:55.021] [main] [info] Variante avec segments MPEG-TS trouvée: 640x360, 517kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:55.022] [main] [info] Variante sélectionnée: 1920x1080, 7124kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=e264de92-04eb-4661-a41b-f584130bc291
+[2025-05-03 19:12:58.633] [main] [info] Marqueur de discontinuité trouvé dans la playlist HLS
+[2025-05-03 19:12:58.633] [main] [info] [HLSClient] INFO: Marqueur de discontinuité trouvé dans la playlist HLS
+[2025-05-03 19:12:58.633] [main] [info] Client HLS démarré avec succès. Flux sélectionné: 1920x1080, 7124kbps, codecs: h264
+[2025-05-03 19:12:58.633] [main] [info] [HLSClient] INFO: Client HLS démarré. Flux sélectionné: 1920x1080, 7124kbps, codecs: h264
+[2025-05-03 19:12:58.633] [main] [info] Thread de récupération des segments HLS démarré
+[2025-05-03 19:12:58.633] [main] [info] [StreamManager] INFO: Flux example1 (Stream d'exemple 1) démarré
+[2025-05-03 19:12:58.633] [main] [info] [StreamManager] INFO: Flux example1 : 1920x1080, 7124kbps, codecs: h264
+[2025-05-03 19:12:58.633] [main] [info] Stream example1 started
+[2025-05-03 19:12:58.633] [main] [info] streamManager loaded
+[2025-05-03 19:12:58.633] [main] [info] Initialisation du serveur web avec le répertoire: web
+[2025-05-03 19:12:58.633] [main] [info] Démarrage du thread de traitement pour le flux: example1
+[2025-05-03 19:12:58.633] [main] [info] Démarrage du convertisseur MPEG-TS
+[2025-05-03 19:12:58.634] [main] [info] Tentative de démarrage du serveur web...
+[2025-05-03 19:12:58.634] [main] [critical] ************ WebServer::start() CALLED! ************
+[2025-05-03 19:12:58.634] [main] [info] Tentative de démarrage du serveur web sur 0.0.0.0:8080
+[2025-05-03 19:12:58.634] [main] [info] Répertoire web racine: web
+[2025-05-03 19:12:58.635] [main] [info] DVBProcessor initialisé avec succès
+[2025-05-03 19:12:58.635] [main] [info] [MPEGTSConverter] INFO: [2025-05-03 19:26:08.114] [main] [info] Démarrage du convertisseur HLS vers MPEG-TS DVB
+[2025-05-03 19:26:08.114] [main] [info] configFile: ../../config/config.json
+[2025-05-03 19:26:08.114] [main] [info] Config constructor called
+[2025-05-03 19:26:08.115] [main] [info] Server config loaded
+[2025-05-03 19:26:08.115] [main] [info] Logging config loaded
+[2025-05-03 19:26:08.115] [main] [info] Alerts config loaded
+[2025-05-03 19:26:08.115] [main] [info] Streams config loaded
+[2025-05-03 19:26:08.115] [main] [info] Post config call
+[2025-05-03 19:26:08.115] [main] [info] config loaded
+[2025-05-03 19:26:08.115] [main] [info] [System] INFO: Application started
+[2025-05-03 19:26:08.115] [main] [info] AlertManager loaded
+[2025-05-03 19:26:08.115] [main] [info] Démarrage du gestionnaire de flux
+[2025-05-03 19:26:08.115] [main] [info] Configuration trouvée - ID: example1, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8, Enabled: true
+[2025-05-03 19:26:08.115] [main] [info] Before call - Starting stream: example1
+[2025-05-03 19:26:08.115] [main] [info] getStreamConfig called with streamId: example1
+[2025-05-03 19:26:08.115] [main] [info] getStreamConfig found streamId: example1
+[2025-05-03 19:26:08.115] [main] [info] Démarrage du flux: example1
+[2025-05-03 19:26:08.115] [main] [debug] Buffer de segments créé avec une taille de 5
+[2025-05-03 19:26:08.115] [main] [info] Démarrage du client HLS pour l'URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 19:26:08.115] [main] [info] Analyse détaillée de la playlist: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8
+[2025-05-03 19:26:12.062] [main] [info] Format: hls
+[2025-05-03 19:26:12.063] [main] [info] Contenu de la playlist:
+[2025-05-03 19:26:12.063] [main] [info] Ligne 1: #EXTM3U
+[2025-05-03 19:26:12.063] [main] [info] Ligne 2: #EXT-X-VERSION:3
+[2025-05-03 19:26:12.063] [main] [info] Ligne 3: #EXT-X-INDEPENDENT-SEGMENTS
+[2025-05-03 19:26:12.063] [main] [info] Ligne 4: 
+[2025-05-03 19:26:12.063] [main] [info] Ligne 5: #EXT-X-STREAM-INF:BANDWIDTH=7124480,AVERAGE-BANDWIDTH=6705600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1920x1080,FRAME-RATE=25.000
+[2025-05-03 19:26:12.063] [main] [info] Ligne 6: f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.063] [main] [info] Ligne 7: 
+[2025-05-03 19:26:12.063] [main] [info] Ligne 8: #EXT-X-STREAM-INF:BANDWIDTH=3604480,AVERAGE-BANDWIDTH=3405600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=1280x720,FRAME-RATE=25.000
+[2025-05-03 19:26:12.063] [main] [info] Ligne 9: 6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.063] [main] [info] Ligne 10: 
+[2025-05-03 19:26:12.063] [main] [info] Ligne 11: #EXT-X-STREAM-INF:BANDWIDTH=2431145,AVERAGE-BANDWIDTH=2305600,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=960x540,FRAME-RATE=25.000
+[2025-05-03 19:26:12.063] [main] [info] Ligne 12: f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.063] [main] [info] Ligne 13: 
+[2025-05-03 19:26:12.063] [main] [info] Ligne 14: #EXT-X-STREAM-INF:BANDWIDTH=517198,AVERAGE-BANDWIDTH=507091,CODECS="avc1.640029,mp4a.40.2",RESOLUTION=640x360,FRAME-RATE=25.000
+[2025-05-03 19:26:12.063] [main] [info] Ligne 15: 19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.063] [main] [info] Ligne 16: 
+[2025-05-03 19:26:12.063] [main] [info] Type de playlist détecté: Master Playlist
+[2025-05-03 19:26:12.063] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.063] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.063] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.064] [main] [info] Variante trouvée: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.064] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:12.762] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 19:26:12.773] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:13.506] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_22_6413546.ts?m=1655215304
+[2025-05-03 19:26:13.515] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:14.129] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_23_6413546.ts?m=1655215304
+[2025-05-03 19:26:14.140] [main] [info] Analyse de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=a499b978-9b5b-4a4f-be58-4a79c3b71e14
+[2025-05-03 19:26:14.886] [main] [info] Segment MPEG-TS trouvé dans la variante: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_21_6413546.ts?m=1655215304
+[2025-05-03 19:26:14.896] [main] [info] Métadonnées:
+[2025-05-03 19:26:22.020] [main] [info] Type de playlist détecté: Master Playlist
+[2025-05-03 19:26:22.020] [main] [info] Bande passante détectée: 7124480 bps
+[2025-05-03 19:26:22.020] [main] [info] Codecs détectés: avc1.640029,mp4a.40.2
+[2025-05-03 19:26:22.020] [main] [info] Résolution détectée: 1920x1080
+[2025-05-03 19:26:22.020] [main] [info] URL de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:22.020] [main] [info] Bande passante détectée: 3604480 bps
+[2025-05-03 19:26:22.020] [main] [info] Codecs détectés: avc1.640029,mp4a.40.2
+[2025-05-03 19:26:22.020] [main] [info] Résolution détectée: 1280x720
+[2025-05-03 19:26:22.020] [main] [info] URL de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:22.020] [main] [info] Bande passante détectée: 2431145 bps
+[2025-05-03 19:26:22.020] [main] [info] Codecs détectés: avc1.640029,mp4a.40.2
+[2025-05-03 19:26:22.020] [main] [info] Résolution détectée: 960x540
+[2025-05-03 19:26:22.020] [main] [info] URL de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:22.020] [main] [info] Bande passante détectée: 517198 bps
+[2025-05-03 19:26:22.020] [main] [info] Codecs détectés: avc1.640029,mp4a.40.2
+[2025-05-03 19:26:22.020] [main] [info] Résolution détectée: 640x360
+[2025-05-03 19:26:22.021] [main] [info] URL de la variante: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:22.662] [main] [info] Segment MPEG-TS trouvé dans la playlist HLS: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_24_6413546.ts?m=1655215304
+[2025-05-03 19:26:23.806] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:26:23.817] [main] [info] Variante avec segments MPEG-TS trouvée: 1920x1080, 7124kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:24.410] [main] [info] Segment MPEG-TS trouvé dans la playlist HLS: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_22_6413546.ts?m=1655215304
+[2025-05-03 19:26:25.336] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:26:25.348] [main] [info] Variante avec segments MPEG-TS trouvée: 1280x720, 3604kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/6261affbd55155aa00d18e77e5e8cb38/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:26.012] [main] [info] Segment MPEG-TS trouvé dans la playlist HLS: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_23_6413546.ts?m=1655215304
+[2025-05-03 19:26:26.555] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:26:26.567] [main] [info] Variante avec segments MPEG-TS trouvée: 960x540, 2431kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f28256027e594251b30f7c29fdfab3ee/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:27.226] [main] [info] Segment MPEG-TS trouvé dans la playlist HLS: https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index_21_6413546.ts?m=1655215304
+[2025-05-03 19:26:27.777] [main] [info] Format du segment vérifié: MPEG-TS
+[2025-05-03 19:26:27.790] [main] [info] Variante avec segments MPEG-TS trouvée: 640x360, 517kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/19c46cb0f11db8d3c294795bdcc6af30/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:27.790] [main] [info] Variante sélectionnée: 1920x1080, 7124kbps, codecs: avc1.640029,mp4a.40.2, URL: https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/f068a925dd7fb56cdabf16e7ebfa8f89/index.m3u8?requestuid=134bfcef-169c-4456-8736-0d722b58ad89
+[2025-05-03 19:26:29.885] [main] [info] Marqueur de discontinuité trouvé dans la playlist HLS
+[2025-05-03 19:26:29.885] [main] [info] [HLSClient] INFO: Marqueur de discontinuité trouvé dans la playlist HLS
+[2025-05-03 19:26:29.885] [main] [info] Client HLS démarré avec succès. Flux sélectionné: 1920x1080, 7124kbps, codecs: h264
+[2025-05-03 19:26:29.885] [main] [info] Thread de récupération des segments HLS démarré
+[2025-05-03 19:26:29.885] [main] [info] [HLSClient] INFO: Client HLS démarré. Flux sélectionné: 1920x1080, 7124kbps, codecs: h264
+[2025-05-03 19:26:29.885] [main] [info] [StreamManager] INFO: Flux example1 (Stream d'exemple 1) démarré
+[2025-05-03 19:26:29.885] [main] [info] [StreamManager] INFO: Flux example1 : 1920x1080, 7124kbps, codecs: h264
+[2025-05-03 19:26:29.885] [main] [info] Stream example1 started
+[2025-05-03 19:26:29.885] [main] [info] streamManager loaded
+[2025-05-03 19:26:29.885] [main] [info] Initialisation du serveur web avec le répertoire: web
+[2025-05-03 19:26:29.885] [main] [info] Tentative de démarrage du serveur web...
+[2025-05-03 19:26:29.885] [main] [critical] ************ WebServer::start() CALLED! ************
+[2025-05-03 19:26:29.885] [main] [info] Démarrage du thread de traitement pour le flux: example1
+[2025-05-03 19:26:29.885] [main] [info] Démarrage du convertisseur MPEG-TS
+[2025-05-03 19:26:29.886] [main] [info] Tentative de démarrage du serveur web sur 0.0.0.0:8080
+[2025-05-03 19:26:29.886] [main] [info] Répertoire web racine: web
+[2025-05-03 19:26:29.887] [main] [info] DVBProcessor initialisé avec succès
+[2025-05-03 19:26:29.887] [main] [info] [MPEGTSConverter] INFO: 

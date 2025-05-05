@@ -1,39 +1,43 @@
 {
-    "settings": {
-        "webServerPort": "8080",
-        "logLevel": "info"
-    },
     "server": {
-        "port": 8080,
-        "address": "0.0.0.0",
-        "workerThreads": 4
+      "address": "0.0.0.0",
+      "port": 8080
     },
     "logging": {
-        "level": "info",
-        "console": true,
-        "file": {
-            "enabled": true,
-            "path": "logs/hls-to-dvb.log",
-            "rotationSize": 10485760,
-            "maxFiles": 5
-        }
+      "level": "debug",
+      "console": true,
+      "file": true,
+      "maxFileSize": 10485760,
+      "maxFiles": 5
     },
-    "alerts": {
-        "retention": {
-            "info": 7200,
-            "warning": 86400,
-            "error": 604800
-        }
+    "alertRetention": {
+      "info": 48,
+      "warning": 72,
+      "error": 168
     },
     "streams": [
-        {
-            "id": "example1",
-            "name": "Example HLS Stream",
-            "hlsInput": "https://f7b399c8cf81ac81.mediapackage.eu-west-1.amazonaws.com/out/v1/a239b9b241bb44f8a5059304abdfb7ab/index.m3u8",
-            "multicastOutput": "239.0.0.1",
-            "multicastPort": 1234,
-            "bufferSize": 1
-        }
-    ]
-}
+      {
+        "id": "example1",
+        "name": "Stream d'exemple 1",
+        "hlsInput": "https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8",
+        "mcastOutput": "239.0.0.1",
+        "mcastPort": 5000,
+        "bufferSize": 5,
+        "enabled": true
+      }
+    ],
+    "dvb": {
+      "networkId": 1,
+      "originalNetworkId": 1,
+      "transportStreamId": 1,
+      "serviceProviderName": "HLS2TS Provider",
+      "psisiUpdateInterval": 200
+    },
+    "multicast": {
+      "ttl": 4,
+      "interface": "",
+      "bufferSize": 1316
+    }
+  }
+
 

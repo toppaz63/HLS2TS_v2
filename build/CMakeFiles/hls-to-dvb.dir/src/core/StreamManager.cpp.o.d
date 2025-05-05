@@ -1071,6 +1071,7 @@ CMakeFiles/hls-to-dvb.dir/src/core/StreamManager.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/thread.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/this_thread.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavformat/avformat.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavcodec/codec_par.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavutil/avutil.h \

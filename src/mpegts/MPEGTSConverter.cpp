@@ -205,33 +205,43 @@ std::vector<uint8_t> MPEGTSConverter::processDiscontinuity(const std::vector<uin
     
     spdlog::info("Traitement d'une discontinuité dans le flux MPEG-TS");
     
-    hls_to_dvb::AlertManager::getInstance().addAlert(
-        hls_to_dvb::AlertLevel::INFO,
-        "MPEGTSConverter",
-        "Traitement d'une discontinuité dans le flux MPEG-TS",
-        false
-    );
-    
     try {
         // Convertir le vecteur d'octets en paquets MPEG-TS
         ts::TSPacketVector packets;
         size_t packetCount = data.size() / ts::PKT_SIZE;
         
+        // Journaliser plus d'informations
+        spdlog::debug("Nombre de paquets: {}", packetCount);
+        
+        // Charger les paquets
         for (size_t i = 0; i < packetCount; ++i) {
             ts::TSPacket packet;
             std::memcpy(packet.b, &data[i * ts::PKT_SIZE], ts::PKT_SIZE);
             packets.push_back(packet);
         }
         
-        // Pour chaque paquet, marquer le flag de discontinuité si c'est un paquet avec PCR
+        // Traiter chaque paquet
+        bool foundPCR = false;
         for (auto& packet : packets) {
-            if (packet.hasPCR()) {
-                packet.setDiscontinuityIndicator(true);
-                
-                // Debug: journaliser le PCR
-                uint64_t pcr = packet.getPCR();
-                spdlog::debug("Marqueur de discontinuité défini sur le paquet avec PCR: {}", pcr);
+            try {
+                // Vérifier si le paquet a un PCR de manière sécurisée
+                if (packet.hasPCR()) {
+                    packet.setDiscontinuityIndicator(true);
+                    foundPCR = true;
+                    
+                    // Journaliser le PID et le PCR
+                    uint16_t pid = packet.getPID();
+                    uint64_t pcr = packet.getPCR();
+                    spdlog::debug("Marqueur de discontinuité défini sur le paquet PID: 0x{:X}, PCR: {}", pid, pcr);
+                }
             }
+            catch (const std::exception& e) {
+                spdlog::error("Erreur lors du traitement d'un paquet: {}", e.what());
+            }
+        }
+        
+        if (!foundPCR) {
+            spdlog::warn("Aucun paquet avec PCR trouvé dans le segment");
         }
         
         // Convertir les paquets en vecteur d'octets

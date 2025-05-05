@@ -20,8 +20,48 @@ file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/logs)
 
 # Trouver les packages requis
 find_package(PkgConfig REQUIRED)
-find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
+
+# Configuration directe pour OpenSSL 3.5.0 sur macOS
+if(APPLE)
+    # Définir directement le chemin vers votre version d'OpenSSL
+    set(OPENSSL_ROOT_DIR "/opt/homebrew/Cellar/openssl@3/3.5.0")
+    
+    # Vérifier que ce chemin existe
+    if(EXISTS "${OPENSSL_ROOT_DIR}")
+        message(STATUS "Using OpenSSL at: ${OPENSSL_ROOT_DIR}")
+        
+        # Configurer les chemins pour les en-têtes et les bibliothèques
+        set(OPENSSL_INCLUDE_DIR "${OPENSSL_ROOT_DIR}/include")
+        set(OPENSSL_CRYPTO_LIBRARY "${OPENSSL_ROOT_DIR}/lib/libcrypto.dylib")
+        set(OPENSSL_SSL_LIBRARY "${OPENSSL_ROOT_DIR}/lib/libssl.dylib")
+        
+        # Vérifier que les fichiers existent
+        if(EXISTS "${OPENSSL_INCLUDE_DIR}/openssl/ssl.h" AND 
+           EXISTS "${OPENSSL_CRYPTO_LIBRARY}" AND 
+           EXISTS "${OPENSSL_SSL_LIBRARY}")
+            set(OPENSSL_FOUND TRUE)
+            message(STATUS "OpenSSL configuration successful")
+            message(STATUS "  Include dir: ${OPENSSL_INCLUDE_DIR}")
+            message(STATUS "  SSL lib: ${OPENSSL_SSL_LIBRARY}")
+            message(STATUS "  Crypto lib: ${OPENSSL_CRYPTO_LIBRARY}")
+            
+            # Inclure OpenSSL dans le chemin d'include global
+            include_directories(${OPENSSL_INCLUDE_DIR})
+        else()
+            message(WARNING "OpenSSL files not found at ${OPENSSL_ROOT_DIR}")
+        endif()
+    else()
+        message(WARNING "OpenSSL directory not found at ${OPENSSL_ROOT_DIR}")
+        # Essayer d'utiliser la méthode standard
+        find_package(OpenSSL)
+    endif()
+else()
+    # Sur les autres plateformes, utiliser find_package standard
+    find_package(OpenSSL)
+endif()
+
+
 
 # Ajouter les chemins de modules CMake personnalisés
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
@@ -165,13 +205,28 @@ else()
     target_link_libraries(hls-to-dvb ${TSDUCK_LIBRARIES})
 endif()
 
-# Autres bibliothèques
+# Lier avec les bibliothèques requises
 target_link_libraries(hls-to-dvb
     ${FFMPEG_LIBRARIES}
-    OpenSSL::SSL
-    OpenSSL::Crypto
     Threads::Threads
 )
+
+# Lier avec OpenSSL si trouvé
+if(OPENSSL_FOUND)
+    # Si nous utilisons notre configuration manuelle sur macOS
+    if(APPLE AND OPENSSL_SSL_LIBRARY AND OPENSSL_CRYPTO_LIBRARY)
+        target_link_libraries(hls-to-dvb
+            ${OPENSSL_SSL_LIBRARY}
+            ${OPENSSL_CRYPTO_LIBRARY}
+        )
+    elseif(OpenSSL_FOUND)
+        # Si find_package a trouvé OpenSSL
+        target_link_libraries(hls-to-dvb
+            OpenSSL::SSL
+            OpenSSL::Crypto
+        )
+    endif()
+endif()
 
 # Ajouter -ldl sur les plateformes qui le supportent
 if(UNIX AND NOT APPLE)
@@ -201,6 +256,13 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     endif()
 elseif(MSVC)
     target_compile_options(hls-to-dvb PRIVATE /W4)
+endif()
+
+# Définir une option de compilation pour indiquer si OpenSSL est disponible
+if(OPENSSL_FOUND)
+    target_compile_definitions(hls-to-dvb PRIVATE HAVE_OPENSSL=1)
+else()
+    target_compile_definitions(hls-to-dvb PRIVATE HAVE_OPENSSL=0)
 endif()
 
 # Copier les fichiers de configuration

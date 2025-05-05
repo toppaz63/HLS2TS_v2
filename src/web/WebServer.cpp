@@ -7,9 +7,20 @@
 #include <algorithm> // Pour std::transform, std::replace, etc.
 #include "alerting/AlertManager.h" // Ajout de l'include pour AlertManager
 #include <cerrno> // Pour strerror
+#include <filesystem>
 
-// Inclure httplib avec l'implémentation
-#define CPPHTTPLIB_OPENSSL_SUPPORT
+// Utilisation conditionnelle d'OpenSSL
+#ifdef HAVE_OPENSSL
+  #if HAVE_OPENSSL
+    #define CPPHTTPLIB_OPENSSL_SUPPORT 1
+  #else
+    #define CPPHTTPLIB_OPENSSL_SUPPORT 0
+  #endif
+#else
+  // Si la macro HAVE_OPENSSL n'est pas définie, supposer qu'OpenSSL n'est pas disponible
+  #define CPPHTTPLIB_OPENSSL_SUPPORT 0
+#endif
+
 #include <httplib.h>
 
 namespace hls_to_dvb {
@@ -40,6 +51,38 @@ bool WebServer::start() {
     spdlog::info("Tentative de démarrage du serveur web sur {}:{}", serverConfig.address, serverConfig.port);
     spdlog::info("Répertoire web racine: {}", webRoot_);
     
+    // Vérifier si le répertoire web existe
+    if (!std::filesystem::exists(webRoot_)) {
+        spdlog::error("Le répertoire web n'existe pas: {}", webRoot_);
+        try {
+            // Tenter de créer le répertoire
+            std::filesystem::create_directories(webRoot_);
+            spdlog::info("Répertoire web créé: {}", webRoot_);
+        }
+        catch (const std::exception& e) {
+            spdlog::error("Erreur lors de la création du répertoire web: {}", e.what());
+        }
+    }
+    
+    // Vérifier les permissions
+    try {
+        // Créer un fichier test
+        std::string testPath = webRoot_ + "/test.txt";
+        std::ofstream testFile(testPath);
+        if (testFile) {
+            testFile << "Test file" << std::endl;
+            testFile.close();
+            std::filesystem::remove(testPath);
+            spdlog::info("Test d'écriture dans le répertoire web réussi");
+        }
+        else {
+            spdlog::error("Impossible d'écrire dans le répertoire web: {}", webRoot_);
+        }
+    }
+    catch (const std::exception& e) {
+        spdlog::error("Erreur lors du test d'écriture: {}", e.what());
+    }
+    
     // Démarrer le serveur dans un thread séparé
     running_ = true;
     serverThread_ = std::thread([this, serverConfig]() {
@@ -59,7 +102,8 @@ bool WebServer::start() {
             // Démarrer le serveur (bloquant)
             spdlog::info("Démarrage de l'écoute sur {}:{}", serverConfig.address, serverConfig.port);
             if (!server_->listen(serverConfig.address.c_str(), serverConfig.port)) {
-                spdlog::error("Erreur lors du démarrage du serveur web: {}", strerror(errno));
+                // Récupérer l'erreur système
+                spdlog::error("Erreur lors du démarrage du serveur web: {} (errno: {})", strerror(errno), errno);
                 running_ = false;
             }
         } catch (const std::exception& e) {
@@ -82,6 +126,7 @@ bool WebServer::start() {
     
     return running_;
 }
+    
 
 void WebServer::stop() {
     if (!isRunning()) {

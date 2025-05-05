@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #1b1f22; -webkit-text-stroke: #1b1f22; background-color: #ffffff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #da4c0c; -webkit-text-stroke: #da4c0c; background-color: #ffffff}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #06214f; -webkit-text-stroke: #06214f; background-color: #ffffff}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #1b1f22; -webkit-text-stroke: #1b1f22; background-color: #ffffff; min-height: 17.0px}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; color: #06214f; -webkit-text-stroke: #06214f; background-color: #ffffff; min-height: 17.0px}
+    span.s1 {font-kerning: none}
+    span.s2 {font-kerning: none; color: #06214f; -webkit-text-stroke: 0px #06214f}
+    span.s3 {font-kerning: none; color: #1b1f22; -webkit-text-stroke: 0px #1b1f22}
+    span.s4 {font-kerning: none; color: #da4c0c; -webkit-text-stroke: 0px #da4c0c}
+    span.s5 {font-kerning: none; color: #cb2339; -webkit-text-stroke: 0px #cb2339}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang=</span><span class="s2">"fr"</span><span class="s1">&gt;</span></p>
+<p class="p2"><span class="s3">&lt;</span><span class="s1">head</span><span class="s3">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset=</span><span class="s2">"UTF-8"</span><span class="s1">&gt;</span></p>
+<p class="p3"><span class="s3"><span class="Apple-converted-space">    </span>&lt;meta name=</span><span class="s1">"viewport"</span><span class="s3"> content=</span><span class="s1">"width=device-width, initial-scale=1.0"</span><span class="s3">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;HLS vers MPEG-TS DVB&lt;/title&gt;</span></p>
+<p class="p3"><span class="s3"><span class="Apple-converted-space">    </span>&lt;</span><span class="s4">link</span><span class="s3"> rel=</span><span class="s1">"stylesheet"</span><span class="s3"> href=</span><span class="s1">"/static/css/styles.css"</span><span class="s3">&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class=</span><span class="s2">"container"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;header&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h1&gt;HLS vers MPEG-TS DVB&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class=</span><span class="s2">"server-status"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"status-indicator"</span><span class="s1">&gt;&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"status-text"</span><span class="s1">&gt;En cours de chargement...&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;nav&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;a href=</span><span class="s2">"#"</span><span class="s1"> class=</span><span class="s2">"active"</span><span class="s1"> data-section=</span><span class="s2">"streams"</span><span class="s1">&gt;Flux&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;a href=</span><span class="s2">"#"</span><span class="s1"> data-section=</span><span class="s2">"alerts"</span><span class="s1">&gt;Alertes&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;a href=</span><span class="s2">"#"</span><span class="s1"> data-section=</span><span class="s2">"settings"</span><span class="s1">&gt;Paramètres&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/nav&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;main&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Section des flux --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;section </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"streams-section"</span><span class="s1"> class=</span><span class="s2">"active"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s2">"section-header"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2&gt;Gestion des Flux&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"add-stream-btn"</span><span class="s1"> class=</span><span class="s2">"btn primary"</span><span class="s1">&gt;Ajouter un flux&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s2">"search-bar"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"text"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"stream-search"</span><span class="s1"> placeholder=</span><span class="s2">"Rechercher un flux..."</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p3"><span class="s3"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s1">"streams-list"</span><span class="s3"> </span><span class="s4">id</span><span class="s3">=</span><span class="s1">"streams-container"</span><span class="s3">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Les flux seront injectés ici dynamiquement --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class=</span><span class="s2">"loading"</span><span class="s1">&gt;Chargement des flux...&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Section des alertes --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;section </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"alerts-section"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s2">"section-header"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2&gt;Alertes&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class=</span><span class="s2">"alert-filters"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;label&gt;&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"checkbox"</span><span class="s1"> class=</span><span class="s2">"alert-level-filter"</span><span class="s1"> data-level=</span><span class="s2">"INFO"</span><span class="s1"> checked&gt; INFO&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;label&gt;&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"checkbox"</span><span class="s1"> class=</span><span class="s2">"alert-level-filter"</span><span class="s1"> data-level=</span><span class="s2">"WARNING"</span><span class="s1"> checked&gt; WARNING&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;label&gt;&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"checkbox"</span><span class="s1"> class=</span><span class="s2">"alert-level-filter"</span><span class="s1"> data-level=</span><span class="s2">"ERROR"</span><span class="s1"> checked&gt; ERROR&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s2">"search-bar"</span><span class="s1">&gt;</span></p>
+<p class="p3"><span class="s3"><span class="Apple-converted-space">                    </span>&lt;input </span><span class="s4">type</span><span class="s3">=</span><span class="s1">"text"</span><span class="s3"> </span><span class="s4">id</span><span class="s3">=</span><span class="s1">"alert-search"</span><span class="s3"> placeholder=</span><span class="s1">"Rechercher une alerte..."</span><span class="s3">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s5">select</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"alert-component-filter"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value=</span><span class="s2">""</span><span class="s1">&gt;Tous les composants&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value=</span><span class="s2">"System"</span><span class="s1">&gt;Système&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value=</span><span class="s2">"HLSClient"</span><span class="s1">&gt;Client HLS&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value=</span><span class="s2">"TSProcessor"</span><span class="s1">&gt;Processeur TS&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value=</span><span class="s2">"MulticastSender"</span><span class="s1">&gt;Sender Multicast&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value=</span><span class="s2">"Stream"</span><span class="s1">&gt;Flux&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value=</span><span class="s2">"WebServer"</span><span class="s1">&gt;Serveur Web&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p3"><span class="s3"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s1">"alerts-list"</span><span class="s3"> </span><span class="s4">id</span><span class="s3">=</span><span class="s1">"alerts-container"</span><span class="s3">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Les alertes seront injectées ici dynamiquement --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class=</span><span class="s2">"loading"</span><span class="s1">&gt;Chargement des alertes...&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s2">"export-buttons"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"export-json-btn"</span><span class="s1"> class=</span><span class="s2">"btn secondary"</span><span class="s1">&gt;Exporter en JSON&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"export-csv-btn"</span><span class="s1"> class=</span><span class="s2">"btn secondary"</span><span class="s1">&gt;Exporter en CSV&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Section des paramètres --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;section </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"settings-section"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s2">"section-header"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2&gt;Paramètres&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s2">"settings-form"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Serveur Web&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;form </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"server-settings-form"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label </span><span class="s5">for</span><span class="s1">=</span><span class="s2">"server-address"</span><span class="s1">&gt;Adresse&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"text"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"server-address"</span><span class="s1"> name=</span><span class="s2">"address"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label </span><span class="s5">for</span><span class="s1">=</span><span class="s2">"server-port"</span><span class="s1">&gt;Port&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"number"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"server-port"</span><span class="s1"> name=</span><span class="s2">"port"</span><span class="s1"> min=</span><span class="s2">"1"</span><span class="s1"> max=</span><span class="s2">"65535"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label </span><span class="s5">for</span><span class="s1">=</span><span class="s2">"server-threads"</span><span class="s1">&gt;Threads&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"number"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"server-threads"</span><span class="s1"> name=</span><span class="s2">"workerThreads"</span><span class="s1"> min=</span><span class="s2">"1"</span><span class="s1"> max=</span><span class="s2">"32"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"submit"</span><span class="s1"> class=</span><span class="s2">"btn primary"</span><span class="s1">&gt;Enregistrer&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/form&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Journalisation&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;form </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"logging-settings-form"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label </span><span class="s5">for</span><span class="s1">=</span><span class="s2">"log-level"</span><span class="s1">&gt;Niveau&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;</span><span class="s5">select</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"log-level"</span><span class="s1"> name=</span><span class="s2">"level"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;option value=</span><span class="s2">"debug"</span><span class="s1">&gt;Debug&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;option value=</span><span class="s2">"info"</span><span class="s1">&gt;Info&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;option value=</span><span class="s2">"warning"</span><span class="s1">&gt;Warning&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;option value=</span><span class="s2">"error"</span><span class="s1">&gt;Error&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"checkbox"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"log-console"</span><span class="s1"> name=</span><span class="s2">"console"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>Afficher sur la console</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"checkbox"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"log-file-enabled"</span><span class="s1"> name=</span><span class="s2">"file.enabled"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>Journalisation dans un fichier</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group log-file-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label </span><span class="s5">for</span><span class="s1">=</span><span class="s2">"log-file-path"</span><span class="s1">&gt;Chemin </span><span class="s4">du</span><span class="s1"> fichier&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"text"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"log-file-path"</span><span class="s1"> name=</span><span class="s2">"file.path"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group log-file-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label </span><span class="s5">for</span><span class="s1">=</span><span class="s2">"log-file-size"</span><span class="s1">&gt;Taille de rotation (Mo)&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"number"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"log-file-size"</span><span class="s1"> name=</span><span class="s2">"file.rotationSize"</span><span class="s1"> min=</span><span class="s2">"1"</span><span class="s1"> max=</span><span class="s2">"1000"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class=</span><span class="s2">"form-group log-file-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;label </span><span class="s5">for</span><span class="s1">=</span><span class="s2">"log-file-count"</span><span class="s1">&gt;Nombre de fichiers&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"number"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"log-file-count"</span><span class="s1"> name=</span><span class="s2">"file.maxFiles"</span><span class="s1"> min=</span><span class="s2">"1"</span><span class="s1"> max=</span><span class="s2">"100"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"submit"</span><span class="s1"> class=</span><span class="s2">"btn primary"</span><span class="s1">&gt;Enregistrer&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/form&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Système d</span><span class="s2">'alertes&lt;/h3&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="info-box"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p&gt;La configuration des alertes se fait via le fichier de configuration. Vous pouvez définir :&lt;/p&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;ul&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;La durée de conservation des alertes par niveau&lt;/li&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Les notifications par email&lt;/li&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Les notifications par webhook&lt;/li&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/main&gt;</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">        </span>&lt;footer&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;HLS vers MPEG-TS DVB Converter v1.0.0&lt;/p&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/footer&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Modals --&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="stream-modal" class="modal"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="modal-content"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 id="stream-modal-title"&gt;Ajouter un flux&lt;/h2&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">            </span>&lt;form id="stream-form"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;input type="hidden" id="stream-id" name="id"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="form-group"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;label for="stream-name"&gt;Nom&lt;/label&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;input type="text" id="stream-name" name="name" required&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="form-group"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;label for="hls-input"&gt;URL HLS d'</span><span class="s3">entrée&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;input </span><span class="s4">type</span><span class="s1">=</span><span class="s2">"url"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s2">"hls-input"</span><span class="s1"> name=</span><span class="s2">"hlsInput"</span><span class="s1"> required&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class=</span><span class="s2">"form-group"</span><span class="s1">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;label </span><span class="s5">for</span><span class="s1">=</span><span class="s2">"mcast-output"</span><span class="s1">&gt;Adresse IP Multicast de sortie&lt;/label&gt;</span></p>
+<p class="p3"><span class="s3"><span class="Apple-converted-space">                    </span>&lt;input </span><span class="s4">type</span><span class="s3">=</span><span class="s1">"text"</span><span class="s3"> </span><span class="s4">id</span><span class="s3">=</span><span class="s1">"mcast-output"</span><span class="s3"> name=</span><span class="s1">"mcastOutput"</span><span class="s3"> required pattern=</span><span class="s1">"^(2[2-3][0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"</span><span class="s3">&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;small&gt;Format: 239.x.x.x (plage d</span><span class="s2">'adresses multicast)&lt;/small&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="form-group"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;label for="mcast-port"&gt;Port Multicast&lt;/label&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;input type="number" id="mcast-port" name="mcastPort" required min="1024" max="65535" value="1234"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="form-group"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;label for="buffer-size"&gt;Taille du buffer (segments)&lt;/label&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;input type="number" id="buffer-size" name="bufferSize" required min="1" max="100" value="3"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;small&gt;Plus la valeur est élevée, plus le délai est important, mais plus la tolérance aux interruptions réseau est grande.&lt;/small&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="form-group"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;label&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input type="checkbox" id="stream-enabled" name="enabled" checked&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                        </span>Activer le flux</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/label&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="form-actions"&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button type="button" id="stream-modal-cancel" class="btn secondary"&gt;Annuler&lt;/button&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button type="submit" id="stream-modal-submit" class="btn primary"&gt;Enregistrer&lt;/button&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/form&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="/static/js/main.js"&gt;&lt;/script&gt;</span></p>
+<p class="p3"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p3"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>

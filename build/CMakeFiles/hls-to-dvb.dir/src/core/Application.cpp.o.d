@@ -1098,6 +1098,7 @@ CMakeFiles/hls-to-dvb.dir/src/core/Application.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/stop_source.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/thread.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/this_thread.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavformat/avformat.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavcodec/codec_par.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavutil/avutil.h \

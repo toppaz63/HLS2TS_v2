@@ -1932,6 +1932,7 @@ CMakeFiles/hls-to-dvb.dir/src/core/Application.cpp.o: /Users/laurent/Dev/HLS2Mul
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ranges \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/span \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack \
@@ -3031,6 +3032,7 @@ CMakeFiles/hls-to-dvb.dir/src/core/SegmentBuffer.cpp.o: /Users/laurent/Dev/HLS2M
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/print \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stddef.h \
@@ -4136,6 +4138,7 @@ CMakeFiles/hls-to-dvb.dir/src/core/StreamManager.cpp.o: /Users/laurent/Dev/HLS2M
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ranges \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/span \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack \
@@ -7468,6 +7471,7 @@ CMakeFiles/hls-to-dvb.dir/src/main.cpp.o: /Users/laurent/Dev/HLS2Multicast/V1/hl
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ranges \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/span \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack \
@@ -8835,37 +8839,37 @@ CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.o: /Users/laurent/Dev/HLS2
   /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/base.h \
   /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/core.h \
   /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/format.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asn1.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asn1err.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bio.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bioerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bn.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bnerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/configuration.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core_dispatch.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core_names.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/crypto.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cryptoerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cryptoerr_legacy.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/e_os2.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/err.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/evp.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/evperr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/indicator.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/lhash.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/macros.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/obj_mac.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/objects.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/objectserr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/opensslconf.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/opensslv.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/params.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/provider.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/safestack.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/stack.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/symhacks.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/types.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asn1.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asn1err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bio.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bioerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bn.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bnerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/configuration.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core_dispatch.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core_names.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/crypto.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cryptoerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cryptoerr_legacy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/e_os2.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/evp.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/evperr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/indicator.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/lhash.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/macros.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/obj_mac.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/objects.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/objectserr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/opensslconf.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/opensslv.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/params.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/provider.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/safestack.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/stack.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/symhacks.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/types.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/common.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/backtracer.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/circular_q.h \
@@ -10556,6 +10560,7 @@ CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.o: /Users/laurent/Dev/H
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/print \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/shared_mutex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
@@ -10828,37 +10833,37 @@ CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.o: /Users/laurent/Dev/H
   /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/base.h \
   /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/core.h \
   /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/format.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asn1.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asn1err.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bio.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bioerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bn.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bnerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/configuration.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core_dispatch.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core_names.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/crypto.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cryptoerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cryptoerr_legacy.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/e_os2.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/err.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/evp.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/evperr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/indicator.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/lhash.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/macros.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/obj_mac.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/objects.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/objectserr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/opensslconf.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/opensslv.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/params.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/provider.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/safestack.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/stack.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/symhacks.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/types.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asn1.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asn1err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bio.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bioerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bn.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bnerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/configuration.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core_dispatch.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core_names.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/crypto.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cryptoerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cryptoerr_legacy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/e_os2.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/evp.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/evperr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/indicator.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/lhash.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/macros.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/obj_mac.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/objects.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/objectserr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/opensslconf.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/opensslv.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/params.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/provider.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/safestack.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/stack.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/symhacks.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/types.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/common.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/backtracer.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/circular_q.h \
@@ -13960,77 +13965,77 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
   /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/ordered_map.hpp \
   /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/thirdparty/hedley/hedley.hpp \
   /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asn1.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asn1err.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/async.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asyncerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bio.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bioerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bn.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bnerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/buffer.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/buffererr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/comp.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/comperr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/conf.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/conferr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/configuration.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/conftypes.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core_dispatch.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/crypto.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cryptoerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cryptoerr_legacy.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ct.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cterr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dh.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dherr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dsa.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dsaerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dtls1.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/e_os2.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/e_ostime.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ec.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ecerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/err.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/evp.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/evperr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/hmac.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/http.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/indicator.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/lhash.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/macros.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/obj_mac.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/objects.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/objectserr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/opensslconf.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/opensslv.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/params.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/pem.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/pemerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/pkcs7.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/pkcs7err.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/prov_ssl.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/quic.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/rsa.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/rsaerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/safestack.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/sha.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/srtp.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ssl.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ssl2.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ssl3.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/sslerr.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/sslerr_legacy.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/stack.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/symhacks.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/tls1.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/types.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509_vfy.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509err.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509v3.h \
-  /opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509v3err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asn1.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asn1err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/async.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asyncerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bio.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bioerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bn.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bnerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/buffer.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/buffererr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/comp.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/comperr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/conf.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/conferr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/configuration.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/conftypes.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core_dispatch.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/crypto.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cryptoerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cryptoerr_legacy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ct.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cterr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dh.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dherr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dsa.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dsaerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dtls1.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/e_os2.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/e_ostime.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ec.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ecerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/evp.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/evperr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/hmac.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/http.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/indicator.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/lhash.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/macros.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/obj_mac.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/objects.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/objectserr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/opensslconf.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/opensslv.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/params.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/pem.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/pemerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/pkcs7.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/pkcs7err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/prov_ssl.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/quic.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/rsa.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/rsaerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/safestack.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/sha.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/srtp.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ssl.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ssl2.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ssl3.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/sslerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/sslerr_legacy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/stack.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/symhacks.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/tls1.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/types.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509_vfy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509v3.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509v3err.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/common.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/backtracer.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/circular_q.h \
@@ -14047,55 +14052,43 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/version.h
 
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509v3err.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509v3err.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509_vfy.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509_vfy.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ssl3.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/sslerr_legacy.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ssl2.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/srtp.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/srtp.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/rsaerr.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/rsaerr.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/quic.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/rsa.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/pem.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/pkcs7err.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/http.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/pkcs7.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ecerr.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/pemerr.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ec.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/pem.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/e_ostime.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/http.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dsa.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/hmac.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dherr.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ec.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dh.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/e_ostime.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ct.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dherr.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/conferr.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cterr.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/comperr.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/conferr.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/comperr.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/comp.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/buffererr.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/buffer.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asyncerr.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/async.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/buffer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/csignal:
 
@@ -14106,8 +14099,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/multicast/MulticastSender.cpp:
 
 /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/mpegts/MPEGTSConverter.cpp:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/sha.h:
 
 /opt/homebrew/include/tsduck/tstlvChannelMessage.h:
 
@@ -14146,8 +14137,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsTunerArgs.h:
 
 /opt/homebrew/include/tsduck/tsTuner.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/tls1.h:
 
 /opt/homebrew/include/tsduck/tsTransportProfileDescriptor.h:
 
@@ -14215,8 +14204,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsTSFileOutputResync.h:
 
-/opt/homebrew/include/tsduck/tsTSFileInputBuffered.h:
-
 /opt/homebrew/include/tsduck/tsTSFile.h:
 
 /opt/homebrew/include/tsduck/tsTSAnalyzerReport.h:
@@ -14241,6 +14228,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsStreamModeDescriptor.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/sha.h:
+
 /opt/homebrew/include/tsduck/tsStreamEventDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsStereoscopicVideoInfoDescriptor.h:
@@ -14254,8 +14243,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsSpliceInformationTable.h:
 
 /opt/homebrew/include/tsduck/tsSpliceDTMFDescriptor.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/conf.h:
 
 /opt/homebrew/include/tsduck/tsSpliceAudioDescriptor.h:
 
@@ -14297,6 +14284,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsSSULinkageDescriptor.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dsaerr.h:
+
 /opt/homebrew/include/tsduck/tsSSUEnhancedMessageDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsSSUDataBroadcastIdDescriptor.h:
@@ -14310,6 +14299,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsSIPrimeTSDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsSIParameterDescriptor.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cterr.h:
 
 /opt/homebrew/include/tsduck/tsSDTT.h:
 
@@ -14354,6 +14345,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsPrivateDataSpecifierDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsPrivateDataIndicatorDescriptor.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/comp.h:
 
 /opt/homebrew/include/tsduck/tsPrefetchDescriptor.h:
 
@@ -14405,15 +14398,11 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsNullInputPlugin.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/sslerr.h:
-
 /opt/homebrew/include/tsduck/tsNorDigLogicalChannelDescriptorV1.h:
 
 /opt/homebrew/include/tsduck/tsNetworkDownloadContentDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsNPTReferenceDescriptor.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509v3.h:
 
 /opt/homebrew/include/tsduck/tsNPTEndpointDescriptor.h:
 
@@ -14503,6 +14492,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsLCEVCLinkageDescriptor.h:
 
+/opt/homebrew/include/tsduck/tsJPEGXSVideoDescriptor.h:
+
 /opt/homebrew/include/tsduck/tsJ2KVideoDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsInvalidSectionHandlerInterface.h:
@@ -14522,6 +14513,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsISPAccessModeDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsISDBTerrestrialDeliverySystemDescriptor.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/pemerr.h:
 
 /opt/homebrew/include/tsduck/tsISDBTargetRegionDescriptor.h:
 
@@ -14811,6 +14804,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsCAEMMTSDescriptor.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/async.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/count.h:
 
 /opt/homebrew/include/tsduck/tsCADescriptor.h:
@@ -14839,6 +14834,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsAudioStreamDescriptor.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/rsa.h:
+
 /opt/homebrew/include/tsduck/tsMPEG2AACAudioDescriptor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/constructible.h:
@@ -14852,6 +14849,12 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsAssociationTagDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsApplicationDescriptor.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__node_handle:
+
+/opt/homebrew/include/tsduck/tsAccessUnitIterator.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/prov_ssl.h:
 
 /opt/homebrew/include/tsduck/tsAbstractVideoData.h:
 
@@ -14891,8 +14894,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/param.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/macros.h:
-
 /opt/homebrew/include/tsduck/tsAVS3AudioDescriptor.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsjsonArray.h:
@@ -14904,8 +14905,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/mman.h:
 
 /opt/homebrew/include/tsduck/tsAVCTimingAndHRDDescriptor.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/crypto.h:
 
 /opt/homebrew/include/tsduck/tsAudioLanguageOptions.h:
 
@@ -14921,6 +14920,10 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsATSC.h:
 
+/opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/detail/input/input_adapters.hpp:
+
+/opt/homebrew/include/tsduck/tsAIT.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/geometric_distribution.h:
 
 /opt/homebrew/include/tsduck/tsAFExtensionsDescriptor.h:
@@ -14928,10 +14931,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsAC3Attributes.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsxmlUnknown.h:
-
-/opt/homebrew/include/tsduck/tsXAITPIDDescriptor.h:
-
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsxmlText.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsxmlJSONConverter.h:
 
@@ -15055,6 +15054,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsPcapStream.h:
 
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsPcapFile.h:
+
 /opt/homebrew/include/tsduck/tsAVCVUIParameters.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/count_if.h:
@@ -15083,9 +15084,9 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsKeyTable.h:
 
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsInterruptHandler.h:
-
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsIntegerUtils.h:
+
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsInteger.h:
 
 /opt/homebrew/include/tsduck/tsIPMACPlatformNameDescriptor.h:
 
@@ -15115,6 +15116,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsGrid.h:
 
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsGitHubRelease.h:
+
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsIntegerMap.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsForkPipe.h:
@@ -15136,12 +15139,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/param.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsException.h:
-
-/opt/homebrew/include/tsduck/tsFTAContentManagementDescriptor.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/zoned_time.h:
-
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsECB.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsDuckConfigFile.h:
 
@@ -15195,14 +15192,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsArgMix.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_ssize_t.h:
-
-/opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavformat/version.h:
-
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsSingleDataStatistics.h:
-
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsAbstractWriteStreamInterface.h:
-
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsAbstractReadStreamInterface.h:
 
 /opt/homebrew/include/tsduck/tsAVS3VideoDescriptor.h:
@@ -15213,81 +15202,89 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsAES256.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_iovec_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_reference.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/types.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/provider.h:
+
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsCompactBitSet.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/opensslconf.h:
+
+/opt/homebrew/include/tsduck/tsXAITPIDDescriptor.h:
+
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsxmlText.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/objects.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/obj_mac.h:
+
 /opt/homebrew/include/tsduck/tsOutputPlugin.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsAES128.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/symhacks.h:
+/opt/homebrew/include/tsduck/tshlsMediaPlayList.h:
 
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsInteger.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/jthread.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/select.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/macros.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/stack.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/lhash.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/replace_copy_if.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_error.h:
 
-/opt/homebrew/include/tsduck/tsBinaryTable.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/indicator.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/safestack.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_ssize_t.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/provider.h:
+/opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavformat/version.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/params.h:
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsSingleDataStatistics.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/objects.h:
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsAbstractWriteStreamInterface.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/obj_mac.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/evperr.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/indicator.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/evp.h:
 
-/opt/homebrew/include/tsduck/tsHEVCHierarchyExtensionDescriptor.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_nothrow_convertible.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/desugars_to.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/err.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigset_t.h:
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsTelnetConnection.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/evperr.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/e_os2.h:
 
-/opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/detail/input/input_adapters.hpp:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find.h:
 
-/opt/homebrew/include/tsduck/tsAIT.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic_sync.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/err.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/symhacks.h:
 
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsPcapFile.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cryptoerr_legacy.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int32_t.h:
+/opt/homebrew/include/tsduck/tsFTAContentManagementDescriptor.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/e_os2.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/zoned_time.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/rotate.h:
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsECB.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cryptoerr_legacy.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/crypto.h:
 
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsGitHubRelease.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core_names.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__node_handle:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core.h:
 
-/opt/homebrew/include/tsduck/tsAccessUnitIterator.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bnerr.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bnerr.h:
+/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsInterruptHandler.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/iter_swap.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bn.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bn.h:
-
-/opt/homebrew/include/tsduck/tsHEVCSubregionDescriptor.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/bit_width.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/iota.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asn1err.h:
-
-/opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/sinks/base_sink.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/asn1.h:
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bio.h:
 
 /opt/homebrew/include/tsduck/tsEITRepetitionProfile.h:
 
@@ -15315,6 +15312,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/semaphore.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/select.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/filio.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/fcntl.h:
@@ -15322,8 +15321,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/default_searcher.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/constrained_ctypes.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/prov_ssl.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_s_ifmt.h:
 
@@ -15438,8 +15435,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsAbstractLongTable.h:
 
 /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/detail/meta/cpp_future.hpp:
-
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsTelnetConnection.h:
 
 /opt/homebrew/include/tsduck/tsSSUSubgroupAssociationDescriptor.h:
 
@@ -15629,6 +15624,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/range_adaptor.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509err.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/owning_view.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsSysCtl.h:
@@ -15763,8 +15760,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_null.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/objectserr.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/space_info.h:
 
 /opt/homebrew/include/tsduck/tsDTGServiceAttributeDescriptor.h:
@@ -15786,12 +15781,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/file_status.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_set_difference.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/evp.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/time.h:
 
@@ -15837,6 +15826,14 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int64_t.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/alloca.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/fill_n.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/params.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int32_t.h:
+
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsAsyncReport.h:
 
 /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/alerting/AlertManager.h:
@@ -15850,6 +15847,12 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_size_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_timeval32.h:
+
+/opt/homebrew/include/tsduck/tsHEVCHierarchyExtensionDescriptor.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/desugars_to.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigset_t.h:
 
 /opt/homebrew/include/tsduck/tsSpliceAvailDescriptor.h:
 
@@ -15999,6 +16002,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/periodic_worker.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/dtls1.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/prev.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/errno.h:
@@ -16125,6 +16130,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstring:
 
+/opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/sinks/base_sink.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind_front.h:
 
 /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/fmt/fmt.h:
@@ -16201,6 +16208,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/piecewise_construct.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asyncerr.h:
+
 /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/version.h:
 
 /opt/homebrew/include/tsduck/tsISDBHyperlinkDescriptor.h:
@@ -16254,8 +16263,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsArgs.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_pointer.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core_dispatch.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/relation.h:
 
@@ -16405,6 +16412,10 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_allocator.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_set_difference.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:
+
 /opt/homebrew/include/tsduck/tsApplicationRecordingDescriptor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/default_sentinel.h:
@@ -16459,6 +16470,12 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsAVCHRDParameters.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/make_projected.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_lower_bound.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asn1.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/datasizeof.h:
 
 /opt/homebrew/include/tsduck/tsMPEGH3DAudioConfigDescriptor.h:
@@ -16475,11 +16492,11 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/netinet/in.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/cryptoerr.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/promote.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/addressof.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_nothrow_convertible.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/conditional.h:
 
@@ -16544,10 +16561,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/erase_if_container.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/tuple_element.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_iovec_t.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_reference.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/piecewise_constant_distribution.h:
 
@@ -16705,8 +16718,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sort_heap.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ssl.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/binomial_distribution.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_find_if.h:
@@ -16714,6 +16725,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsBasicLocalEventDescriptor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/has_virtual_destructor.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/pkcs7err.h:
 
 /opt/homebrew/include/tsduck/tsAbstractVideoStructure.h:
 
@@ -16767,13 +16780,7 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/discrete_distribution.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/all_of.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/opensslconf.h:
-
 /opt/homebrew/include/tsduck/tsBroadcasterNameDescriptor.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core_names.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/default_random_engine.h:
 
@@ -16793,10 +16800,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/bernoulli_distribution.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/logarithms.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/lhash.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/minmax.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/tuple_size.h:
@@ -16806,6 +16809,10 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavutil/frame.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__string/extern_template_lists.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/replace_copy_if.h:
+
+/opt/homebrew/include/tsduck/tsBinaryTable.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/saturation_arithmetic.h:
 
@@ -16831,11 +16838,15 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/inttypes.h:
 
+/opt/homebrew/include/tsduck/tsHEVCSubregionDescriptor.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/bit_width.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/iota.h:
+
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tstlvMessage.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dsaerr.h:
 
 /opt/homebrew/include/tsduck/tsMPEG2StereoscopicVideoFormatDescriptor.h:
 
@@ -16935,6 +16946,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/remainder.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/logarithms.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/negative_binomial_distribution.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/make_const_lvalue_ref.h:
@@ -17017,8 +17030,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/incrementable_traits.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dh.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/tag_types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/front_insert_iterator.h:
@@ -17073,8 +17084,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/subrange.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/sslerr_legacy.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/fma.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsOutputPager.h:
@@ -17084,10 +17093,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_assignable.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsSystemMonitor.h:
-
-/opt/homebrew/include/tsduck/tsJPEGXSVideoDescriptor.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/cryptoerr.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/unicode.h:
 
@@ -17116,6 +17121,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsDES.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_constructible.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/conf.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/memory_resource.h:
 
@@ -17195,8 +17202,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/inner_product.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/configuration.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/set_symmetric_difference.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pop_heap.h:
@@ -17233,6 +17238,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_functions.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/stack.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl.h:
 
 /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/thirdparty/hedley/hedley_undef.hpp:
@@ -17240,8 +17247,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/error_functions.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/is_sorted_until.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_error.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/duration.h:
 
@@ -17253,6 +17258,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/container_adaptor.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/asn1err.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/uniform_real_distribution.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/seed_seq.h:
@@ -17260,6 +17267,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/concepts.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsCryptoLibrary.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/bioerr.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/clamp.h:
 
@@ -17321,8 +17330,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__cstddef/ptrdiff_t.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bioerr.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/same_as.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_off_t.h:
@@ -17365,11 +17372,11 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavutil/common.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dsa.h:
-
 /opt/homebrew/include/tsduck/tsTSFileInputArgs.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/common_with.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/iter_swap.h:
 
 /opt/homebrew/include/tsduck/tsStreamIdentifierDescriptor.h:
 
@@ -17380,8 +17387,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsApplicationUsageDescriptor.h:
 
 /opt/homebrew/include/tsduck/tsAbstractMultilingualDescriptor.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/bio.h:
 
 /opt/homebrew/include/tsduck/tsTransportProtocolDescriptor.h:
 
@@ -17441,6 +17446,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_replace_copy.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/x509v3.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/integer_sequence.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/formatter_floating_point.h:
@@ -17450,8 +17457,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsMPEPacket.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/concepts.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/opensslv.h:
 
 /opt/homebrew/include/tsduck/tsPESStreamPacketizer.h:
 
@@ -17487,6 +17492,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_max_element.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/buffererr.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_primary_template.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__charconv/to_chars_base_10.h:
@@ -17515,6 +17522,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsStringifyInterface.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ssl2.h:
+
 /opt/homebrew/include/tsduck/tsECMGClientArgs.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/type_list.h:
@@ -17532,8 +17541,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/detail/iterators/iterator_traits.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstdio:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/x509err.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/endian.h:
 
@@ -17559,10 +17566,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /opt/homebrew/include/tsduck/tsAbstractAVCAccessUnit.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/make_projected.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_lower_bound.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_remove_copy.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/uses_allocator_construction.h:
@@ -17576,10 +17579,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsjsonString.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_n.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic_sync.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_string.h:
 
@@ -17685,6 +17684,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/rotate.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/conftypes.h:
+
 /opt/homebrew/include/tsduck/tsTVCT.h:
 
 /opt/homebrew/include/tsduck/tsPluginOptions.h:
@@ -17753,10 +17754,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/exponential_distribution.h:
 
-/opt/homebrew/include/tsduck/tshlsMediaPlayList.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/jthread.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_fundamental.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/bit_floor.h:
@@ -17773,6 +17770,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/accumulate.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/tls1.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_partition_copy.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/construct_at.h:
@@ -17784,8 +17783,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_shuffle.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_reverse.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/dtls1.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_all_of.h:
 
@@ -17808,6 +17805,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsAbstractDeliverySystemDescriptor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ssl3.h:
 
 /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/sinks/ansicolor_sink.h:
 
@@ -17871,8 +17870,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_t.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/quic.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/common_type.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/voidify.h:
@@ -17883,13 +17880,11 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_merge.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/alloca.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/fill_n.h:
-
 /opt/homebrew/include/tsduck/tsIPSignallingDescriptor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/assignable.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/objectserr.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/mersenne_twister_engine.h:
 
@@ -17907,7 +17902,13 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_stdlib.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/hmac.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_is_sorted.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/pkcs7.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/core_dispatch.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/decay.h:
 
@@ -17936,10 +17937,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/transform_reduce.h:
 
 /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/detail/output/serializer.hpp:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/none_of.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/types.h:
 
 /opt/homebrew/Cellar/nlohmann-json/3.12.0/include/nlohmann/detail/abi_macros.hpp:
 
@@ -17971,6 +17968,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_generate.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/ssl.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/unique_lock.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition.h:
@@ -17978,8 +17977,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsPDCDescriptor.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tstlvConnection.h:
-
-/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsCompactBitSet.h:
 
 /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/mpegts/DVBProcessor.cpp:
 
@@ -18004,8 +18001,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_move_backward.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find_end.h:
-
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/conftypes.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/uniform_random_bit_generator_adaptor.h:
 
@@ -18109,6 +18104,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/unistd.h:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/opensslv.h:
+
 /opt/homebrew/include/tsduck/tsMediaServiceKindDescriptor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/ordering.h:
@@ -18177,8 +18174,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/abs.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ecerr.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h:
 
 /opt/homebrew/include/tsduck/tsXTID.h:
@@ -18204,6 +18199,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /opt/homebrew/include/tsduck/tsATSCEAC3AudioDescriptor.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/iter_swap.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/safestack.h:
 
 /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavutil/macros.h:
 
@@ -18257,6 +18254,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/minmax_element.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/rotate.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_find_end.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/includes.h:
@@ -18291,8 +18290,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/countr.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/core.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/bit_log2.h:
@@ -18307,6 +18304,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/streambuf:
 
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/sslerr.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/mem_fn.h:
 
 /opt/homebrew/include/tsduck/tsDVBCharTable.h:
@@ -18314,6 +18313,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/binary_search.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/is_partitioned.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/none_of.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/poisson_distribution.h:
 
@@ -18343,8 +18344,6 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_wctype_t.h:
 
-/opt/homebrew/Cellar/openssl@3/3.4.1/include/openssl/ct.h:
-
 /opt/homebrew/include/tsduck/tsDVBCSA2.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__charconv/to_chars_integral.h:
@@ -18364,6 +18363,8 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/dependent_type.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_symbol_aliasing.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/all_of.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_search.h:
 
@@ -18434,6 +18435,10 @@ CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multic
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/in_in_result.h:
 
 /opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore/tsConfigSection.h:
+
+/opt/homebrew/include/tsduck/tsTSFileInputBuffered.h:
+
+/opt/homebrew/Cellar/openssl@3/3.5.0/include/openssl/configuration.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_uintptr_t.h:
 

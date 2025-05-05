@@ -492,7 +492,7 @@ FFMPEG_libavutil_MODULE_NAME:INTERNAL=libavutil
 FFMPEG_libavutil_PREFIX:INTERNAL=/opt/homebrew/Cellar/ffmpeg/7.1.1_2
 FFMPEG_libavutil_VERSION:INTERNAL=59.39.100
 //Details about finding OpenSSL
-FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL:INTERNAL=[/opt/homebrew/Cellar/openssl@3/3.4.1/lib/libcrypto.dylib][/opt/homebrew/Cellar/openssl@3/3.4.1/include][ ][v3.4.1()]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL:INTERNAL=[/opt/homebrew/Cellar/openssl@3/3.4.1/lib/libcrypto.dylib][/opt/homebrew/Cellar/openssl@3/3.4.1/include][ ][v()]
 //Details about finding PkgConfig
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/opt/homebrew/bin/pkg-config][v2.4.3()]
 //Details about finding Threads

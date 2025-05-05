@@ -255,8 +255,8 @@ bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/build.make
-bin/hls-to-dvb: /opt/homebrew/Cellar/openssl@3/3.4.1/lib/libssl.dylib
-bin/hls-to-dvb: /opt/homebrew/Cellar/openssl@3/3.4.1/lib/libcrypto.dylib
+bin/hls-to-dvb: /opt/homebrew/Cellar/openssl@3/3.5.0/lib/libssl.dylib
+bin/hls-to-dvb: /opt/homebrew/Cellar/openssl@3/3.5.0/lib/libcrypto.dylib
 bin/hls-to-dvb: /opt/homebrew/lib/libspdlog.1.15.2.dylib
 bin/hls-to-dvb: /opt/homebrew/lib/libfmt.11.1.4.dylib
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/link.txt

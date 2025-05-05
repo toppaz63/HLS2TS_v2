@@ -9,6 +9,7 @@
 #include <atomic>
 #include <thread>
 #include <optional>
+#include <regex>
 
 extern "C" {
 #include <libavformat/avformat.h>
@@ -137,4 +138,66 @@ private:
      * @return true si des discontinuités ont été détectées
      */
     bool checkForDiscontinuities(const std::string& url);
+
+    /**
+     * @brief Résout une URL relative par rapport à une URL de base
+     * @param baseUrl URL de base
+     * @param relativeUrl URL relative
+     * @return URL absolue résolue
+     */
+    std::string resolveRelativeUrl(const std::string& baseUrl, const std::string& relativeUrl);
+    
+    /**
+     * @brief Vérifie le format d'un segment HLS
+     * @param segmentUrl URL du segment à vérifier
+     * @return true si le segment est en format MPEG-TS
+     */
+    bool checkSegmentFormat(const std::string& segmentUrl);
+
+    /**
+    * @brief Force l'acceptation d'un flux HLS même si les segments MPEG-TS ne sont pas détectés
+    * @return true si le flux peut être traité
+    */
+    bool forceAcceptHLSStream();
+
+    /**
+     * @brief Affiche des informations détaillées sur une playlist HLS
+     * @param url URL de la playlist à analyser
+     */
+    void dumpPlaylistInfo(const std::string& url);
+
+    /**
+    * @brief Extrait la valeur d'un attribut dans une ligne de manifeste HLS
+    * @param line Ligne du manifeste contenant l'attribut
+    * @param attributeName Nom de l'attribut à extraire
+    * @return Valeur de l'attribut ou chaîne vide si non trouvé
+    */
+    std::string extractAttributeValue(const std::string& line, const std::string& attributeName);
+
+    /**
+    * @brief Détermine si une playlist est une master playlist
+    * @param content Contenu de la playlist
+    * @return true si c'est une master playlist, false sinon
+    */
+    bool isMasterPlaylist(const std::string& content);
+
+    /**
+    * @brief Vérifie si FFmpeg supporte les protocoles SSL/TLS
+    */
+    void checkFFmpegSSLSupport();
+
+    /**
+    * @brief Télécharge un manifeste HLS en utilisant curl comme alternative
+    * @param url URL du manifeste HLS
+    * @param content Référence pour stocker le contenu récupéré
+    * @return true si réussi, false sinon
+    */
+    bool fetchHLSManifestWithCurl(const std::string& url, std::string& content);
+
+    /**
+    * @brief Crée un dictionnaire d'options FFmpeg avec les paramètres appropriés
+    * @param longTimeout Utiliser un timeout plus long si true
+    * @return Dictionnaire d'options FFmpeg
+    */
+    AVDictionary* createFFmpegOptions(bool longTimeout = false);
 };
