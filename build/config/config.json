@@ -22,6 +22,7 @@
         "hlsInput": "https://demo.daiconnect.com/live/hls/dev/live-hls-muxed/.m3u8",
         "mcastOutput": "239.0.0.1",
         "mcastPort": 5000,
+        "mcastInterface": "en0",
         "bufferSize": 5,
         "enabled": true
       }

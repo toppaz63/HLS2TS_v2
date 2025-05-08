@@ -946,6 +946,8 @@ CMakeFiles/hls-to-dvb.dir/src/hls/HLSClient.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/this_thread.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavformat/avformat.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavcodec/codec_par.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavutil/avutil.h \
@@ -983,9 +985,10 @@ CMakeFiles/hls-to-dvb.dir/src/hls/HLSClient.cpp.o: \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavcodec/avcodec.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavcodec/version.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavcodec/codec_desc.h \
+  /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/hls/custom_formatters.h \
+  /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/format.h \
+  /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/base.h \
   /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/include/alerting/AlertManager.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/chrono \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/calendar.h \
@@ -1020,8 +1023,6 @@ CMakeFiles/hls-to-dvb.dir/src/hls/HLSClient.cpp.o: \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/tweakme.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/fmt/fmt.h \
   /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/core.h \
-  /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/format.h \
-  /opt/homebrew/Cellar/fmt/11.1.4/include/fmt/base.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/registry.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/periodic_worker.h \
   /opt/homebrew/Cellar/spdlog/1.15.2/include/spdlog/details/synchronous_factory.h \

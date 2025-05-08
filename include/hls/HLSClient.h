@@ -10,6 +10,7 @@
 #include <thread>
 #include <optional>
 #include <regex>
+#include <map>  
 
 extern "C" {
 #include <libavformat/avformat.h>
@@ -28,6 +29,7 @@ struct HLSStreamInfo {
     int width;                  ///< Largeur de la vidéo
     int height;                 ///< Hauteur de la vidéo
     bool hasMPEGTSSegments;     ///< Indique si le flux contient des segments MPEG-TS
+    std::optional<bool> isLive; ///< Indique si le flux est Live (true) ou VOD (false)
 };
 
 /**
@@ -93,11 +95,30 @@ public:
      * @return true si le flux est valide
      */
     bool isValidStream() const;
+
+    /**
+     * @brief Vérifie si le flux est un flux live
+     * @return true si le flux est live, false sinon
+     */
+    bool isLiveStream();
+
     
     /**
      * @brief Destructeur
      */
     ~HLSClient();
+
+    /**
+     * @brief Rafraîchit la playlist HLS
+     * @return true si la playlist a été rafraîchie avec succès, false sinon
+     */
+    bool refreshPlaylist();
+
+    /**
+     * @brief Vérifie si le client HLS est en cours d'exécution
+     * @return true si le client est en cours d'exécution, false sinon
+     */
+    bool isRunning() const;
     
 private:
     std::string url_;                    ///< URL du flux HLS
@@ -113,6 +134,8 @@ private:
     
     std::atomic<size_t> segmentsProcessed_;       ///< Compteur de segments traités
     std::atomic<size_t> discontinuitiesDetected_; ///< Compteur de discontinuités détectées
+
+    std::mutex mutex_;                  ///< Mutex pour l'accès général aux membres de la classe
     
     /**
      * @brief Sélectionne le flux avec le plus grand débit
@@ -200,4 +223,12 @@ private:
     * @return Dictionnaire d'options FFmpeg
     */
     AVDictionary* createFFmpegOptions(bool longTimeout = false);
+    
+    // Stockage des durées de segment
+    std::map<int, double> segmentDurations_;
+    double averageSegmentDuration_ = 0.0;
+    
+    // Méthode pour extraire les durées de segment
+    void extractSegmentDurations(const std::string& playlistContent);
+
 };

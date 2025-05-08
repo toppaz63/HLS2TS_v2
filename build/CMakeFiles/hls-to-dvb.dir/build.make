@@ -198,10 +198,24 @@ CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/mpegts/DVBProcessor.cpp -o CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.s
 
+CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o: CMakeFiles/hls-to-dvb.dir/flags.make
+CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o: /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/mpegts/TSQualityMonitor.cpp
+CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o: CMakeFiles/hls-to-dvb.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o -MF CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o.d -o CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o -c /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/mpegts/TSQualityMonitor.cpp
+
+CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/mpegts/TSQualityMonitor.cpp > CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.i
+
+CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/mpegts/TSQualityMonitor.cpp -o CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.s
+
 CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o: CMakeFiles/hls-to-dvb.dir/flags.make
 CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o: /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/multicast/MulticastSender.cpp
 CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o: CMakeFiles/hls-to-dvb.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o -MF CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o.d -o CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o -c /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/multicast/MulticastSender.cpp
 
 CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.i: cmake_force
@@ -215,7 +229,7 @@ CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.s: cmake_force
 CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: CMakeFiles/hls-to-dvb.dir/flags.make
 CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/web/WebServer.cpp
 CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o: CMakeFiles/hls-to-dvb.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o -MF CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o.d -o CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o -c /Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/src/web/WebServer.cpp
 
 CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.i: cmake_force
@@ -237,6 +251,7 @@ hls__to__dvb_OBJECTS = \
 "CMakeFiles/hls-to-dvb.dir/src/hls/HLSClient.cpp.o" \
 "CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.o" \
 "CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.o" \
+"CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o" \
 "CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o" \
 "CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o"
 
@@ -252,6 +267,7 @@ bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/alerting/AlertManager.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/hls/HLSClient.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.o
+bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/build.make
@@ -260,7 +276,7 @@ bin/hls-to-dvb: /opt/homebrew/Cellar/openssl@3/3.5.0/lib/libcrypto.dylib
 bin/hls-to-dvb: /opt/homebrew/lib/libspdlog.1.15.2.dylib
 bin/hls-to-dvb: /opt/homebrew/lib/libfmt.11.1.4.dylib
 bin/hls-to-dvb: CMakeFiles/hls-to-dvb.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable bin/hls-to-dvb"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/laurent/Dev/HLS2Multicast/V1/hls-to-dvb-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable bin/hls-to-dvb"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/hls-to-dvb.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

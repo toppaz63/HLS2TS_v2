@@ -21,6 +21,11 @@
   #define CPPHTTPLIB_OPENSSL_SUPPORT 0
 #endif
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmismatched-tags"
+#include <httplib.h>
+#pragma GCC diagnostic pop
+
 #include <httplib.h>
 
 namespace hls_to_dvb {

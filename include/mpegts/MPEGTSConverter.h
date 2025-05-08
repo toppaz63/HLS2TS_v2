@@ -8,11 +8,13 @@
 #include <memory>
 #include <atomic>
 #include <mutex>
+#include <map>
 
 // Forward declarations
 namespace ts {
     class TSPacket;
     class TSProcessor;
+    typedef std::vector<TSPacket> TSPacketVector;
 }
 
 // Forward declaration pour DVBProcessor
@@ -78,17 +80,18 @@ private:
     mutable std::mutex mutex_;                  ///< Mutex pour les accès concurrents
     
     /**
-     * @brief Traite les discontinuités dans le flux MPEG-TS
-     * @param data Données MPEG-TS à traiter
-     * @param discontinuity Indique si une discontinuité est présente
-     * @return Données MPEG-TS traitées
+     * @brief Traite les paquets MPEG-TS pour assurer la conformité DVB
+     * @param packets Paquets à traiter
+     * @param discontinuity Indique s'il y a une discontinuité
      */
-    std::vector<uint8_t> processDiscontinuity(const std::vector<uint8_t>& data, bool discontinuity);
+    void processPackets(ts::TSPacketVector& packets, bool discontinuity);
     
     /**
-     * @brief Met à jour les tables PSI/SI dans le flux MPEG-TS
-     * @param data Données MPEG-TS à mettre à jour
-     * @return Données MPEG-TS avec tables mises à jour
+     * @brief Réinitialise les compteurs de continuité
      */
-    std::vector<uint8_t> updatePSITables(const std::vector<uint8_t>& data);
+    void resetContinuityCounters();
+    
+    std::map<uint16_t, uint8_t> continuityCounters_; ///< Compteurs de continuité par PID
+    uint64_t lastPcrValue_;                        ///< Dernière valeur PCR traitée
+    uint16_t pcrPid_;                              ///< PID principal des PCR
 };

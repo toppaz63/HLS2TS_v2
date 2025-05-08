@@ -24,6 +24,159 @@ void signalHandler(int signum) {
     g_running = 0;
 }
 
+// Fonction pour vérifier les capacités FFmpeg
+void checkFFmpegCapabilities() {
+    spdlog::info("Vérification des capacités FFmpeg:");
+    
+    // Vérifier la version
+    spdlog::info("  Version FFmpeg: {}", avutil_version() ? av_version_info() : "Information non disponible");
+    
+    // Vérifier les formats supportés
+    void* opaque = nullptr;
+    const AVInputFormat* input_format;
+    bool has_hls = false;
+    bool has_applehttp = false;
+    
+    while ((input_format = av_demuxer_iterate(&opaque))) {
+        if (input_format->name) {
+            if (strcmp(input_format->name, "hls") == 0) {
+                has_hls = true;
+                spdlog::info("  Format HLS supporté: Oui (via démuxeur 'hls')");
+            }
+            else if (strcmp(input_format->name, "applehttp") == 0) {
+                has_applehttp = true;
+                spdlog::info("  Format HLS supporté: Oui (via démuxeur 'applehttp')");
+            }
+        }
+    }
+    
+    if (!has_hls && !has_applehttp) {
+        spdlog::error("  Format HLS supporté: Non - FFmpeg ne semble pas supporter le format HLS!");
+        spdlog::error("  Cela peut causer des problèmes dans la récupération des segments HLS.");
+    }
+    
+    // Vérifier les protocoles supportés
+    opaque = nullptr;
+    const char* protocol_name;
+    bool has_http = false;
+    bool has_https = false;
+    
+    while ((protocol_name = avio_enum_protocols(&opaque, 0))) {
+        if (strcmp(protocol_name, "http") == 0) {
+            has_http = true;
+            spdlog::info("  Protocole HTTP supporté: Oui");
+        }
+        else if (strcmp(protocol_name, "https") == 0) {
+            has_https = true;
+            spdlog::info("  Protocole HTTPS supporté: Oui");
+        }
+    }
+    
+    if (!has_http) {
+        spdlog::error("  Protocole HTTP supporté: Non - FFmpeg ne supporte pas HTTP!");
+        spdlog::error("  Cela peut empêcher d'accéder aux flux HLS via HTTP.");
+    }
+    
+    if (!has_https) {
+        spdlog::error("  Protocole HTTPS supporté: Non - FFmpeg ne supporte pas HTTPS!");
+        spdlog::error("  Cela peut empêcher d'accéder aux flux HLS via HTTPS.");
+    }
+    
+    // Vérifier si FFmpeg a été compilé avec le support TLS/SSL
+    #ifdef CONFIG_OPENSSL
+        spdlog::info("  Support SSL/TLS: Oui (via OpenSSL)");
+    #elif defined(CONFIG_GNUTLS)
+        spdlog::info("  Support SSL/TLS: Oui (via GnuTLS)");
+    #else
+        spdlog::warn("  Support SSL/TLS: Incertain - Dépend de la compilation de FFmpeg");
+    #endif
+    
+    spdlog::info("Fin de la vérification des capacités FFmpeg");
+}
+
+bool testHLSUrl(const std::string& url) {
+    spdlog::info("Test d'accessibilité de l'URL HLS: {}", url);
+    
+    if (url.empty()) {
+        spdlog::error("L'URL est vide!");
+        return false;
+    }
+    
+    // Vérifier que l'URL commence par http:// ou https://
+    if (url.find("http://") != 0 && url.find("https://") != 0) {
+        spdlog::warn("L'URL ne commence pas par http:// ou https:// - cela peut causer des problèmes");
+    }
+    
+    AVFormatContext* ctx = nullptr;
+    AVDictionary* options = nullptr;
+    
+    // Configurer le timeout pour ne pas bloquer trop longtemps
+    av_dict_set(&options, "timeout", "5000000", 0);     // 5 secondes en microsecondes
+    av_dict_set(&options, "http_persistent", "0", 0);   // Désactiver les connexions persistantes
+    av_dict_set(&options, "icy", "0", 0);               // Désactiver les métadonnées ICY
+    av_dict_set(&options, "reconnect", "1", 0);         // Autoriser les reconnexions
+    
+    // Tenter d'ouvrir l'URL
+    int ret = avformat_open_input(&ctx, url.c_str(), nullptr, &options);
+    if (ret < 0) {
+        char errbuf[AV_ERROR_MAX_STRING_SIZE];
+        av_strerror(ret, errbuf, sizeof(errbuf));
+        spdlog::error("Impossible d'accéder à l'URL HLS {}: {}", url, errbuf);
+        av_dict_free(&options);
+        return false;
+    }
+    
+    // Tenter de récupérer les informations sur le flux
+    ret = avformat_find_stream_info(ctx, nullptr);
+    if (ret < 0) {
+        char errbuf[AV_ERROR_MAX_STRING_SIZE];
+        av_strerror(ret, errbuf, sizeof(errbuf));
+        spdlog::error("Erreur lors de la récupération des informations sur le flux: {}", errbuf);
+        avformat_close_input(&ctx);
+        av_dict_free(&options);
+        return false;
+    }
+    
+    // Vérifier le format du flux
+    spdlog::info("Format du flux: {}", ctx->iformat ? ctx->iformat->name : "inconnu");
+    
+    // Vérifier s'il s'agit d'un flux HLS
+    bool isHLS = false;
+    if (ctx->iformat && (
+        strcmp(ctx->iformat->name, "hls") == 0 || 
+        strcmp(ctx->iformat->name, "applehttp") == 0)) {
+        isHLS = true;
+        spdlog::info("Le flux est bien au format HLS");
+    } else {
+        spdlog::warn("Le flux ne semble pas être au format HLS!");
+    }
+    
+    // Afficher des informations sur les flux
+    spdlog::info("Nombre de flux: {}", ctx->nb_streams);
+    for (unsigned int i = 0; i < ctx->nb_streams; i++) {
+        AVStream* stream = ctx->streams[i];
+        const char* typeName = "inconnu";
+        
+        switch(stream->codecpar->codec_type) {
+            case AVMEDIA_TYPE_VIDEO: typeName = "video"; break;
+            case AVMEDIA_TYPE_AUDIO: typeName = "audio"; break;
+            case AVMEDIA_TYPE_SUBTITLE: typeName = "sous-titres"; break;
+            default: break;
+        }
+        
+        // Convertir AVCodecID en entier pour éviter les problèmes de formatage
+        int codecId = static_cast<int>(stream->codecpar->codec_id);
+        spdlog::info("  Flux #{}: Type: {}, Codec ID: {}", i, typeName, codecId);
+    }
+    
+    // Libérer les ressources
+    avformat_close_input(&ctx);
+    av_dict_free(&options);
+    
+    spdlog::info("URL HLS accessible: {}", url);
+    return isHLS;
+}
+
 // Point d'entrée principal
 int main(int argc, char* argv[]) {
     // Vérifier les arguments
@@ -68,6 +221,9 @@ int main(int argc, char* argv[]) {
         spdlog::info("Démarrage du convertisseur HLS vers MPEG-TS DVB");
         spdlog::info("configFile: {}", configFile);
         
+        // Vérifier les capacités FFmpeg
+        checkFFmpegCapabilities();
+
         // Charger la configuration
         Config config(configFile);
         if (!config.load()) {
@@ -75,6 +231,45 @@ int main(int argc, char* argv[]) {
             return 1;
         }
         spdlog::info("Configuration chargée avec succès");
+
+        // Vérifier les flux configurés
+        auto streamConfigs = config.getStreamConfigs();
+        if (streamConfigs.empty()) {
+            spdlog::error("ATTENTION: Aucun flux configuré! Vérifiez le fichier de configuration.");
+            // Optionnel: Vous pouvez quitter ici si aucun flux n'est configuré
+            // return 1;
+        } else {
+            spdlog::info("{} flux configurés dans le fichier de configuration:", streamConfigs.size());
+            for (const auto& streamConfig : streamConfigs) {
+                spdlog::info("  - Flux {}: {} -> {} (port {})", 
+                        streamConfig.id, streamConfig.hlsInput, 
+                        streamConfig.mcastOutput, streamConfig.mcastPort);
+                
+                if (streamConfig.hlsInput.empty()) {
+                    spdlog::error("ERREUR: URL HLS vide pour le flux {}", streamConfig.id);
+                    continue;
+                }
+                
+                if (streamConfig.mcastOutput.empty() || streamConfig.mcastPort <= 0) {
+                    spdlog::error("ERREUR: Configuration multicast invalide pour le flux {}", streamConfig.id);
+                    continue;
+                }
+                
+                // Tester l'accessibilité de l'URL HLS
+                if (!testHLSUrl(streamConfig.hlsInput)) {
+                    spdlog::error("ERREUR: URL HLS inaccessible ou invalide: {}. Le flux {} pourrait ne pas fonctionner.", 
+                                streamConfig.hlsInput, streamConfig.id);
+                    
+                    // Ajoutez une alerte ici
+                    AlertManager::getInstance().addAlert(
+                        AlertLevel::ERROR,
+                        "Configuration",
+                        "URL HLS inaccessible ou invalide pour le flux " + streamConfig.id + ": " + streamConfig.hlsInput,
+                        true
+                    );
+                }
+            }
+        }
 
         const auto& loggingConfig = config.getLoggingConfig();
         if (loggingConfig.level == "debug") {
@@ -120,6 +315,9 @@ int main(int argc, char* argv[]) {
         // Cette méthode va initialiser et démarrer tous les flux configurés
         // y compris la création des instances de MPEGTSConverter et MulticastSender
         spdlog::info("Démarrage du gestionnaire de flux");
+        //spdlog::error("*** VÉRIFICATION: streamId={}, config existe? {} ***", 
+        //    streamConfig.id, 
+        //    config_->getStreamConfig(streamConfig.id) ? "OUI" : "NON");
         streamManager.start();
         spdlog::info("Gestionnaire de flux démarré avec succès");
         

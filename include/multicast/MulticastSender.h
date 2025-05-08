@@ -9,6 +9,7 @@
 #include <memory>
 #include <vector>
 #include <chrono>
+#include <utility> // Pour std::pair
 
 namespace hls_to_dvb {
 
@@ -83,9 +84,10 @@ public:
     /**
      * @brief Envoie des données sur le groupe multicast
      * @param data Données à envoyer
+     * @param discontinuity Indique si ces données contiennent une discontinuité
      * @return true si l'envoi a réussi, false sinon
      */
-    bool send(const std::vector<uint8_t>& data);
+    bool send(const std::vector<uint8_t>& data, bool discontinuity = false);
     
     /**
      * @brief Configure le débit du flux
@@ -110,6 +112,12 @@ public:
      * @return Port multicast
      */
     int getPort() const;
+
+    /**
+     * @brief Envoie un paquet de test pour vérifier la connectivité
+     * @return true si le paquet a été envoyé avec succès, false sinon
+     */
+    bool sendTestPacket();
     
 private:
     std::string groupAddress_;
@@ -125,9 +133,13 @@ private:
     
     std::mutex queueMutex_;
     std::condition_variable queueCond_;
-    std::queue<std::vector<uint8_t>> dataQueue_;
+    std::queue<std::pair<std::vector<uint8_t>, bool>> dataQueue_; // Données + indicateur de discontinuité
     
     MulticastStats stats_;
+    
+    // Variables pour le contrôle de débit
+    std::chrono::steady_clock::time_point lastSendTime_;
+    size_t bytesSentInCurrentSecond_;
     
     void senderLoop();
     bool createSocket();
@@ -138,6 +150,12 @@ private:
     * @return true si les permissions semblent correctes, false sinon
     */
     bool checkNetworkPermissions();
+
+    /**
+     * @brief Détecte l'interface réseau active
+     * @return Nom de l'interface active
+     */
+    std::string detectActiveInterface();
 };
 
 } // namespace hls_to_dvb

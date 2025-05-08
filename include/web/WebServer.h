@@ -9,9 +9,9 @@
 
 // Forward declarations pour éviter les inclusions circulaires
 namespace httplib {
-    class Server;
-    class Request;
-    class Response;
+    struct Server;
+    struct Request;
+    struct Response;
 }
 
 namespace hls_to_dvb {

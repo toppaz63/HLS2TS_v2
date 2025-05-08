@@ -57,9 +57,10 @@ public:
     /**
      * @brief Met à jour les tables PSI/SI dans un flux MPEG-TS
      * @param data Données MPEG-TS à mettre à jour
+     * @param discontinuity Indique s'il y a une discontinuité
      * @return Données MPEG-TS avec tables mises à jour
      */
-    std::vector<uint8_t> updatePSITables(const std::vector<uint8_t>& data);
+         std::vector<uint8_t> updatePSITables(const std::vector<uint8_t>& data, bool discontinuity = false);
     
     /**
      * @brief Configure un service DVB

@@ -237,15 +237,6 @@ ENABLE_SANITIZERS:BOOL=OFF
 //Path to a file.
 HTTPLIB_INCLUDE_DIR:PATH=/opt/homebrew/include
 
-//Path to a library.
-OPENSSL_CRYPTO_LIBRARY:FILEPATH=/opt/homebrew/Cellar/openssl@3/3.4.1/lib/libcrypto.dylib
-
-//Path to a file.
-OPENSSL_INCLUDE_DIR:PATH=/opt/homebrew/Cellar/openssl@3/3.4.1/include
-
-//Path to a library.
-OPENSSL_SSL_LIBRARY:FILEPATH=/opt/homebrew/Cellar/openssl@3/3.4.1/lib/libssl.dylib
-
 //Arguments to supply to pkg-config
 PKG_CONFIG_ARGN:STRING=
 
@@ -277,7 +268,7 @@ pkgcfg_lib_FFMPEG_avformat:FILEPATH=/opt/homebrew/Cellar/ffmpeg/7.1.1_2/lib/liba
 pkgcfg_lib_FFMPEG_avutil:FILEPATH=/opt/homebrew/Cellar/ffmpeg/7.1.1_2/lib/libavutil.dylib
 
 //Path to a library.
-pkgcfg_lib_TSDUCK_crypto:FILEPATH=/opt/homebrew/Cellar/openssl@3/3.4.1/lib/libcrypto.dylib
+pkgcfg_lib_TSDUCK_crypto:FILEPATH=/opt/homebrew/Cellar/openssl@3/3.5.0/lib/libcrypto.dylib
 
 //Path to a library.
 pkgcfg_lib_TSDUCK_pcsclite:FILEPATH=/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib/libpcsclite.dylib
@@ -287,12 +278,6 @@ pkgcfg_lib_TSDUCK_tscore:FILEPATH=/opt/homebrew/Cellar/tsduck/3.40-4165/lib/libt
 
 //Path to a library.
 pkgcfg_lib_TSDUCK_tsduck:FILEPATH=/opt/homebrew/Cellar/tsduck/3.40-4165/lib/libtsduck.dylib
-
-//Path to a library.
-pkgcfg_lib__OPENSSL_crypto:FILEPATH=/opt/homebrew/Cellar/openssl@3/3.4.1/lib/libcrypto.dylib
-
-//Path to a library.
-pkgcfg_lib__OPENSSL_ssl:FILEPATH=/opt/homebrew/Cellar/openssl@3/3.4.1/lib/libssl.dylib
 
 //The directory containing a CMake configuration file for spdlog.
 spdlog_DIR:PATH=/opt/homebrew/lib/cmake/spdlog
@@ -491,48 +476,40 @@ FFMPEG_libavutil_LIBDIR:INTERNAL=/opt/homebrew/Cellar/ffmpeg/7.1.1_2/lib
 FFMPEG_libavutil_MODULE_NAME:INTERNAL=libavutil
 FFMPEG_libavutil_PREFIX:INTERNAL=/opt/homebrew/Cellar/ffmpeg/7.1.1_2
 FFMPEG_libavutil_VERSION:INTERNAL=59.39.100
-//Details about finding OpenSSL
-FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL:INTERNAL=[/opt/homebrew/Cellar/openssl@3/3.4.1/lib/libcrypto.dylib][/opt/homebrew/Cellar/openssl@3/3.4.1/include][ ][v()]
 //Details about finding PkgConfig
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/opt/homebrew/bin/pkg-config][v2.4.3()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
-//ADVANCED property for variable: OPENSSL_CRYPTO_LIBRARY
-OPENSSL_CRYPTO_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENSSL_INCLUDE_DIR
-OPENSSL_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENSSL_SSL_LIBRARY
-OPENSSL_SSL_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_ARGN
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
-TSDUCK_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/tsduck/3.40-4165/include/tsduck;-I/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore;-std=c++20;-I/opt/homebrew/Cellar/pcsc-lite/2.3.3/include/PCSC;-I/opt/homebrew/Cellar/srt/1.5.4/include;-I/opt/homebrew/Cellar/srt/1.5.4/include/srt;-I/opt/homebrew/Cellar/openssl@3/3.4.1/include;-I/opt/homebrew/Cellar/librist/0.2.11/include;-I/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include/editline;-I/opt/homebrew/Cellar/libusb/1.0.28/include/libusb-1.0
+TSDUCK_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/tsduck/3.40-4165/include/tsduck;-I/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore;-std=c++20;-I/opt/homebrew/Cellar/pcsc-lite/2.3.3/include/PCSC;-I/opt/homebrew/Cellar/srt/1.5.4/include;-I/opt/homebrew/Cellar/srt/1.5.4/include/srt;-I/opt/homebrew/Cellar/openssl@3/3.5.0/include;-I/opt/homebrew/Cellar/librist/0.2.11/include;-I/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include/editline;-I/opt/homebrew/Cellar/libusb/1.0.28/include/libusb-1.0
 TSDUCK_CFLAGS_I:INTERNAL=
 TSDUCK_CFLAGS_OTHER:INTERNAL=-std=c++20
 TSDUCK_FOUND:INTERNAL=1
 TSDUCK_INCLUDEDIR:INTERNAL=
-TSDUCK_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/include/tsduck;/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore;/opt/homebrew/Cellar/pcsc-lite/2.3.3/include/PCSC;/opt/homebrew/Cellar/srt/1.5.4/include;/opt/homebrew/Cellar/srt/1.5.4/include/srt;/opt/homebrew/Cellar/openssl@3/3.4.1/include;/opt/homebrew/Cellar/librist/0.2.11/include;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include/editline;/opt/homebrew/Cellar/libusb/1.0.28/include/libusb-1.0
-TSDUCK_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/tsduck/3.40-4165/lib;-ltsduck;-ltscore;-L/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib;-lpcsclite;-L/opt/homebrew/Cellar/openssl@3/3.4.1/lib;-lcrypto
+TSDUCK_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/include/tsduck;/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore;/opt/homebrew/Cellar/pcsc-lite/2.3.3/include/PCSC;/opt/homebrew/Cellar/srt/1.5.4/include;/opt/homebrew/Cellar/srt/1.5.4/include/srt;/opt/homebrew/Cellar/openssl@3/3.5.0/include;/opt/homebrew/Cellar/librist/0.2.11/include;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include/editline;/opt/homebrew/Cellar/libusb/1.0.28/include/libusb-1.0
+TSDUCK_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/tsduck/3.40-4165/lib;-ltsduck;-ltscore;-L/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib;-lpcsclite;-L/opt/homebrew/Cellar/openssl@3/3.5.0/lib;-lcrypto
 TSDUCK_LDFLAGS_OTHER:INTERNAL=
 TSDUCK_LIBDIR:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/lib
 TSDUCK_LIBRARIES:INTERNAL=tsduck;tscore;pcsclite;crypto
-TSDUCK_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/lib;/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib;/opt/homebrew/Cellar/openssl@3/3.4.1/lib
+TSDUCK_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/lib;/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib;/opt/homebrew/Cellar/openssl@3/3.5.0/lib
 TSDUCK_LIBS:INTERNAL=
 TSDUCK_LIBS_L:INTERNAL=
 TSDUCK_LIBS_OTHER:INTERNAL=
 TSDUCK_LIBS_PATHS:INTERNAL=
 TSDUCK_MODULE_NAME:INTERNAL=tsduck
 TSDUCK_PREFIX:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165
-TSDUCK_STATIC_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/tsduck/3.40-4165/include/tsduck;-I/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore;-std=c++20;-I/opt/homebrew/Cellar/pcsc-lite/2.3.3/include/PCSC;-I/opt/homebrew/Cellar/srt/1.5.4/include;-I/opt/homebrew/Cellar/srt/1.5.4/include/srt;-I/opt/homebrew/Cellar/openssl@3/3.4.1/include;-I/opt/homebrew/Cellar/librist/0.2.11/include;-I/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include/editline;-I/opt/homebrew/Cellar/libusb/1.0.28/include/libusb-1.0
+TSDUCK_STATIC_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/tsduck/3.40-4165/include/tsduck;-I/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore;-std=c++20;-I/opt/homebrew/Cellar/pcsc-lite/2.3.3/include/PCSC;-I/opt/homebrew/Cellar/srt/1.5.4/include;-I/opt/homebrew/Cellar/srt/1.5.4/include/srt;-I/opt/homebrew/Cellar/openssl@3/3.5.0/include;-I/opt/homebrew/Cellar/librist/0.2.11/include;-I/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include/editline;-I/opt/homebrew/Cellar/libusb/1.0.28/include/libusb-1.0
 TSDUCK_STATIC_CFLAGS_I:INTERNAL=
 TSDUCK_STATIC_CFLAGS_OTHER:INTERNAL=-std=c++20
-TSDUCK_STATIC_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/include/tsduck;/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore;/opt/homebrew/Cellar/pcsc-lite/2.3.3/include/PCSC;/opt/homebrew/Cellar/srt/1.5.4/include;/opt/homebrew/Cellar/srt/1.5.4/include/srt;/opt/homebrew/Cellar/openssl@3/3.4.1/include;/opt/homebrew/Cellar/librist/0.2.11/include;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include/editline;/opt/homebrew/Cellar/libusb/1.0.28/include/libusb-1.0
-TSDUCK_STATIC_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/tsduck/3.40-4165/lib;-ltsduck;-lpthread;-ldl;-lm;-lstdc++;-ltscore;-lpthread;-ldl;-lm;-lstdc++;-L/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib;-lpcsclite;-pthread;-L/usr/lib;-lcurl;-lldap;-lz;-L/opt/homebrew/Cellar/srt/1.5.4/lib;-lsrt;-lc++;-L/opt/homebrew/Cellar/openssl@3/3.4.1/lib;-lssl;-lcrypto;-L/opt/homebrew/Cellar/librist/0.2.11/lib;-lrist;-lmbedcrypto;-lcjson;-ledit;-L/opt/homebrew/Cellar/libusb/1.0.28/lib;-lusb-1.0;-lobjc;-Wl,-framework,IOKit;-Wl,-framework,CoreFoundation;-Wl,-framework,Security
+TSDUCK_STATIC_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/include/tsduck;/opt/homebrew/Cellar/tsduck/3.40-4165/include/tscore;/opt/homebrew/Cellar/pcsc-lite/2.3.3/include/PCSC;/opt/homebrew/Cellar/srt/1.5.4/include;/opt/homebrew/Cellar/srt/1.5.4/include/srt;/opt/homebrew/Cellar/openssl@3/3.5.0/include;/opt/homebrew/Cellar/librist/0.2.11/include;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include/editline;/opt/homebrew/Cellar/libusb/1.0.28/include/libusb-1.0
+TSDUCK_STATIC_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/tsduck/3.40-4165/lib;-ltsduck;-lpthread;-ldl;-lm;-lstdc++;-ltscore;-lpthread;-ldl;-lm;-lstdc++;-L/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib;-lpcsclite;-pthread;-L/usr/lib;-lcurl;-lldap;-lz;-L/opt/homebrew/Cellar/srt/1.5.4/lib;-lsrt;-lc++;-L/opt/homebrew/Cellar/openssl@3/3.5.0/lib;-lssl;-lcrypto;-L/opt/homebrew/Cellar/librist/0.2.11/lib;-lrist;-lmbedcrypto;-lcjson;-ledit;-L/opt/homebrew/Cellar/libusb/1.0.28/lib;-lusb-1.0;-lobjc;-Wl,-framework,IOKit;-Wl,-framework,CoreFoundation;-Wl,-framework,Security
 TSDUCK_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread;-Wl,-framework,IOKit;-Wl,-framework,CoreFoundation;-Wl,-framework,Security
 TSDUCK_STATIC_LIBDIR:INTERNAL=
 TSDUCK_STATIC_LIBRARIES:INTERNAL=tsduck;pthread;dl;m;stdc++;tscore;pthread;dl;m;stdc++;pcsclite;curl;ldap;z;srt;c++;ssl;crypto;rist;mbedcrypto;cjson;edit;usb-1.0;objc
-TSDUCK_STATIC_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/lib;/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib;/usr/lib;/opt/homebrew/Cellar/srt/1.5.4/lib;/opt/homebrew/Cellar/openssl@3/3.4.1/lib;/opt/homebrew/Cellar/librist/0.2.11/lib;/opt/homebrew/Cellar/libusb/1.0.28/lib
+TSDUCK_STATIC_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/tsduck/3.40-4165/lib;/opt/homebrew/Cellar/pcsc-lite/2.3.3/lib;/usr/lib;/opt/homebrew/Cellar/srt/1.5.4/lib;/opt/homebrew/Cellar/openssl@3/3.5.0/lib;/opt/homebrew/Cellar/librist/0.2.11/lib;/opt/homebrew/Cellar/libusb/1.0.28/lib
 TSDUCK_STATIC_LIBS:INTERNAL=
 TSDUCK_STATIC_LIBS_L:INTERNAL=
 TSDUCK_STATIC_LIBS_OTHER:INTERNAL=
@@ -542,47 +519,10 @@ TSDUCK_tsduck_INCLUDEDIR:INTERNAL=
 TSDUCK_tsduck_LIBDIR:INTERNAL=
 TSDUCK_tsduck_PREFIX:INTERNAL=
 TSDUCK_tsduck_VERSION:INTERNAL=
-_OPENSSL_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/openssl@3/3.4.1/include
-_OPENSSL_CFLAGS_I:INTERNAL=
-_OPENSSL_CFLAGS_OTHER:INTERNAL=
-_OPENSSL_FOUND:INTERNAL=1
-_OPENSSL_INCLUDEDIR:INTERNAL=/opt/homebrew/Cellar/openssl@3/3.4.1/include
-_OPENSSL_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/openssl@3/3.4.1/include
-_OPENSSL_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/openssl@3/3.4.1/lib;-lssl;-lcrypto
-_OPENSSL_LDFLAGS_OTHER:INTERNAL=
-_OPENSSL_LIBDIR:INTERNAL=/opt/homebrew/Cellar/openssl@3/3.4.1/lib
-_OPENSSL_LIBRARIES:INTERNAL=ssl;crypto
-_OPENSSL_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/openssl@3/3.4.1/lib
-_OPENSSL_LIBS:INTERNAL=
-_OPENSSL_LIBS_L:INTERNAL=
-_OPENSSL_LIBS_OTHER:INTERNAL=
-_OPENSSL_LIBS_PATHS:INTERNAL=
-_OPENSSL_MODULE_NAME:INTERNAL=openssl
-_OPENSSL_PREFIX:INTERNAL=/opt/homebrew/Cellar/openssl@3/3.4.1
-_OPENSSL_STATIC_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/openssl@3/3.4.1/include
-_OPENSSL_STATIC_CFLAGS_I:INTERNAL=
-_OPENSSL_STATIC_CFLAGS_OTHER:INTERNAL=
-_OPENSSL_STATIC_INCLUDE_DIRS:INTERNAL=/opt/homebrew/Cellar/openssl@3/3.4.1/include
-_OPENSSL_STATIC_LDFLAGS:INTERNAL=-L/opt/homebrew/Cellar/openssl@3/3.4.1/lib;-lssl;-lcrypto
-_OPENSSL_STATIC_LDFLAGS_OTHER:INTERNAL=
-_OPENSSL_STATIC_LIBDIR:INTERNAL=
-_OPENSSL_STATIC_LIBRARIES:INTERNAL=ssl;crypto
-_OPENSSL_STATIC_LIBRARY_DIRS:INTERNAL=/opt/homebrew/Cellar/openssl@3/3.4.1/lib
-_OPENSSL_STATIC_LIBS:INTERNAL=
-_OPENSSL_STATIC_LIBS_L:INTERNAL=
-_OPENSSL_STATIC_LIBS_OTHER:INTERNAL=
-_OPENSSL_STATIC_LIBS_PATHS:INTERNAL=
-_OPENSSL_VERSION:INTERNAL=3.4.1
-_OPENSSL_openssl_INCLUDEDIR:INTERNAL=
-_OPENSSL_openssl_LIBDIR:INTERNAL=
-_OPENSSL_openssl_PREFIX:INTERNAL=
-_OPENSSL_openssl_VERSION:INTERNAL=
 __pkg_config_arguments_FFMPEG:INTERNAL=REQUIRED;libavformat;libavcodec;libavutil
 __pkg_config_arguments_TSDUCK:INTERNAL=tsduck
-__pkg_config_arguments__OPENSSL:INTERNAL=QUIET;openssl
 __pkg_config_checked_FFMPEG:INTERNAL=1
 __pkg_config_checked_TSDUCK:INTERNAL=1
-__pkg_config_checked__OPENSSL:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_FFMPEG_avcodec
 pkgcfg_lib_FFMPEG_avcodec-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_FFMPEG_avformat
@@ -597,9 +537,5 @@ pkgcfg_lib_TSDUCK_pcsclite-ADVANCED:INTERNAL=1
 pkgcfg_lib_TSDUCK_tscore-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_TSDUCK_tsduck
 pkgcfg_lib_TSDUCK_tsduck-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib__OPENSSL_crypto
-pkgcfg_lib__OPENSSL_crypto-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib__OPENSSL_ssl
-pkgcfg_lib__OPENSSL_ssl-ADVANCED:INTERNAL=1
 prefix_result:INTERNAL=/opt/homebrew/Cellar/ffmpeg/7.1.1_2/lib
 

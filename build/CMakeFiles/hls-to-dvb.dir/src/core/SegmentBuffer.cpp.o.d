@@ -948,6 +948,8 @@ CMakeFiles/hls-to-dvb.dir/src/core/SegmentBuffer.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/this_thread.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/regex \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavformat/avformat.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavcodec/codec_par.h \
   /opt/homebrew/Cellar/ffmpeg/7.1.1_2/include/libavutil/avutil.h \

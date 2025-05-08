@@ -189,6 +189,7 @@ set(SOURCES
     src/hls/HLSClient.cpp
     src/mpegts/MPEGTSConverter.cpp
     src/mpegts/DVBProcessor.cpp
+    src/mpegts/TSQualityMonitor.cpp
     src/multicast/MulticastSender.cpp
     src/web/WebServer.cpp
 )

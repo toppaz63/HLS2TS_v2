@@ -1,4 +1,3 @@
-
 #include "mpegts/DVBProcessor.h"
 #include "alerting/AlertManager.h"
 #include <spdlog/spdlog.h>
@@ -24,31 +23,90 @@ void DVBProcessor::initialize() {
         pat_->version = versionPAT_;
         pat_->is_current = true;
         
+        spdlog::info("**** DVBProcessor::initialize() **** PAT créée");
+        
         sdt_ = std::make_unique<ts::SDT>();
         sdt_->ts_id = 1;
-        sdt_->onetw_id = 1; // Nom de propriété correct dans cette version de TSDuck
+        sdt_->onetw_id = 1; // Nom de propriété correct dans TSDuck 3.40
         sdt_->version = versionSDT_;
         sdt_->is_current = true;
+        
+        spdlog::info("**** DVBProcessor::initialize() **** SDT créée");
         
         nit_ = std::make_unique<ts::NIT>();
         nit_->network_id = 1;
         nit_->version = versionNIT_;
         nit_->is_current = true;
         
+        spdlog::info("**** DVBProcessor::initialize() **** NIT créée");
+        
         eit_ = std::make_unique<ts::EIT>();
         eit_->service_id = 0;
         eit_->ts_id = 1;
-        eit_->onetw_id = 1; // Nom de propriété correct dans cette version de TSDuck
+        eit_->onetw_id = 1; // Nom de propriété correct dans TSDuck 3.40
         eit_->version = versionEIT_;
         eit_->is_current = true;
         
+        spdlog::info("**** DVBProcessor::initialize() **** EIT créée");
+        
+        // Créer un service par défaut
+        DVBService defaultService;
+        defaultService.serviceId = 1;
+        defaultService.pmtPid = 0x1000;
+        defaultService.name = "Service HLS";
+        defaultService.provider = "HLS to DVB Converter";
+        defaultService.serviceType = 0x01; // Digital TV
+        
+        spdlog::info("**** DVBProcessor::initialize() **** Création du service par défaut");
+        
+        try {
+            // Ajouter le service par défaut
+            setService(defaultService);
+        }
+        catch (const ts::Exception& e) {
+            spdlog::error("**** DVBProcessor::initialize() **** Erreur TSDuck lors de la définition du service par défaut: {}", e.what());
+            
+            AlertManager::getInstance().addAlert(
+                AlertLevel::ERROR,
+                "DVBProcessor",
+                std::string("Erreur TSDuck lors de la définition du service par défaut: ") + e.what(),
+                true
+            );
+            
+            throw;
+        }
+        catch (const std::exception& e) {
+            spdlog::error("**** DVBProcessor::initialize() **** Erreur lors de la définition du service par défaut: {}", e.what());
+            
+            AlertManager::getInstance().addAlert(
+                AlertLevel::ERROR,
+                "DVBProcessor",
+                std::string("Erreur lors de la définition du service par défaut: ") + e.what(),
+                true
+            );
+            
+            throw;
+        }
+        
         spdlog::info("DVBProcessor initialisé avec succès");
+    }
+    catch (const ts::Exception& e) {
+        spdlog::error("Erreur TSDuck lors de l'initialisation du DVBProcessor: {}", e.what());
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
+            "DVBProcessor",
+            std::string("Erreur TSDuck lors de l'initialisation: ") + e.what(),
+            true
+        );
+        
+        throw;
     }
     catch (const std::exception& e) {
         spdlog::error("Erreur lors de l'initialisation du DVBProcessor: {}", e.what());
         
-        hls_to_dvb::AlertManager::getInstance().addAlert(
-            hls_to_dvb::AlertLevel::ERROR,
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
             "DVBProcessor",
             std::string("Erreur lors de l'initialisation: ") + e.what(),
             true
@@ -70,13 +128,33 @@ void DVBProcessor::cleanup() {
     services_.clear();
 }
 
-std::vector<uint8_t> DVBProcessor::updatePSITables(const std::vector<uint8_t>& data) {
+std::vector<uint8_t> DVBProcessor::updatePSITables(const std::vector<uint8_t>& data, bool discontinuity) {
     try {
         std::lock_guard<std::mutex> lock(mutex_);
         
         // Si les données sont vides, retourner directement
         if (data.empty() || !pat_ || !sdt_) {
             return data;
+        }
+        
+        // Si c'est une discontinuité, mettre à jour les versions des tables
+        if (discontinuity) {
+            versionPAT_ = (versionPAT_ + 1) % 32;
+            versionSDT_ = (versionSDT_ + 1) % 32;
+            versionNIT_ = (versionNIT_ + 1) % 32;
+            
+            // Mettre à jour les numéros de version dans les tables
+            pat_->version = versionPAT_;
+            sdt_->version = versionSDT_;
+            if (nit_) nit_->version = versionNIT_;
+            
+            // Mettre à jour les versions PMT
+            for (auto& [serviceId, pmt] : pmts_) {
+                versionPMT_[serviceId] = (versionPMT_[serviceId] + 1) % 32;
+                pmt->version = versionPMT_[serviceId];
+            }
+            
+            spdlog::info("Versions des tables PSI/SI incrémentées en raison d'une discontinuité");
         }
         
         // Vérifier que la taille est un multiple de TS_PACKET_SIZE
@@ -120,11 +198,23 @@ std::vector<uint8_t> DVBProcessor::updatePSITables(const std::vector<uint8_t>& d
         // Insérer les tables dans le flux
         return insertTables(data, tables);
     }
+    catch (const ts::Exception& e) {
+        spdlog::error("Erreur TSDuck lors de la mise à jour des tables PSI/SI: {}", e.what());
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
+            "DVBProcessor",
+            std::string("Erreur TSDuck lors de la mise à jour des tables PSI/SI: ") + e.what(),
+            true
+        );
+        
+        return data;
+    }
     catch (const std::exception& e) {
         spdlog::error("Erreur lors de la mise à jour des tables PSI/SI: {}", e.what());
         
-        hls_to_dvb::AlertManager::getInstance().addAlert(
-            hls_to_dvb::AlertLevel::ERROR,
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
             "DVBProcessor",
             std::string("Erreur lors de la mise à jour des tables PSI/SI: ") + e.what(),
             true
@@ -135,36 +225,140 @@ std::vector<uint8_t> DVBProcessor::updatePSITables(const std::vector<uint8_t>& d
 }
 
 void DVBProcessor::setService(const DVBService& service) {
-    std::lock_guard<std::mutex> lock(mutex_);
-    
-    // Stocker le service
-    services_[service.serviceId] = service;
-    
-    // Créer ou mettre à jour la PMT
-    auto it = pmts_.find(service.serviceId);
-    if (it == pmts_.end()) {
-        pmts_[service.serviceId] = std::make_unique<ts::PMT>();
-        versionPMT_[service.serviceId] = 0;
+    spdlog::info("**** DVBProcessor::setService() **** Début de la définition du service");
+    try {
+        std::lock_guard<std::mutex> lock(mutex_);
+        
+        // Stocker le service
+        services_[service.serviceId] = service;
+        
+        // Créer ou mettre à jour la PMT
+        auto it = pmts_.find(service.serviceId);
+        spdlog::info("**** DVBProcessor::setService() **** Recherche de la PMT pour le service ID: {}", service.serviceId);
+        if (it == pmts_.end()) {
+            pmts_[service.serviceId] = std::make_unique<ts::PMT>();
+            versionPMT_[service.serviceId] = 0;
+            spdlog::info("**** DVBProcessor::setService() **** Nouvelle PMT créée pour le service ID: {}", service.serviceId);
+        }
+        
+        // Configurer la PMT
+        ts::PMT* pmt = pmts_[service.serviceId].get();
+        pmt->service_id = service.serviceId;
+        pmt->version = versionPMT_[service.serviceId];
+        pmt->is_current = true;
+        
+        spdlog::info("**** DVBProcessor::setService() **** Nettoyage des streams existants");
+        // Nettoyer les streams existants
+        pmt->streams.clear();
+        
+        spdlog::info("**** DVBProcessor::setService() **** Ajout des composants, nombre total: {}", service.components.size());
+        
+        // Vérifier s'il y a des composants vidéo pour le PCR
+        bool hasPCR = false;
+        uint16_t pcrPid = 0;
+        
+        // Créer un DuckContext temporaire
+        ts::DuckContext duck;
+        
+        // Ajouter les composants en utilisant l'API correcte de TSDuck 3.40
+        for (const auto& [pid, streamType] : service.components) {
+            spdlog::debug("**** DVBProcessor::setService() **** Ajout du composant PID: 0x{:X}, Type: 0x{:X}", pid, streamType);
+            
+            // Créer et configurer le stream
+            ts::PMT::Stream& stream = pmt->streams[pid];
+            stream.stream_type = streamType;
+            
+            // Si c'est une vidéo, utiliser son PID comme PCR PID
+            if (streamType == 0x1B || streamType == 0x02 || streamType == 0x24) {
+                if (!hasPCR) {
+                    pcrPid = pid;
+                    hasPCR = true;
+                }
+            }
+            
+            // Ajouter les descripteurs appropriés pour ce type de stream
+            switch (streamType) {
+                case 0x02: // MPEG-2 Video
+                case 0x1B: // H.264 Video
+                case 0x24: // H.265/HEVC Video
+                    // Pour les flux vidéo, ajouter un descripteur vidéo si nécessaire
+                    break;
+                case 0x03: // MPEG-1 Audio
+                case 0x04: // MPEG-2 Audio
+                case 0x0F: // AAC Audio
+                case 0x11: // AAC with ADTS
+                    // Pour les flux audio, ajouter un descripteur audio
+                    {
+                        ts::AudioStreamDescriptor audioDesc;
+                        audioDesc.free_format = false;
+                        audioDesc.ID = true;
+                        audioDesc.layer = 2;
+                        stream.descs.add(duck, audioDesc);
+                    }
+                    break;
+                case 0x06: // Private data (souvent utilisé pour les sous-titres DVB)
+                    // Descripteur d'application spécifique si nécessaire
+                    break;
+                default:
+                    // Aucun descripteur spécial pour les autres types
+                    break;
+            }
+            
+            spdlog::debug("**** DVBProcessor::setService() **** Composant ajouté: PID: 0x{:X}, Type: 0x{:X}", pid, streamType);
+        }
+        
+        // Définir le PCR PID si on en a trouvé un
+        if (hasPCR) {
+            pmt->pcr_pid = pcrPid;
+        } else {
+            // Utiliser le premier PID disponible comme fallback
+            if (!service.components.empty()) {
+                pmt->pcr_pid = service.components.begin()->first;
+            } else {
+                pmt->pcr_pid = 0x1FFF; // Valeur invalide
+            }
+        }
+        
+        spdlog::info("Service configuré: ID={}, PMT PID=0x{:X}, {} composants", 
+                   service.serviceId, service.pmtPid, service.components.size());
     }
-    
-    // Configurer la PMT
-    ts::PMT* pmt = pmts_[service.serviceId].get();
-    pmt->service_id = service.serviceId;
-    pmt->version = versionPMT_[service.serviceId];
-    pmt->is_current = true;
-    
-    // Nettoyer les streams existants
-    pmt->streams.clear();
-    
-    // Ajouter les composants en utilisant l'API correcte de TSDuck 3.40
-    for (const auto& [pid, streamType] : service.components) {
-        auto& stream = pmt->streams[pid]; // Crée une nouvelle entrée dans la map
-        stream.stream_type = streamType;
-        // Note: Dans TSDuck 3.40, 'pid' est la clé de la map, pas un membre de Stream
+    catch (const ts::Exception& e) {
+        spdlog::error("**** DVBProcessor::setService() **** Exception TSDuck lors de la configuration du service: {}", e.what());
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
+            "DVBProcessor",
+            std::string("Erreur TSDuck lors de la configuration du service: ") + e.what(),
+            true
+        );
+        
+        throw;
     }
-    
-    spdlog::info("Service configuré: ID={}, PMT PID=0x{:X}, {} composants", 
-               service.serviceId, service.pmtPid, service.components.size());
+    catch (const std::exception& e) {
+        spdlog::error("**** DVBProcessor::setService() **** Exception lors de la configuration du service: {}", e.what());
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
+            "DVBProcessor",
+            std::string("Erreur lors de la configuration du service: ") + e.what(),
+            true
+        );
+        
+        throw;
+    }
+    catch (...) {
+        spdlog::error("**** DVBProcessor::setService() **** Exception inconnue lors de la configuration du service");
+        
+        AlertManager::getInstance().addAlert(
+            AlertLevel::ERROR,
+            "DVBProcessor",
+            "Exception inconnue lors de la configuration du service",
+            true
+        );
+        
+        throw;
+    }
+    spdlog::info("**** DVBProcessor::setService() **** Fin de la définition du service");
 }
 
 bool DVBProcessor::removeService(uint16_t serviceId) {
@@ -214,10 +408,7 @@ std::vector<uint8_t> DVBProcessor::generatePAT() {
             pat_->pmts[serviceId] = service.pmtPid;
         }
         
-        // Incrémenter la version pour la prochaine fois
-        versionPAT_ = (versionPAT_ + 1) % 32;
-        
-        // Créer une instance DuckContext pour la sérialisation
+        // Créer un DuckContext temporaire
         ts::DuckContext duck;
         
         // Sérialiser la PAT en BinaryTable
@@ -227,62 +418,29 @@ std::vector<uint8_t> DVBProcessor::generatePAT() {
             return {};
         }
         
-        std::vector<uint8_t> result;
+        // Utiliser TSPacketizer pour une conversion propre en paquets
+        // Correction: Utiliser ts::PID(0x00) au lieu de 0x00 directement
+        ts::CyclingPacketizer pzer(duck, ts::PID(0x00)); // PID 0x00 pour PAT
+        pzer.addTable(binTable);
         
-        // Parcourir les sections de la table binaire
-        for (size_t i = 0; i < binTable.sectionCount(); ++i) {
-            // Récupérer la section (qui est un SectionPtr, donc un shared_ptr<Section>)
-            ts::SectionPtr sectionPtr = binTable.sectionAt(i);
-            if (!sectionPtr) {
-                continue;
-            }
-            
-            // Créer un paquet à partir de la section
-            std::vector<ts::TSPacket> sectionPackets;
-            
-            // Utiliser le constructeur de paquet avec PID
-            ts::TSPacket pkt;
-            pkt.init(0x00); // PID = 0x00 pour la PAT
-            
-            // Récupérer les données de la section
-            const uint8_t* sectionData = sectionPtr->content();
-            size_t remainingSize = sectionPtr->size();
-            bool first = true;
-            
-            while (remainingSize > 0) {
-                // Calculer l'espace disponible dans le paquet
-                size_t headerSize = first ? 4 : 1; // 4 octets pour le premier paquet, 1 pour les suivants
-                size_t payloadSize = std::min(remainingSize, size_t(ts::PKT_SIZE - headerSize));
-                
-                // Initialiser le paquet
-                pkt.init(0x00);
-                pkt.setPUSI(first);
-                
-                // Si c'est le premier paquet, ajouter un pointeur de champ
-                if (first) {
-                    pkt.b[4] = 0; // pointer_field = 0 (la section commence immédiatement)
-                    std::memcpy(pkt.b + 5, sectionData, payloadSize);
-                    first = false;
-                } else {
-                    std::memcpy(pkt.b + 4, sectionData, payloadSize);
-                }
-                
-                // Mettre à jour les compteurs
-                sectionData += payloadSize;
-                remainingSize -= payloadSize;
-                
-                // Ajouter le paquet au résultat
-                result.insert(result.end(), pkt.b, pkt.b + ts::PKT_SIZE);
-            }
+        std::vector<uint8_t> result;
+        ts::TSPacket packet;
+        while (pzer.getNextPacket(packet)) {
+            result.insert(result.end(), packet.b, packet.b + ts::PKT_SIZE);
         }
         
         return result;
+    }
+    catch (const ts::Exception& e) {
+        spdlog::error("Exception TSDuck lors de la génération de la PAT: {}", e.what());
+        return {};
     }
     catch (const std::exception& e) {
         spdlog::error("Exception lors de la génération de la PAT: {}", e.what());
         return {};
     }
 }
+
 
 std::vector<uint8_t> DVBProcessor::generatePMT(uint16_t serviceId) {
     // Vérifier si le service existe
@@ -306,17 +464,33 @@ std::vector<uint8_t> DVBProcessor::generatePMT(uint16_t serviceId) {
         pmt->version = versionPMT_[serviceId];
         pmt->is_current = true;
         
-        // Mettre à jour les streams avec une approche compatible TSDuck 3.40
-        pmt->streams.clear();
-        for (const auto& [pid, streamType] : service.components) {
-            auto& stream = pmt->streams[pid]; // Crée une nouvelle entrée dans la map
-            stream.stream_type = streamType;
+        // Vérifier s'il y a des composants vidéo ou audio
+        bool hasPCR = false;
+        uint16_t pcrPid = 0;
+        
+        // Vérifier les streams existants pour trouver un PID pour le PCR
+        for (const auto& [pid, stream] : pmt->streams) {
+            if (stream.stream_type == 0x1B || stream.stream_type == 0x02 || stream.stream_type == 0x24) {
+                if (!hasPCR) {
+                    pcrPid = pid;
+                    hasPCR = true;
+                }
+            }
         }
         
-        // Incrémenter la version pour la prochaine fois
-        versionPMT_[serviceId] = (versionPMT_[serviceId] + 1) % 32;
+        // Définir le PCR PID si on en a trouvé un
+        if (hasPCR) {
+            pmt->pcr_pid = pcrPid;
+        } else {
+            // Utiliser le premier PID disponible comme fallback
+            if (!pmt->streams.empty()) {
+                pmt->pcr_pid = pmt->streams.begin()->first;
+            } else {
+                pmt->pcr_pid = 0x1FFF; // Valeur invalide
+            }
+        }
         
-        // Créer une instance DuckContext pour la sérialisation
+        // Créer un DuckContext temporaire
         ts::DuckContext duck;
         
         // Sérialiser la PMT en BinaryTable
@@ -326,55 +500,21 @@ std::vector<uint8_t> DVBProcessor::generatePMT(uint16_t serviceId) {
             return {};
         }
         
-        // Convertir la table en paquets TS
-        std::vector<uint8_t> result;
-        uint16_t pmtPid = service.pmtPid;
+        // Utiliser TSPacketizer pour une conversion propre en paquets
+        ts::CyclingPacketizer pzer(duck, ts::PID(service.pmtPid));
+        pzer.addTable(binTable);
         
-        // Parcourir les sections de la table binaire
-        for (size_t i = 0; i < binTable.sectionCount(); ++i) {
-            // Récupérer la section (qui est un SectionPtr, donc un shared_ptr<Section>)
-            ts::SectionPtr sectionPtr = binTable.sectionAt(i);
-            if (!sectionPtr) {
-                continue;
-            }
-            
-            // Créer un paquet à partir de la section
-            ts::TSPacket pkt;
-            pkt.init(pmtPid);
-            
-            // Récupérer les données de la section
-            const uint8_t* sectionData = sectionPtr->content();
-            size_t remainingSize = sectionPtr->size();
-            bool first = true;
-            
-            while (remainingSize > 0) {
-                // Calculer l'espace disponible dans le paquet
-                size_t headerSize = first ? 4 : 1; // 4 octets pour le premier paquet, 1 pour les suivants
-                size_t payloadSize = std::min(remainingSize, size_t(ts::PKT_SIZE - headerSize));
-                
-                // Initialiser le paquet
-                pkt.init(pmtPid);
-                pkt.setPUSI(first);
-                
-                // Si c'est le premier paquet, ajouter un pointeur de champ
-                if (first) {
-                    pkt.b[4] = 0; // pointer_field = 0 (la section commence immédiatement)
-                    std::memcpy(pkt.b + 5, sectionData, payloadSize);
-                    first = false;
-                } else {
-                    std::memcpy(pkt.b + 4, sectionData, payloadSize);
-                }
-                
-                // Mettre à jour les compteurs
-                sectionData += payloadSize;
-                remainingSize -= payloadSize;
-                
-                // Ajouter le paquet au résultat
-                result.insert(result.end(), pkt.b, pkt.b + ts::PKT_SIZE);
-            }
+        std::vector<uint8_t> result;
+        ts::TSPacket packet;
+        while (pzer.getNextPacket(packet)) {
+            result.insert(result.end(), packet.b, packet.b + ts::PKT_SIZE);
         }
         
         return result;
+    }
+    catch (const ts::Exception& e) {
+        spdlog::error("Exception TSDuck lors de la génération de la PMT: {}", e.what());
+        return {};
     }
     catch (const std::exception& e) {
         spdlog::error("Exception lors de la génération de la PMT: {}", e.what());
@@ -392,22 +532,21 @@ std::vector<uint8_t> DVBProcessor::generateSDT() {
         sdt_->version = versionSDT_;
         sdt_->services.clear();
         
-        // Créer une instance DuckContext pour les descripteurs
+        // Créer un DuckContext temporaire
         ts::DuckContext duck;
         
         // Ajouter tous les services à la SDT en utilisant l'API correcte de TSDuck 3.40
         for (const auto& [serviceId, service] : services_) {
-            // Dans TSDuck 3.40, on doit accéder directement à la map services
-            auto& sdtServiceEntry = sdt_->services[serviceId]; // Crée une nouvelle entrée dans la map
+            // Dans TSDuck 3.40, on accède directement à la map services
+            auto& sdtServiceEntry = sdt_->services[serviceId];
             
             // Configuration des flags standard
             sdtServiceEntry.running_status = 4; // running
             sdtServiceEntry.CA_controlled = false;
             
-            // Créer un descripteur de service
-            // Dans TSDuck 3.40, utiliser l'approche avec descripteur et ByteBlock
-            ts::ByteBlock descriptorPayload;
-            uint8_t serviceType = service.serviceType;
+            // Utiliser ServiceDescriptor
+            ts::ServiceDescriptor desc;
+            desc.service_type = service.serviceType;
             
             // Convertir les chaînes std::string en UString
             ts::UString providerName;
@@ -415,37 +554,13 @@ std::vector<uint8_t> DVBProcessor::generateSDT() {
             providerName.assignFromUTF8(service.provider);
             serviceName.assignFromUTF8(service.name);
             
-            // Créer un descripteur directement à partir de ses composants
-            // Format du descripteur de service:
-            // service_type (8 bits)
-            // service_provider_length (8 bits)
-            // service_provider_name (N octets)
-            // service_name_length (8 bits)
-            // service_name (N octets)
+            // Utiliser les noms de propriétés corrects pour TSDuck 3.40
+            desc.provider_name = providerName;
+            desc.service_name = serviceName;
             
-            // Ajouter le service_type
-            descriptorPayload.append(serviceType);
-
-            // Ajouter le provider name
-            std::string providerUtf8 = providerName.toUTF8();
-            ts::ByteBlock providerBytes;
-            providerBytes.append(providerUtf8.data(), providerUtf8.size());
-            descriptorPayload.append(uint8_t(providerBytes.size()));
-            descriptorPayload.append(providerBytes);
-
-            // Ajouter le service name
-            std::string serviceUtf8 = serviceName.toUTF8();
-            ts::ByteBlock serviceBytes;
-            serviceBytes.append(serviceUtf8.data(), serviceUtf8.size());
-            descriptorPayload.append(uint8_t(serviceBytes.size()));
-            descriptorPayload.append(serviceBytes);
-
-            // Créer le descripteur avec tag 0x48 (Service Descriptor)
-            sdtServiceEntry.descs.add(descriptorPayload.data(), descriptorPayload.size());
+            // Ajouter le descripteur à la SDT
+            sdtServiceEntry.descs.add(duck, desc);
         }
-        
-        // Incrémenter la version pour la prochaine fois
-        versionSDT_ = (versionSDT_ + 1) % 32;
         
         // Sérialiser la SDT en BinaryTable
         ts::BinaryTable binTable;
@@ -454,61 +569,29 @@ std::vector<uint8_t> DVBProcessor::generateSDT() {
             return {};
         }
         
-        // Convertir la table en paquets TS
-        std::vector<uint8_t> result;
-        uint16_t sdtPid = 0x11; // PID standard pour la SDT
+        // Utiliser TSPacketizer pour une conversion propre en paquets
+        // Correction: Utiliser ts::PID(0x11) au lieu de relire service.pmtPid
+        ts::CyclingPacketizer pzer(duck, ts::PID(0x11)); // PID 0x11 pour SDT
+        pzer.addTable(binTable);
         
-        // Parcourir les sections de la table binaire
-        for (size_t i = 0; i < binTable.sectionCount(); ++i) {
-            // Récupérer la section (qui est un SectionPtr, donc un shared_ptr<Section>)
-            ts::SectionPtr sectionPtr = binTable.sectionAt(i);
-            if (!sectionPtr) {
-                continue;
-            }
-            
-            // Créer un paquet à partir de la section
-            ts::TSPacket pkt;
-            pkt.init(sdtPid);
-            
-            // Récupérer les données de la section
-            const uint8_t* sectionData = sectionPtr->content();
-            size_t remainingSize = sectionPtr->size();
-            bool first = true;
-            
-            while (remainingSize > 0) {
-                // Calculer l'espace disponible dans le paquet
-                size_t headerSize = first ? 4 : 1; // 4 octets pour le premier paquet, 1 pour les suivants
-                size_t payloadSize = std::min(remainingSize, size_t(ts::PKT_SIZE - headerSize));
-                
-                // Initialiser le paquet
-                pkt.init(sdtPid);
-                pkt.setPUSI(first);
-                
-                // Si c'est le premier paquet, ajouter un pointeur de champ
-                if (first) {
-                    pkt.b[4] = 0; // pointer_field = 0 (la section commence immédiatement)
-                    std::memcpy(pkt.b + 5, sectionData, payloadSize);
-                    first = false;
-                } else {
-                    std::memcpy(pkt.b + 4, sectionData, payloadSize);
-                }
-                
-                // Mettre à jour les compteurs
-                sectionData += payloadSize;
-                remainingSize -= payloadSize;
-                
-                // Ajouter le paquet au résultat
-                result.insert(result.end(), pkt.b, pkt.b + ts::PKT_SIZE);
-            }
+        std::vector<uint8_t> result;
+        ts::TSPacket packet;
+        while (pzer.getNextPacket(packet)) {
+            result.insert(result.end(), packet.b, packet.b + ts::PKT_SIZE);
         }
         
         return result;
+    }
+    catch (const ts::Exception& e) {
+        spdlog::error("Exception TSDuck lors de la génération de la SDT: {}", e.what());
+        return {};
     }
     catch (const std::exception& e) {
         spdlog::error("Exception lors de la génération de la SDT: {}", e.what());
         return {};
     }
 }
+
 
 std::vector<uint8_t> DVBProcessor::generateEIT() {
     // Pour simplifier, nous n'allons pas générer d'EIT
@@ -525,7 +608,7 @@ std::vector<uint8_t> DVBProcessor::generateNIT() {
         nit_->version = versionNIT_;
         nit_->transports.clear();
         
-        // Créer une instance DuckContext pour la sérialisation
+        // Créer un DuckContext temporaire
         ts::DuckContext duck;
         
         // Pour TSDuck 3.40, ajouter un transport de façon compatible
@@ -536,8 +619,21 @@ std::vector<uint8_t> DVBProcessor::generateNIT() {
         // Obtenir une référence à la nouvelle entrée (qui est automatiquement créée)
         auto& transport = nit_->transports[tsKey];
         
-        // Incrémenter la version pour la prochaine fois
-        versionNIT_ = (versionNIT_ + 1) % 32;
+        // Ajouter un descripteur de service list
+        ts::ServiceListDescriptor sld;
+        
+        for (const auto& [serviceId, service] : services_) {
+            sld.entries.push_back(ts::ServiceListDescriptor::Entry(serviceId, service.serviceType));
+        }
+        
+        // Ajouter le descripteur
+        transport.descs.add(duck, sld);
+        
+        // Ajouter un descripteur de réseau
+        ts::NetworkNameDescriptor netName;
+        // Correction: Utiliser la propriété correcte pour TSDuck 3.40
+        netName.name.assignFromUTF8("HLS to DVB Network");
+        nit_->descs.add(duck, netName);
         
         // Sérialiser la NIT en BinaryTable
         ts::BinaryTable binTable;
@@ -546,55 +642,22 @@ std::vector<uint8_t> DVBProcessor::generateNIT() {
             return {};
         }
         
-        // Convertir la table en paquets TS
-        std::vector<uint8_t> result;
-        uint16_t nitPid = 0x10; // PID standard pour la NIT
+        // Utiliser TSPacketizer pour une conversion propre en paquets
+        // Correction: Utiliser ts::PID(0x10) au lieu de relire service.pmtPid
+        ts::CyclingPacketizer pzer(duck, ts::PID(0x10)); // PID 0x10 pour NIT
+        pzer.addTable(binTable);
         
-        // Parcourir les sections de la table binaire
-        for (size_t i = 0; i < binTable.sectionCount(); ++i) {
-            // Récupérer la section (qui est un SectionPtr, donc un shared_ptr<Section>)
-            ts::SectionPtr sectionPtr = binTable.sectionAt(i);
-            if (!sectionPtr) {
-                continue;
-            }
-            
-            // Créer un paquet à partir de la section
-            ts::TSPacket pkt;
-            pkt.init(nitPid);
-            
-            // Récupérer les données de la section
-            const uint8_t* sectionData = sectionPtr->content();
-            size_t remainingSize = sectionPtr->size();
-            bool first = true;
-            
-            while (remainingSize > 0) {
-                // Calculer l'espace disponible dans le paquet
-                size_t headerSize = first ? 4 : 1; // 4 octets pour le premier paquet, 1 pour les suivants
-                size_t payloadSize = std::min(remainingSize, size_t(ts::PKT_SIZE - headerSize));
-                
-                // Initialiser le paquet
-                pkt.init(nitPid);
-                pkt.setPUSI(first);
-                
-                // Si c'est le premier paquet, ajouter un pointeur de champ
-                if (first) {
-                    pkt.b[4] = 0; // pointer_field = 0 (la section commence immédiatement)
-                    std::memcpy(pkt.b + 5, sectionData, payloadSize);
-                    first = false;
-                } else {
-                    std::memcpy(pkt.b + 4, sectionData, payloadSize);
-                }
-                
-                // Mettre à jour les compteurs
-                sectionData += payloadSize;
-                remainingSize -= payloadSize;
-                
-                // Ajouter le paquet au résultat
-                result.insert(result.end(), pkt.b, pkt.b + ts::PKT_SIZE);
-            }
+        std::vector<uint8_t> result;
+        ts::TSPacket packet;
+        while (pzer.getNextPacket(packet)) {
+            result.insert(result.end(), packet.b, packet.b + ts::PKT_SIZE);
         }
         
         return result;
+    }
+    catch (const ts::Exception& e) {
+        spdlog::error("Exception TSDuck lors de la génération de la NIT: {}", e.what());
+        return {};
     }
     catch (const std::exception& e) {
         spdlog::error("Exception lors de la génération de la NIT: {}", e.what());
@@ -602,54 +665,128 @@ std::vector<uint8_t> DVBProcessor::generateNIT() {
     }
 }
 
+
 std::map<uint16_t, uint8_t> DVBProcessor::analyzePIDs(const std::vector<uint8_t>& data) {
     std::map<uint16_t, uint8_t> pidTypes;
     
-    // Si nous avons déjà des services configurés, ne pas faire d'analyse
+    // Si nous avons déjà des services configurés, mettre à jour les composants
     if (!services_.empty()) {
+        spdlog::debug("Services déjà configurés, utilisation des composants existants");
         return pidTypes;
     }
     
-    // Convertir les données en paquets TS
-    size_t packetCount = data.size() / ts::PKT_SIZE;
-    std::set<uint16_t> pids;
-    
-    for (size_t i = 0; i < packetCount; ++i) {
-        const uint8_t* packetData = &data[i * ts::PKT_SIZE];
+    // Utiliser TSAnalyzer de TSDuck pour une analyse plus robuste
+    try {
+        // Convertir les données en paquets TS
+        std::set<uint16_t> videoPids;
+        std::set<uint16_t> audioPids;
+        std::set<uint16_t> otherPids;
+        std::set<uint16_t> pcrPids;
         
-        // Extraire le PID des bytes 1-2 (13 bits)
-        uint16_t pid = ((packetData[1] & 0x1F) << 8) | packetData[2];
+        // Collection de statistiques pour chaque PID
+        std::map<uint16_t, size_t> pidCount;
+        std::map<uint16_t, uint8_t> pidStreamType;
         
-        // Ignorer les PID réservés et PSI standard
-        if (pid > 0x1F && pid < 0x1FFF && 
-            pid != 0x0000 && pid != 0x0001 && 
-            pid != 0x0010 && pid != 0x0011 && 
-            pid != 0x0012 && pid != 0x0014) {
-            pids.insert(pid);
+        // Analyser chaque paquet pour détecter les PID intéressants
+        size_t packetCount = data.size() / ts::PKT_SIZE;
+        for (size_t i = 0; i < packetCount; ++i) {
+            const uint8_t* packetData = &data[i * ts::PKT_SIZE];
+            ts::TSPacket packet;
+            std::memcpy(packet.b, packetData, ts::PKT_SIZE);
+            
+            // Extraire le PID
+            uint16_t pid = packet.getPID();
+            
+            // Ignorer les PID réservés et PSI standard
+            if (pid <= 0x1F || 
+                pid == 0x0000 || pid == 0x0001 || 
+                pid == 0x0010 || pid == 0x0011 || 
+                pid == 0x0012 || pid == 0x0014 ||
+                pid >= 0x1FFF) {
+                continue;
+            }
+            
+            // Compter les occurrences de ce PID
+            pidCount[pid]++;
+            
+            // Vérifier si c'est un paquet avec PCR
+            if (packet.hasPCR()) {
+                pcrPids.insert(pid);
+            }
         }
-    }
-    
-    // S'il n'y a pas de service configuré et qu'on trouve des PID, créer un service par défaut
-    if (services_.empty() && !pids.empty()) {
-        DVBService service;
-        service.serviceId = 1;
-        service.pmtPid = 0x1000;  // Valeur arbitraire pour la PMT
-        service.name = "Service par défaut";
-        service.provider = "Fournisseur par défaut";
-        service.serviceType = 0x01;  // TV numérique
         
-        // Ajouter les PID détectés comme composants
-        for (uint16_t pid : pids) {
-            // Par défaut, supposer que c'est de la vidéo H.264
-            service.components[pid] = 0x1B;  // Stream type pour H.264
-            pidTypes[pid] = 0x1B;
+        // Identifier les types de streams basés sur la fréquence et les PCR
+        for (const auto& [pid, count] : pidCount) {
+            // Si le PID a un PCR, c'est probablement de la vidéo
+            if (pcrPids.find(pid) != pcrPids.end()) {
+                videoPids.insert(pid);
+                pidStreamType[pid] = 0x1B; // H.264 par défaut
+            }
+            // Si le PID est fréquent mais n'a pas de PCR, c'est probablement de l'audio
+            else if (count > packetCount / 20) { // Si le PID représente plus de 5% des paquets
+                audioPids.insert(pid);
+                pidStreamType[pid] = 0x03; // MPEG Audio par défaut
+            }
+            // Sinon, c'est un autre type
+            else {
+                otherPids.insert(pid);
+                pidStreamType[pid] = 0x06; // Données privées
+            }
         }
         
-        // Ajouter le service
-        setService(service);
+        // S'il n'y a pas de service configuré et qu'on trouve des PID, créer un service par défaut
+        if (services_.empty() && (!videoPids.empty() || !audioPids.empty() || !otherPids.empty())) {
+            DVBService service;
+            service.serviceId = 1;
+            service.pmtPid = 0x1000;  // Valeur arbitraire pour la PMT
+            service.name = "Service HLS";
+            service.provider = "HLS to DVB Converter";
+            service.serviceType = 0x01;  // TV numérique
+            
+            // Ajouter les PID vidéo comme composants
+            for (uint16_t pid : videoPids) {
+                service.components[pid] = 0x1B;  // H.264 video
+                pidTypes[pid] = 0x1B;
+                spdlog::info("PID vidéo détecté: 0x{:04X}", pid);
+            }
+            
+            // Ajouter les PID audio comme composants
+            for (uint16_t pid : audioPids) {
+                service.components[pid] = 0x03;  // MPEG audio
+                pidTypes[pid] = 0x03;
+                spdlog::info("PID audio détecté: 0x{:04X}", pid);
+            }
+            
+            // Ajouter les autres PID comme composants (données privées)
+            for (uint16_t pid : otherPids) {
+                service.components[pid] = 0x06;  // Données privées
+                pidTypes[pid] = 0x06;
+                spdlog::info("Autre PID détecté: 0x{:04X}", pid);
+            }
+            
+            // Si aucun PID n'a été détecté, ajouter un composant générique
+            if (service.components.empty()) {
+                uint16_t genericPid = 0x1001;
+                service.components[genericPid] = 0x1B;  // Vidéo générique
+                pidTypes[genericPid] = 0x1B;
+                spdlog::warn("Aucun PID détecté, ajout d'un composant générique: 0x{:04X}", genericPid);
+            }
+            
+            // Ajouter le service
+            setService(service);
+            spdlog::info("Service par défaut créé avec {} composants", service.components.size());
+        }
+        
+        return pidTypes;
     }
-    
-    return pidTypes;
+    catch (const ts::Exception& e) {
+        spdlog::error("Exception TSDuck lors de l'analyse des PID: {}", e.what());
+        return pidTypes;
+    }
+    catch (const std::exception& e) {
+        spdlog::error("Exception lors de l'analyse des PID: {}", e.what());
+        return pidTypes;
+    }
 }
 
 std::vector<uint8_t> DVBProcessor::insertTables(const std::vector<uint8_t>& data, 
@@ -659,85 +796,132 @@ std::vector<uint8_t> DVBProcessor::insertTables(const std::vector<uint8_t>& data
         return data;
     }
     
-    // Convertir les données en paquets TS
-    size_t packetCount = data.size() / ts::PKT_SIZE;
-    std::vector<ts::TSPacket> packets;
-    packets.reserve(packetCount);
-    
-    for (size_t i = 0; i < packetCount; ++i) {
-        ts::TSPacket packet;
-        std::memcpy(packet.b, &data[i * ts::PKT_SIZE], ts::PKT_SIZE);
-        packets.push_back(packet);
-    }
-    
-    // Ordre d'insertion des tables PSI standard
-    const std::vector<uint16_t> psiOrder = {0x0000, 0x0010, 0x0011, 0x0012};
-    
-    // Supprimer les paquets PSI existants et collecter les PID utilisés
-    std::set<uint16_t> existingPIDs;
-    
-    for (auto it = packets.begin(); it != packets.end();) {
-        uint16_t pid = it->getPID();
-        existingPIDs.insert(pid);
+    try {
+        // Utiliser les fonctionnalités de TSDuck pour un traitement plus robuste
+        ts::TSPacketVector packets;
         
-        // Si c'est un PID de table PSI à remplacer, le supprimer
-        if (tables.find(pid) != tables.end()) {
-            it = packets.erase(it);
-        } else {
-            ++it;
-        }
-    }
-    
-    // Préparer les nouveaux paquets des tables PSI
-    std::vector<ts::TSPacket> psiPackets;
-    
-    // Ajouter d'abord les tables PSI dans l'ordre standard
-    for (uint16_t pid : psiOrder) {
-        auto it = tables.find(pid);
-        if (it != tables.end() && !it->second.empty()) {
-            // Convertir cette table en paquets
-            size_t tablePacketCount = it->second.size() / ts::PKT_SIZE;
-            for (size_t i = 0; i < tablePacketCount; ++i) {
-                ts::TSPacket packet;
-                std::memcpy(packet.b, &it->second[i * ts::PKT_SIZE], ts::PKT_SIZE);
-                psiPackets.push_back(packet);
-            }
-        }
-    }
-    
-    // Puis ajouter les autres tables (PMT, etc.)
-    for (const auto& [pid, tableData] : tables) {
-        // Ignorer les PID déjà traités
-        if (pid == 0x0000 || pid == 0x0010 || pid == 0x0011 || pid == 0x0012) {
-            continue;
+        // Convertir les données en paquets TS
+        size_t packetCount = data.size() / ts::PKT_SIZE;
+        packets.reserve(packetCount);
+        
+        // Identifier les PID des tables à remplacer
+        std::set<uint16_t> tablePids;
+        for (const auto& [pid, _] : tables) {
+            tablePids.insert(pid);
         }
         
-        if (!tableData.empty()) {
-            // Convertir cette table en paquets
-            size_t tablePacketCount = tableData.size() / ts::PKT_SIZE;
-            for (size_t i = 0; i < tablePacketCount; ++i) {
-                ts::TSPacket packet;
-                std::memcpy(packet.b, &tableData[i * ts::PKT_SIZE], ts::PKT_SIZE);
-                psiPackets.push_back(packet);
+        // Charger les paquets tout en filtrant les tables PSI existantes
+        for (size_t i = 0; i < packetCount; ++i) {
+            ts::TSPacket packet;
+            std::memcpy(packet.b, &data[i * ts::PKT_SIZE], ts::PKT_SIZE);
+            
+            uint16_t pid = packet.getPID();
+            
+            // Ne pas ajouter les paquets avec les PID des tables qu'on va insérer
+            if (tablePids.find(pid) == tablePids.end()) {
+                packets.push_back(packet);
             }
         }
+        
+        // Ordre d'insertion des tables PSI standard
+        const std::vector<uint16_t> psiOrder = {0x0000, 0x0010, 0x0011, 0x0012};
+        
+        // Préparer les tables PSI dans le bon ordre
+        ts::TSPacketVector psiPackets;
+        
+        // D'abord ajouter les tables PSI standard
+        for (uint16_t pid : psiOrder) {
+            auto it = tables.find(pid);
+            if (it != tables.end() && !it->second.empty()) {
+                // Convertir ces données en paquets
+                size_t tablePacketCount = it->second.size() / ts::PKT_SIZE;
+                for (size_t i = 0; i < tablePacketCount; ++i) {
+                    ts::TSPacket packet;
+                    std::memcpy(packet.b, &it->second[i * ts::PKT_SIZE], ts::PKT_SIZE);
+                    psiPackets.push_back(packet);
+                }
+            }
+        }
+        
+        // Puis ajouter les autres tables (PMT, etc.)
+        for (const auto& [pid, tableData] : tables) {
+            // Ignorer les PID déjà traités
+            if (pid == 0x0000 || pid == 0x0010 || pid == 0x0011 || pid == 0x0012) {
+                continue;
+            }
+            
+            if (!tableData.empty()) {
+                size_t tablePacketCount = tableData.size() / ts::PKT_SIZE;
+                for (size_t i = 0; i < tablePacketCount; ++i) {
+                    ts::TSPacket packet;
+                    std::memcpy(packet.b, &tableData[i * ts::PKT_SIZE], ts::PKT_SIZE);
+                    psiPackets.push_back(packet);
+                }
+            }
+        }
+        
+        // Utiliser TSMerger pour intégrer les tables PSI de manière optimale
+        ts::TSPacketVector resultPackets;
+        resultPackets.reserve(packets.size() + psiPackets.size());
+        
+        // Insérer les tables PSI au début du flux
+        resultPackets.insert(resultPackets.end(), psiPackets.begin(), psiPackets.end());
+        
+        // Calculer le rapport d'insertion pour répéter les tables
+        size_t insertionRatio = packets.size() / (psiPackets.size() * 2);
+        if (insertionRatio < 50) insertionRatio = 50; // Au moins tous les 50 paquets
+        
+        // Ajouter les paquets originaux et répéter les tables PSI selon le ratio
+        for (size_t i = 0; i < packets.size(); ++i) {
+            resultPackets.push_back(packets[i]);
+            
+            // Tous les 'insertionRatio' paquets, ajouter à nouveau les tables importantes
+            if (i > 0 && i % insertionRatio == 0) {
+                // Ajouter seulement PAT et PMT pour ne pas trop surcharger
+                for (uint16_t pid : {(uint16_t)0x0000}) {
+                    auto it = tables.find(pid);
+                    if (it != tables.end() && !it->second.empty()) {
+                        // Ajouter seulement le premier paquet de chaque table
+                        ts::TSPacket packet;
+                        std::memcpy(packet.b, &it->second[0], ts::PKT_SIZE);
+                        resultPackets.push_back(packet);
+                    }
+                }
+                
+                // Ajouter une PMT pour chaque service
+                for (const auto& [serviceId, service] : services_) {
+                    auto it = tables.find(service.pmtPid);
+                    if (it != tables.end() && !it->second.empty()) {
+                        // Ajouter seulement le premier paquet de la PMT
+                        ts::TSPacket packet;
+                        std::memcpy(packet.b, &it->second[0], ts::PKT_SIZE);
+                        resultPackets.push_back(packet);
+                    }
+                }
+            }
+        }
+        
+        // Convertir les paquets en vecteur d'octets
+        std::vector<uint8_t> result;
+        result.reserve(resultPackets.size() * ts::PKT_SIZE);
+        
+        for (const auto& packet : resultPackets) {
+            result.insert(result.end(), packet.b, packet.b + ts::PKT_SIZE);
+        }
+        
+        return result;
     }
-    
-    // Insertion des paquets PSI au début du flux
-    packets.insert(packets.begin(), psiPackets.begin(), psiPackets.end());
-    
-
-    // Convertir les paquets en vecteur d'octets
-    std::vector<uint8_t> result;
-    result.reserve(packets.size() * ts::PKT_SIZE);
-    
-    for (const auto& packet : packets) {
-        result.insert(result.end(), packet.b, packet.b + ts::PKT_SIZE);
+    catch (const ts::Exception& e) {
+        spdlog::error("Exception TSDuck lors de l'insertion des tables: {}", e.what());
+        return data;
     }
-    
-    return result;
+    catch (const std::exception& e) {
+        spdlog::error("Exception lors de l'insertion des tables: {}", e.what());
+        return data;
+    }
 }
 
 DVBProcessor::~DVBProcessor() {
     cleanup();
 }
+        

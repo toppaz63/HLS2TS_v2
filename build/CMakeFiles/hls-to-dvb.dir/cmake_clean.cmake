@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/hls-to-dvb.dir/src/mpegts/DVBProcessor.cpp.o.d"
   "CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.o"
   "CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.o.d"
+  "CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o"
+  "CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o.d"
   "CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o"
   "CMakeFiles/hls-to-dvb.dir/src/multicast/MulticastSender.cpp.o.d"
   "CMakeFiles/hls-to-dvb.dir/src/web/WebServer.cpp.o"

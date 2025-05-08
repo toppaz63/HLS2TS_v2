@@ -345,6 +345,30 @@ src/mpegts/MPEGTSConverter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/MPEGTSConverter.cpp.s
 .PHONY : src/mpegts/MPEGTSConverter.cpp.s
 
+src/mpegts/TSQualityMonitor.o: src/mpegts/TSQualityMonitor.cpp.o
+.PHONY : src/mpegts/TSQualityMonitor.o
+
+# target to build an object file
+src/mpegts/TSQualityMonitor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.o
+.PHONY : src/mpegts/TSQualityMonitor.cpp.o
+
+src/mpegts/TSQualityMonitor.i: src/mpegts/TSQualityMonitor.cpp.i
+.PHONY : src/mpegts/TSQualityMonitor.i
+
+# target to preprocess a source file
+src/mpegts/TSQualityMonitor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.i
+.PHONY : src/mpegts/TSQualityMonitor.cpp.i
+
+src/mpegts/TSQualityMonitor.s: src/mpegts/TSQualityMonitor.cpp.s
+.PHONY : src/mpegts/TSQualityMonitor.s
+
+# target to generate assembly for a file
+src/mpegts/TSQualityMonitor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hls-to-dvb.dir/build.make CMakeFiles/hls-to-dvb.dir/src/mpegts/TSQualityMonitor.cpp.s
+.PHONY : src/mpegts/TSQualityMonitor.cpp.s
+
 src/multicast/MulticastSender.o: src/multicast/MulticastSender.cpp.o
 .PHONY : src/multicast/MulticastSender.o
 
@@ -429,6 +453,9 @@ help:
 	@echo "... src/mpegts/MPEGTSConverter.o"
 	@echo "... src/mpegts/MPEGTSConverter.i"
 	@echo "... src/mpegts/MPEGTSConverter.s"
+	@echo "... src/mpegts/TSQualityMonitor.o"
+	@echo "... src/mpegts/TSQualityMonitor.i"
+	@echo "... src/mpegts/TSQualityMonitor.s"
 	@echo "... src/multicast/MulticastSender.o"
 	@echo "... src/multicast/MulticastSender.i"
 	@echo "... src/multicast/MulticastSender.s"

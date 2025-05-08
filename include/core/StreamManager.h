@@ -3,6 +3,7 @@
 #include "config.h"
 #include "../hls/HLSClient.h"
 #include "../mpegts/MPEGTSConverter.h"
+#include "../mpegts/TSQualityMonitor.h"
 #include "../multicast/MulticastSender.h"
 #include "../core/SegmentBuffer.h"
 
@@ -29,6 +30,7 @@ struct StreamInstance {
     std::shared_ptr<MPEGTSConverter> mpegtsConverter; ///< Convertisseur MPEG-TS
     std::shared_ptr<SegmentBuffer> segmentBuffer;    ///< Buffer de segments
     std::shared_ptr<MulticastSender> multicastSender; ///< Émetteur multicast
+    std::shared_ptr<TSQualityMonitor> qualityMonitor;   
     std::shared_ptr<std::atomic<bool>> running;      ///< État du flux (en cours d'exécution ou non)
     std::thread processingThread;                    ///< Thread de traitement du flux
 
@@ -37,13 +39,13 @@ struct StreamInstance {
 
     // Méthode pour accéder à running de manière thread-safe
     bool isRunning() const {
-        return running && running->load();
+        return running->load();
     }
 
     // Méthode pour modifier running de manière thread-safe
     void setRunning(bool value) {
         if (running) {
-            running->store(value);
+             running->store(value);
         }
     }
 };
@@ -111,6 +113,8 @@ public:
         int bandwidth = 0;                  ///< Bande passante en bits/s
         std::string codecs;                 ///< Codecs utilisés
     };
+
+    
     
     /**
      * @brief Récupère les statistiques d'un flux
@@ -131,6 +135,12 @@ public:
      * @brief Destructeur
      */
     ~StreamManager();
+
+    /**
+     * @brief Fonction de test direct pour vérifier chaque composant
+     * @param streamId ID du flux à tester
+     */
+    void testDirectDataFlow(const std::string& streamId);
     
 private:
     Config* config_; ///< Pointeur vers la configuration
@@ -145,6 +155,24 @@ private:
      * @param streamId ID du flux à traiter
      */
     void processStream(const std::string& streamId);
+
+        /**
+     * @brief Traite un segment HLS (conversion et envoi multicast)
+     * @param stream Pointeur vers l'instance de flux
+     * @param hlsSegment Segment HLS à traiter
+     * @param segmentInProgress Référence vers l'indicateur de segment en cours
+     * @param sendStartTime Référence vers l'horodatage de début d'envoi
+     * @return true si le traitement a réussi
+     */
+    bool processSegment(StreamInstance* stream, const HLSSegment& hlsSegment, 
+                       bool& segmentInProgress, std::chrono::steady_clock::time_point& sendStartTime);
+    
+    /**
+     * @brief Réinitialise complètement un flux en cas de problème
+     * @param streamId Identifiant du flux à réinitialiser
+     * @return true si la réinitialisation a réussi
+     */
+    bool resetStream(const std::string& streamId);
 
     bool isValidMulticastAddress(const std::string& address);
 };
