@@ -56,6 +56,9 @@ void DVBProcessor::initialize() {
         defaultService.name = "Service HLS";
         defaultService.provider = "HLS to DVB Converter";
         defaultService.serviceType = 0x01; // Digital TV
+        defaultService.components[0x1001] = 0x1B; // H.264 Video
+        defaultService.components[0x1002] = 0x03; // MPEG Audio
+ 
         
         spdlog::info("**** DVBProcessor::initialize() **** Création du service par défaut");
         
@@ -259,6 +262,7 @@ void DVBProcessor::setService(const DVBService& service) {
         
         // Créer un DuckContext temporaire
         ts::DuckContext duck;
+
         
         // Ajouter les composants en utilisant l'API correcte de TSDuck 3.40
         for (const auto& [pid, streamType] : service.components) {
@@ -279,21 +283,65 @@ void DVBProcessor::setService(const DVBService& service) {
             // Ajouter les descripteurs appropriés pour ce type de stream
             switch (streamType) {
                 case 0x02: // MPEG-2 Video
+                    try {
+                        ts::VideoStreamDescriptor videoDesc;
+                        videoDesc.frame_rate_code = 4; // 25 Hz pour PAL
+                        videoDesc.chroma_format = 1; // 4:2:0
+                        videoDesc.profile_and_level_indication = 0x85; // Main Profile @ Main Level
+                        
+                        spdlog::info("**** DVBProcessor::setService() **** Tentative d'ajout du descripteur MPEG-2 video pour PID 0x{:X}", pid);
+                        stream.descs.add(duck, videoDesc);
+                        spdlog::info("**** DVBProcessor::setService() **** Descripteur MPEG-2 video ajouté avec succès pour PID 0x{:X}", pid);
+                    }
+                    catch (const ts::Exception& e) {
+                        spdlog::error("**** DVBProcessor::setService() ****  Erreur lors de l'ajout du descripteur MPEG-2 video: {}", e.what());
+                    }
+                    break;
+
                 case 0x1B: // H.264 Video
+                    try {
+                        ts::AVCVideoDescriptor avcDesc;
+                        avcDesc.profile_idc = 100; // High Profile
+                        avcDesc.level_idc = 40; // Level 4.0
+                        
+                        spdlog::info("**** DVBProcessor::setService() **** Tentative d'ajout du descripteur H.264 video pour PID 0x{:X}", pid);
+                        stream.descs.add(duck, avcDesc);
+                        spdlog::info("**** DVBProcessor::setService() **** Descripteur H.264 video ajouté avec succès pour PID 0x{:X}", pid);
+                    }
+                    catch (const ts::Exception& e) {
+                        spdlog::error("**** DVBProcessor::setService() ****  Erreur lors de l'ajout du descripteur H.264 video: {}", e.what());
+                    }
+                    break;
+
                 case 0x24: // H.265/HEVC Video
-                    // Pour les flux vidéo, ajouter un descripteur vidéo si nécessaire
+                    try {
+                        ts::HEVCVideoDescriptor hevcDesc;
+                        // Configuration de base pour HEVC
+                        
+                        spdlog::info("**** DVBProcessor::setService() **** Tentative d'ajout du descripteur HEVC video pour PID 0x{:X}", pid);
+                        stream.descs.add(duck, hevcDesc);
+                        spdlog::info("**** DVBProcessor::setService() **** Descripteur HEVC video ajouté avec succès pour PID 0x{:X}", pid);
+                    }
+                    catch (const ts::Exception& e) {
+                        spdlog::error("**** DVBProcessor::setService() ****  Erreur lors de l'ajout du descripteur HEVC video: {}", e.what());
+                    }
                     break;
                 case 0x03: // MPEG-1 Audio
                 case 0x04: // MPEG-2 Audio
                 case 0x0F: // AAC Audio
                 case 0x11: // AAC with ADTS
                     // Pour les flux audio, ajouter un descripteur audio
-                    {
+                    try {
                         ts::AudioStreamDescriptor audioDesc;
                         audioDesc.free_format = false;
                         audioDesc.ID = true;
                         audioDesc.layer = 2;
+                        spdlog::info("**** DVBProcessor::setService() **** Tentative d'ajout du descripteur audio pour PID 0x{:X}", pid);
                         stream.descs.add(duck, audioDesc);
+                        spdlog::info("**** DVBProcessor::setService() **** Descripteur audio ajouté avec succès pour PID 0x{:X}", pid);
+                    }
+                    catch (const ts::Exception& e) {
+                        spdlog::error("**** DVBProcessor::setService() ****  Erreur lors de l'ajout du descripteur audio: {}", e.what());
                     }
                     break;
                 case 0x06: // Private data (souvent utilisé pour les sous-titres DVB)
@@ -317,6 +365,13 @@ void DVBProcessor::setService(const DVBService& service) {
             } else {
                 pmt->pcr_pid = 0x1FFF; // Valeur invalide
             }
+        }
+        // Vérifier si la PMT est valide
+        if (!pmt->isValid()) {
+            spdlog::error("PMT configurée non valide selon les standards DVB");
+            // Log des détails de la PMT pour déboguer
+            spdlog::info("PMT service_id: {}, PCR PID: 0x{:X}, Nombre de streams: {}",
+                        pmt->service_id, pmt->pcr_pid, pmt->streams.size());
         }
         
         spdlog::info("Service configuré: ID={}, PMT PID=0x{:X}, {} composants", 
@@ -410,6 +465,7 @@ std::vector<uint8_t> DVBProcessor::generatePAT() {
         
         // Créer un DuckContext temporaire
         ts::DuckContext duck;
+
         
         // Sérialiser la PAT en BinaryTable
         ts::BinaryTable binTable;
@@ -492,7 +548,8 @@ std::vector<uint8_t> DVBProcessor::generatePMT(uint16_t serviceId) {
         
         // Créer un DuckContext temporaire
         ts::DuckContext duck;
-        
+
+
         // Sérialiser la PMT en BinaryTable
         ts::BinaryTable binTable;
         if (!pmt->serialize(duck, binTable)) {
@@ -534,6 +591,7 @@ std::vector<uint8_t> DVBProcessor::generateSDT() {
         
         // Créer un DuckContext temporaire
         ts::DuckContext duck;
+
         
         // Ajouter tous les services à la SDT en utilisant l'API correcte de TSDuck 3.40
         for (const auto& [serviceId, service] : services_) {
@@ -610,6 +668,7 @@ std::vector<uint8_t> DVBProcessor::generateNIT() {
         
         // Créer un DuckContext temporaire
         ts::DuckContext duck;
+
         
         // Pour TSDuck 3.40, ajouter un transport de façon compatible
         uint16_t tsid = 1;
@@ -771,9 +830,14 @@ std::map<uint16_t, uint8_t> DVBProcessor::analyzePIDs(const std::vector<uint8_t>
                 pidTypes[genericPid] = 0x1B;
                 spdlog::warn("Aucun PID détecté, ajout d'un composant générique: 0x{:04X}", genericPid);
             }
-            
-            // Ajouter le service
-            setService(service);
+            try {
+                // Tentative d'ajouter service par défaut
+                setService(service);
+            }
+            catch (const std::exception& e) {
+                spdlog::error("Exception capturée lors de l'initialisation du service par défaut: {}", e.what());
+                // Continuez sans service par défaut
+            }
             spdlog::info("Service par défaut créé avec {} composants", service.components.size());
         }
         
