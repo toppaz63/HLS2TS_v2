@@ -137,6 +137,12 @@ private:
      * @return Map des PID détectés et leurs types
      */
     std::map<uint16_t, uint8_t> analyzePIDs(const std::vector<uint8_t>& data);
+
+    /**
+     * @brief Configure un service DVB
+     * @param service Configuration du service interne pour gestion correcte du mutex   
+     */
+    void setServiceInternal(const DVBService& service);
     
     /**
      * @brief Insère des tables PSI/SI dans un flux MPEG-TS

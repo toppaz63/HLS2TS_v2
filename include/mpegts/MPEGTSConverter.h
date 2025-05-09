@@ -90,6 +90,11 @@ private:
      * @brief Réinitialise les compteurs de continuité
      */
     void resetContinuityCounters();
+
+    /**
+     * @brief Réinitialise les compteurs de continuité appel compatible mutex
+     */
+    void resetContinuityCountersInternal();
     
     std::map<uint16_t, uint8_t> continuityCounters_; ///< Compteurs de continuité par PID
     uint64_t lastPcrValue_;                        ///< Dernière valeur PCR traitée

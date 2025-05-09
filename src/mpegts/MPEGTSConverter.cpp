@@ -15,9 +15,16 @@ MPEGTSConverter::MPEGTSConverter()
     resetContinuityCounters();
 }
 
+void MPEGTSConverter::resetContinuityCountersInternal() {
+    //std::lock_guard<std::mutex> lock(mutex_);
+    continuityCounters_.clear();
+    spdlog::info("**** MPEGTSConverter::resetContinuityCountersInternal() **** Réinitialisation des compteurs de continuité");
+}
+
 void MPEGTSConverter::resetContinuityCounters() {
     std::lock_guard<std::mutex> lock(mutex_);
-    continuityCounters_.clear();
+    resetContinuityCountersInternal();
+    spdlog::info("**** MPEGTSConverter::resetContinuityCounters() **** Réinitialisation des compteurs de continuité");
 }
 
 void MPEGTSConverter::start() {
@@ -34,11 +41,14 @@ void MPEGTSConverter::start() {
         // Initialiser le processeur DVB
         dvbProcessor_ = std::make_unique<DVBProcessor>();
         dvbProcessor_->initialize();
+        spdlog::info("**** MPEGTSConverter::start() **** DVBProcessor initialisé avec succès");
         
         // Réinitialiser les variables d'état
         lastPcrValue_ = 0;
         pcrPid_ = 0x1FFF; // Valeur invalide par défaut
-        resetContinuityCounters();
+        spdlog::info("**** MPEGTSConverter::start() **** Réinitialisation des variables d'état");
+        resetContinuityCountersInternal();
+        spdlog::info("**** MPEGTSConverter::start() **** Réinitialisation des compteurs de continuité");
         
         running_ = true;
         

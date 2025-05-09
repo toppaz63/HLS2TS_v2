@@ -14,6 +14,7 @@ DVBProcessor::DVBProcessor()
 }
 
 void DVBProcessor::initialize() {
+    spdlog::info("**** DVBProcessor::initialize() **** Début");
     std::lock_guard<std::mutex> lock(mutex_);
     
     try {
@@ -64,7 +65,7 @@ void DVBProcessor::initialize() {
         
         try {
             // Ajouter le service par défaut
-            setService(defaultService);
+            setServiceInternal(defaultService);
         }
         catch (const ts::Exception& e) {
             spdlog::error("**** DVBProcessor::initialize() **** Erreur TSDuck lors de la définition du service par défaut: {}", e.what());
@@ -228,20 +229,29 @@ std::vector<uint8_t> DVBProcessor::updatePSITables(const std::vector<uint8_t>& d
 }
 
 void DVBProcessor::setService(const DVBService& service) {
-    spdlog::info("**** DVBProcessor::setService() **** Début de la définition du service");
+    spdlog::info("**** DVBProcessor::setService() **** (Publique) Début");
+    std::lock_guard<std::mutex> lock(mutex_); // Verrouillage ici
+    setServiceInternal(service); // Appel à la version interne
+    spdlog::info("**** DVBProcessor::setService() **** (Publique) Fin");
+}
+
+void DVBProcessor::setServiceInternal(const DVBService& service) {
+    spdlog::info("**** DVBProcessor::setServiceInternal() **** Début de la définition du service"); // Notez le changement de nom du log
     try {
-        std::lock_guard<std::mutex> lock(mutex_);
-        
-        // Stocker le service
+        spdlog::info("**** DVBProcessor::setServiceInternal() **** Avant accès services_."); // LOG D1
         services_[service.serviceId] = service;
-        
-        // Créer ou mettre à jour la PMT
+        spdlog::info("**** DVBProcessor::setServiceInternal() **** Service stocké. Service ID: {}", service.serviceId); // LOG D2
+
+        spdlog::info("**** DVBProcessor::setServiceInternal() **** Avant accès pmts_.find."); // LOG E1
         auto it = pmts_.find(service.serviceId);
-        spdlog::info("**** DVBProcessor::setService() **** Recherche de la PMT pour le service ID: {}", service.serviceId);
+        spdlog::info("**** DVBProcessor::setServiceInternal() **** Recherche de la PMT pour le service ID: {} terminée.", service.serviceId); // LOG E2
+
         if (it == pmts_.end()) {
+            spdlog::info("**** DVBProcessor::setServiceInternal() **** Avant création unique_ptr PMT."); // LOG F1
             pmts_[service.serviceId] = std::make_unique<ts::PMT>();
+            spdlog::info("**** DVBProcessor::setServiceInternal() **** Après création unique_ptr PMT."); // LOG F2
             versionPMT_[service.serviceId] = 0;
-            spdlog::info("**** DVBProcessor::setService() **** Nouvelle PMT créée pour le service ID: {}", service.serviceId);
+            spdlog::info("**** DVBProcessor::setServiceInternal() **** Nouvelle PMT créée pour le service ID: {}", service.serviceId); // LOG F3
         }
         
         // Configurer la PMT
@@ -250,11 +260,11 @@ void DVBProcessor::setService(const DVBService& service) {
         pmt->version = versionPMT_[service.serviceId];
         pmt->is_current = true;
         
-        spdlog::info("**** DVBProcessor::setService() **** Nettoyage des streams existants");
+        spdlog::info("**** DVBProcessor::setServiceInternal() **** Nettoyage des streams existants");
         // Nettoyer les streams existants
         pmt->streams.clear();
         
-        spdlog::info("**** DVBProcessor::setService() **** Ajout des composants, nombre total: {}", service.components.size());
+        spdlog::info("**** DVBProcessor::setServiceInternal() **** Ajout des composants, nombre total: {}", service.components.size());
         
         // Vérifier s'il y a des composants vidéo pour le PCR
         bool hasPCR = false;
@@ -262,7 +272,7 @@ void DVBProcessor::setService(const DVBService& service) {
         
         // Créer un DuckContext temporaire
         ts::DuckContext duck;
-
+        duck.report().setMaxSeverity(ts::Severity::Debug);
         
         // Ajouter les composants en utilisant l'API correcte de TSDuck 3.40
         for (const auto& [pid, streamType] : service.components) {
@@ -403,7 +413,6 @@ void DVBProcessor::setService(const DVBService& service) {
     }
     catch (...) {
         spdlog::error("**** DVBProcessor::setService() **** Exception inconnue lors de la configuration du service");
-        
         AlertManager::getInstance().addAlert(
             AlertLevel::ERROR,
             "DVBProcessor",
@@ -727,7 +736,8 @@ std::vector<uint8_t> DVBProcessor::generateNIT() {
 
 std::map<uint16_t, uint8_t> DVBProcessor::analyzePIDs(const std::vector<uint8_t>& data) {
     std::map<uint16_t, uint8_t> pidTypes;
-    
+    spdlog::error("**** DVBProcessor::analyzePIDs() **** Début de l'analyse des PIDs");
+
     // Si nous avons déjà des services configurés, mettre à jour les composants
     if (!services_.empty()) {
         spdlog::debug("Services déjà configurés, utilisation des composants existants");
@@ -830,15 +840,15 @@ std::map<uint16_t, uint8_t> DVBProcessor::analyzePIDs(const std::vector<uint8_t>
                 pidTypes[genericPid] = 0x1B;
                 spdlog::warn("Aucun PID détecté, ajout d'un composant générique: 0x{:04X}", genericPid);
             }
-            try {
+            //try {
                 // Tentative d'ajouter service par défaut
-                setService(service);
-            }
-            catch (const std::exception& e) {
-                spdlog::error("Exception capturée lors de l'initialisation du service par défaut: {}", e.what());
-                // Continuez sans service par défaut
-            }
-            spdlog::info("Service par défaut créé avec {} composants", service.components.size());
+                //setService(service);
+            //}
+            //catch (const std::exception& e) {
+            //    spdlog::error("Exception capturée lors de l'initialisation du service par défaut: {}", e.what());
+            //    // Continuez sans service par défaut
+            //}
+            spdlog::info("Analyse des PIDs terminée avec {} composants", service.components.size());
         }
         
         return pidTypes;

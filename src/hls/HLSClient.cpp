@@ -2015,8 +2015,11 @@ std::optional<HLSSegment> HLSClient::getNextSegment() {
     lastLogTime = std::chrono::steady_clock::now();
 
     // Prendre simplement le premier segment disponible (FIFO)
+    spdlog::info("getNextSegment() - Avant front()");
     HLSSegment segment = segmentQueue_.front();
+    spdlog::info("getNextSegment() - Après front()");
     segmentQueue_.pop();
+    spdlog::info("getNextSegment() - Après pop()");
     
     // Incrémenter le compteur de segments traités
     segmentsProcessed_++;
